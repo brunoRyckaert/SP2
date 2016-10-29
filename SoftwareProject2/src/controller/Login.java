@@ -13,12 +13,47 @@ public class Login {
 	 * @param wachtwoord
 	 * @return Personeelslid indien combinatie juist; null indien fout.
 	 */
+	private String username;
+	private String wachtwoord;
+	private int id;
 	public static Personeelslid checkLogin(String username, String wachtwoord) {
 		Personeelslid perslid = null;
+		LoginDAO login = new LoginDAO();
+		login.checkLogin(username,wachtwoord);
 		return perslid;
 	}
 	
 	
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getWachtwoord() {
+		return wachtwoord;
+	}
+
+
+	public void setWachtwoord(String wachtwoord) {
+		this.wachtwoord = wachtwoord;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	/**
 	 * Deze functie dient eerst via checkLogin() na te gaan of de combinatie juist is. 
 	 * Zoja, dan moet het de lopende instellingen aanpassen om dit personeelslid bij te houden. (Settings.setIngelogdPersoneel())
