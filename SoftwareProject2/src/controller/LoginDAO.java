@@ -2,6 +2,8 @@ package controller;
 
 import java.sql.*;
 
+import model.Login;
+
 
 public class LoginDAO extends DAO{
 	
@@ -9,15 +11,7 @@ public class LoginDAO extends DAO{
 	{
 		try
 		{
-		//Connection 
-			if( con == null || con.isClosed())
-			{
-				con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
-			}
-			if( con == null || con.isClosed())
-			{
-				return false;
-			}
+		con = DAO.getInstance();
 		PreparedStatement stmt = con.prepareStatement("select * from Login where Usernaam = ? AND Wachtwoord = ?");
 		stmt.setString(1,log.getUsername());
 		stmt.setString(2,log.getWachtwoord());

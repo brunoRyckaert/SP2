@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import model.Login;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -16,7 +17,6 @@ import java.util.Scanner;
 
 import com.sun.prism.Image;
 
-import controller.Login;
 import view.Gui;
 // gebruikersnaam = trein
 public class Main extends Application {
@@ -32,6 +32,7 @@ public class Main extends Application {
 		}
 	}
 	public static void main(String[] args) {
+		System.out.println(Login.Sha512("trein","salty"));
 		launch(args);
 	}
 }

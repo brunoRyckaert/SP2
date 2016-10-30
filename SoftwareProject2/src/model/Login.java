@@ -1,14 +1,14 @@
-package controller;
+package model;
 
 import java.awt.TextField;
 import java.security.MessageDigest;
 
+import controller.LoginDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.Stage;
-import model.Personeelslid;
 
 public class Login {
 	/**

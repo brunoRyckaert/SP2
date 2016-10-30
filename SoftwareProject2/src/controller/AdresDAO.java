@@ -2,6 +2,8 @@ package controller;
 
 import java.sql.*;
 
+import model.Adres;
+
 
 public class AdresDAO extends DAO{
 	

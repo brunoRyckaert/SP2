@@ -3,6 +3,9 @@ package controller;
 import java.sql.Date;
 import java.util.Calendar;
 
+import model.Adres;
+import model.Login;
+
 public class Personeel {
 	Login login = new Login();
 	private Integer id;
