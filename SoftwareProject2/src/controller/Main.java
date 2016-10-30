@@ -32,7 +32,6 @@ public class Main extends Application {
 		}
 	}
 	public static void main(String[] args) {
-		System.out.println(Login.Sha512("trein","salty"));
 		launch(args);
 	}
 }
