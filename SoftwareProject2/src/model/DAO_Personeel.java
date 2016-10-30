@@ -1,17 +1,28 @@
 package model;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+
 public class DAO_Personeel extends DAO_Connect {
 
-	public static boolean createPersoneel(int a,int b, String c)
+	public static boolean createPersoneel(int a,int b, String c) throws SQLException
 	{
 		 Connection con = null; 
 		PreparedStatement pstmt = null;  
         try {
-            con = DriverManager.getConnection(
+            con = (Connection) DriverManager.getConnection(
                       "jdbc:default:connection");
 
-            pstmt = con.prepareStatement(
-                        "INSERT INTO Kassier Values (?,?,?)" );
+            try {
+				pstmt = (PreparedStatement) con.prepareStatement(
+				            "INSERT INTO Kassier Values (?,?,?)" );
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
                       
 
             pstmt.setString(1, c);
@@ -27,4 +38,6 @@ public class DAO_Personeel extends DAO_Connect {
 		return true;
 		
 	}
+	
+	
 }
