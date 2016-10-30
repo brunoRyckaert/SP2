@@ -9,7 +9,14 @@ public Adres getAdres(int adresID) throws SQLException
 {
 	try
 	{
-	con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+		if( con == null || con.isClosed())
+		{
+			con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+		}
+		if( con == null || con.isClosed())
+		{
+			return null;
+		}
 	PreparedStatement stmt = con.prepareStatement("select * from Adres where AdresID = ?");
 	stmt.setInt(1,adresID);
 	ResultSet rs = stmt.executeQuery();

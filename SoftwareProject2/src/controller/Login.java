@@ -1,7 +1,13 @@
 package controller;
 
+import java.awt.TextField;
 import java.security.MessageDigest;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.*;
+import javafx.stage.Stage;
 import model.Personeelslid;
 
 public class Login {
@@ -13,13 +19,14 @@ public class Login {
 	 * @param wachtwoord
 	 * @return Personeelslid indien combinatie juist; null indien fout.
 	 */
-	private String username;
-	private String wachtwoord;
-	private int id;
-	public static Personeelslid checkLogin(String username, String wachtwoord) {
+private String username;
+private String wachtwoord;
+private Integer id;
+
+	public static Personeelslid checkLogin(Login log) {
 		Personeelslid perslid = null;
 		LoginDAO login = new LoginDAO();
-		login.checkLogin(username,wachtwoord);
+		login.checkLogin(log);
 		return perslid;
 	}
 	
