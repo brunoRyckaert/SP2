@@ -2,6 +2,7 @@ package model;
 
 public class Personeelslid {
 	private static enum Rol { PERSONEEL, SYSADMIN };
+	
 	private String naam;
 	private int databaseID;
 	private Rol rol;
@@ -10,6 +11,11 @@ public class Personeelslid {
 		this.naam = naam;
 		this.rol = rol;
 	}
+	//default constructor toegevoegd
+	public Personeelslid() {
+		
+	}
+	
 	public String getNaam() {
 		return naam;
 	}
