@@ -26,6 +26,7 @@ public class Ticket {
 	public void setTicketsoortID(int ticketsoortID) {
 		this.ticketsoortID = ticketsoortID;
 	}
+	
 	public String getHeenDatum() {
 		return heenDatum;
 	}

@@ -30,7 +30,7 @@ public class PersoneelslidTest {
 	public void testofTweeDataseIdsDezelfdeZijn() {
 		
 		p2.setDatabaseID(101);
-		p1.setDatabaseID(100);
+		p1.setDatabaseID(101);
 		assertTrue(p1.getDatabaseID()== p2.getDatabaseID());
 	}
 
