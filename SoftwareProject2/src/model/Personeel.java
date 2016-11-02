@@ -1,10 +1,7 @@
-package controller;
+package model;
 
 import java.sql.Date;
 import java.util.Calendar;
-
-import model.Adres;
-import model.Login;
 
 public class Personeel {
 	Login login = new Login();
@@ -13,6 +10,16 @@ public class Personeel {
 	private String naam;
 	private Boolean isActief;
 	private Date geboorteDatum;
+	private Boolean Admin;
+	public Boolean getAdmin() {
+		return Admin;
+	}
+	public void setAdmin(Boolean admin) {
+		Admin = admin;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public Login getLogin() {
 		return login;
 	}

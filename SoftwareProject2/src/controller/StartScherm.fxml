@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StartController">
+   <children>
+      <Button fx:id="btnVerk" layoutX="471.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnVerkoopAction" text="Verkopen" />
+      <Button fx:id="btnVerVo" layoutX="227.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnVerlorenVoorwerpAction" text="verloren voorwerpen" />
+      <Button fx:id="btnOpz" layoutX="67.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnOpzoekAction" text="Opzoeken" />
+      <SplitMenuButton fx:id="smbTaal" layoutX="526.0" layoutY="14.0" mnemonicParsing="false" text="taal">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </SplitMenuButton>
+      <Separator layoutX="215.0" layoutY="258.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Separator layoutX="403.0" layoutY="258.0" orientation="VERTICAL" prefHeight="200.0" />
+      <TextArea fx:id="txtaOpz" layoutX="36.0" layoutY="215.0" prefHeight="200.0" prefWidth="150.0" />
+      <TextArea fx:id="txtaVerVo" layoutX="231.0" layoutY="215.0" prefHeight="200.0" prefWidth="150.0" />
+      <TextArea fx:id="txtaVerk" layoutX="428.0" layoutY="215.0" prefHeight="200.0" prefWidth="150.0" />
+      <Label fx:id="lblHelloUser" layoutX="14.0" layoutY="14.0" prefHeight="21.0" prefWidth="165.0" />
+      <Button fx:id="btnLogOff" alignment="CENTER" layoutX="24.0" layoutY="615.0" mnemonicParsing="false" onAction="#btnLogOffAction" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: grey;" text="Afmelden" textAlignment="CENTER" />
+   </children>
+</Pane>

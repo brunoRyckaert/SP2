@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.Personeel;
+
 public class PersoneelDAO extends DAO{
 	
 public Personeel getPersoon(int loginID)
@@ -20,12 +22,14 @@ public Personeel getPersoon(int loginID)
 		{
 			return null;
 		}
+
 	PreparedStatement stmt = con.prepareStatement("select * from Kassier where LoginID = ?");
 	stmt.setInt(1,loginID);
 	ResultSet rs = stmt.executeQuery();
 	Personeel pers = new Personeel();
 	pers.setNaam(null);
 	int adresID = 0;
+
 	while (rs.next())
 	{
 	pers.setId(rs.getInt("KassierID"));
@@ -33,6 +37,7 @@ public Personeel getPersoon(int loginID)
 	pers.setGeboorteDatum(rs.getDate("geboortedatum"));
 	pers.setIsActief(rs.getBoolean("actief"));
 	adresID = rs.getInt("adresID");
+	pers.setAdmin(rs.getBoolean("isAdmin"));
 	}
 	con.close();
 	if(pers.getNaam() == null)

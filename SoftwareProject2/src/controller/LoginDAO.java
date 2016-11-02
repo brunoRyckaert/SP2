@@ -7,7 +7,7 @@ import model.Login;
 
 public class LoginDAO extends DAO{
 	
-	public Boolean checkLogin(Login log)
+	public Login checkLogin(Login log)
 	{
 		try
 		{
@@ -16,12 +16,6 @@ public class LoginDAO extends DAO{
 		stmt.setString(1,log.getUsername());
 		stmt.setString(2,log.getWachtwoord());
 		ResultSet rs = stmt.executeQuery();
-		if (!rs.next())
-		{    
-		    return false; 
-		} 
-		else
-		{
 		while (rs.next())
 		{
 		log.setId(rs.getInt("LoginID"));
@@ -30,19 +24,19 @@ public class LoginDAO extends DAO{
 		}
 		if(log.getUsername() == null || log.getWachtwoord() == null)
 		{
-		return false;
+		return null;
 		}
 		else
 		{
-		return true;
+		return log;
 		}
-		}
+		
 		}
 		catch (SQLException exc)
 		{
 			System.out.println("PROBLEEM: "+exc.getMessage());
 			System.out.println("fout code: "+ exc.getErrorCode());
-			return false;
+			return null;
 		}
 		
 	}

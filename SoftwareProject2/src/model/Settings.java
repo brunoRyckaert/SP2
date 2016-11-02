@@ -7,23 +7,23 @@ public class Settings {
 	 */
 	private static Settings settings;
 	
-	private Personeelslid ingelogdPersoneelslid;
+	private Personeel ingelogdPersoneelslid;
 	
 	private Settings() {
 		ingelogdPersoneelslid = null;
 	}
-	public Settings getInstance() {
+	public static Settings getInstance() {
 		if (Settings.settings == null) {
 			Settings.settings = new Settings();
 		}
 		return Settings.settings;
 	}
 
-	public Personeelslid getIngelogdPersoneelslid() {
+	public Personeel getIngelogdPersoneelslid() {
 		return ingelogdPersoneelslid;
 	}
 
-	public void setIngelogdPersoneelslid(Personeelslid ingelogdPersoneelslid) {
+	public void setIngelogdPersoneelslid(Personeel ingelogdPersoneelslid) {
 		this.ingelogdPersoneelslid = ingelogdPersoneelslid;
 	}
 }
