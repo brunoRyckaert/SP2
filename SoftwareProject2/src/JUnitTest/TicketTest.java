@@ -10,7 +10,7 @@ public class TicketTest {
     Ticket t = new Ticket();
     Ticket t1 = new Ticket();
     
-    
+    @Test
     public void testofNullObject(){
     	assertNull(t);
     }
@@ -26,57 +26,32 @@ public class TicketTest {
 
 	@Test
 	public void testOfKortingDezelfdeIsAlsPrijs() {
-		
-	}
-	/*
-	@Test
-	public void testOfKlasse1is(){
-	
+		t.setKorting(50);
+		t.setPrijs(120);
+		assertTrue((t.getKorting()* t.getPrijs()/(100))==t.getPrijs());
 	}
 	
+	
 	@Test
-	public void testOfKlasse2is(){
+	public void testOfTweeDatumsGelijkZijn(){
+		t.setHeenDatum("04.11.2016");
+		t1.setHeenDatum("05.12.2016");
+		assertFalse(t.getHeenDatum().equals(t1.getHeenDatum()));
+	}
+
+	
+
+	@Test
+	public void testAantalReizigersIsPositief() {
+		t.setAantalReizigers(15);
 		
-	}
-	*/
-	@Test
-	public void testGetTicketsoortID() {
-		fail("Not yet implemented");
+		assertTrue(t.getAantalReizigers()>0);
 	}
 
 	@Test
-	public void testSetTicketsoortID() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetHeenDatum() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetHeenDatum() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetTerugDatum() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetTerugDatum() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetBeginStation() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetBeginStation() {
-		fail("Not yet implemented");
+	public void testBeginStationIsEmpty() {
+	 t1.setBeginStation("");
+	 assertEquals("",t1.getBeginStation());
 	}
 
 	@Test
@@ -84,20 +59,15 @@ public class TicketTest {
 		fail("Not yet implemented");
 	}
 
-	@Test
-	public void testSetEindStation() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
-	public void testGetPrijs() {
-		fail("Not yet implemented");
+	public void testPrijsIsPositiefOfNul() {
+		t.setPrijs(500);
+		assertTrue(t.getPrijs()>=0);
 	}
 
-	@Test
-	public void testSetPrijs() {
-		fail("Not yet implemented");
-	}
+	
 
 	@Test
 	public void testGetKorting() {
