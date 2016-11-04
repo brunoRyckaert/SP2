@@ -62,12 +62,12 @@ public class KlantTest {
 
 	@Test
 	public void testOfTweetelefoonNummersDezelfdeZijn() {
-		k1.setTelefoonNummer(0489456302);
+		k1.setTelefoonNummer(489456302);
+	 k2.setTelefoonNummer(487520921);
+	assertTrue(k1.getTelefoonNummer()==k2.getTelefoonNummer());
+	
+		
 	}
 
-	@Test
-	public void testSetTelefoonNummer() {
-		fail("Not yet implemented");
-	}
 
 }
