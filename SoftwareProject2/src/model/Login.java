@@ -1,8 +1,14 @@
-package controller;
+package model;
 
+import java.awt.TextField;
 import java.security.MessageDigest;
 
-import model.Personeelslid;
+import controller.LoginDAO;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.*;
+import javafx.stage.Stage;
 
 public class Login {
 	/**
@@ -13,12 +19,48 @@ public class Login {
 	 * @param wachtwoord
 	 * @return Personeelslid indien combinatie juist; null indien fout.
 	 */
-	public static Personeelslid checkLogin(String username, String wachtwoord) {
+private String username;
+private String wachtwoord;
+private Integer id;
+
+	public static Personeelslid checkLogin(Login log) {
 		Personeelslid perslid = null;
+		LoginDAO login = new LoginDAO();
+		login.checkLogin(log);
 		return perslid;
 	}
 	
 	
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getWachtwoord() {
+		return wachtwoord;
+	}
+
+
+	public void setWachtwoord(String wachtwoord) {
+		this.wachtwoord = wachtwoord;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	/**
 	 * Deze functie dient eerst via checkLogin() na te gaan of de combinatie juist is. 
 	 * Zoja, dan moet het de lopende instellingen aanpassen om dit personeelslid bij te houden. (Settings.setIngelogdPersoneel())
