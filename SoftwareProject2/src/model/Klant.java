@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Calendar;
-//Adres moet er nog bij komen
+
 public class Klant {
 
 	private int klantNummer; 
@@ -9,14 +9,16 @@ public class Klant {
 	private String voornaam; 
 	private Calendar geboortedatum; 
 	private long telefoonNummer;
+	private Adres adres; 
 	
 	public Klant(){}
-	public Klant(int klantNummer, String naam, String voornaam, Calendar geboortedatum, long telefoonNummer){
+	public Klant(int klantNummer, String naam, String voornaam, Calendar geboortedatum, long telefoonNummer, Adres adres){
 		this.klantNummer=klantNummer; 
 		this.naam=naam; 
 		this.voornaam=voornaam; 
 		this.geboortedatum=geboortedatum; 
-		this.telefoonNummer=telefoonNummer; 
+		this.telefoonNummer=telefoonNummer;
+		this.adres=adres;
 	}
 	public int getKlantNummer() {
 		return klantNummer;
@@ -49,4 +51,11 @@ public class Klant {
 	public void setTelefoonNummer(long telefoonNummer) {
 		this.telefoonNummer = telefoonNummer;
 	}
+	public Adres getAdres() {
+		return adres;
+	}
+	public void setAdres(Adres adres) {
+		this.adres = adres;
+	}
+	
 }
