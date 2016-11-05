@@ -2,13 +2,12 @@ package JUnitTest;
 
 import static org.junit.Assert.*;
 
-import java.text.SimpleDateFormat;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
+
 import java.util.Calendar;
 
 import org.junit.Test;
 
+import model.Adres;
 import model.Klant;
 
 public class KlantTest {
@@ -19,7 +18,12 @@ public class KlantTest {
 		assertNotNull(k1);
 		assertNull(null);
 	}
-
+    
+	@Test
+	public void testOfAdresNietNullIs(){
+		k2.setAdres(new Adres());
+		assertNotNull(k2.getAdres());
+	}
 	@Test
 	public void testOfTweeKlantenDezelfdeZijn() {
 		 k1.setKlantNummer(101);
