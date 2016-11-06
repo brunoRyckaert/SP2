@@ -1,30 +1,32 @@
 package model;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Klant {
 
-	private int klantNummer; 
+	private int klantID; 
 	private String naam; 
 	private String voornaam; 
-	private Calendar geboortedatum; 
-	private long telefoonNummer;
-	private Adres adres; 
+	private Date geboortedatum; 
+	private long telefoonnummer;
+	private int adresID; 
 	
 	public Klant(){}
-	public Klant(int klantNummer, String naam, String voornaam, Calendar geboortedatum, long telefoonNummer, Adres adres){
-		this.klantNummer=klantNummer; 
+	public Klant(int klantID, String naam, Date geboortedatum, long telefoonnummer, int adresID){
+		this.klantID=klantID; 
 		this.naam=naam; 
-		this.voornaam=voornaam; 
+	//this.voornaam=voornaam; 
 		this.geboortedatum=geboortedatum; 
-		this.telefoonNummer=telefoonNummer;
-		this.adres=adres;
+		this.telefoonnummer=telefoonnummer;
+		this.adresID=adresID;
 	}
-	public int getKlantNummer() {
-		return klantNummer;
+	public int getKlantID() {
+		return klantID;
 	}
-	public void setKlantNummer(int klantNummer) {
-		this.klantNummer = klantNummer;
+	public void setKlantID(int klantID) {
+		this.klantID = klantID;
 	}
 	public String getNaam() {
 		return naam;
@@ -38,24 +40,30 @@ public class Klant {
 	public void setVoornaam(String voornaam) {
 		this.voornaam = voornaam;
 	}
-	public Calendar getGeboortedatum() {
+	public Date getGeboortedatum() {
 		
 		return geboortedatum;
 	}
-	public void setGeboortedatum(Calendar geboortedatum) {
+public String getGeboortedatumAsString() {
+	SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy");
+	return "Geboortedatum: " + myFormat.format(geboortedatum.getTime());
+	}
+	public void setGeboortedatum(Date geboortedatum) {
+		Calendar cal = Calendar.getInstance();
+		  cal.setTime(geboortedatum);
 		this.geboortedatum = geboortedatum;
 	}
-	public long getTelefoonNummer() {
-		return telefoonNummer;
+	public long getTelefoonnummer() {
+		return telefoonnummer;
 	}
-	public void setTelefoonNummer(long telefoonNummer) {
-		this.telefoonNummer = telefoonNummer;
+	public void setTelefoonnummer(long telefoonnummer) {
+		this.telefoonnummer = telefoonnummer;
 	}
-	public Adres getAdres() {
-		return adres;
+	public int getAdresID() {
+		return adresID;
 	}
-	public void setAdres(Adres adres) {
-		this.adres = adres;
+	public void setAdresID(int adresID) {
+		this.adresID = adresID;
 	}
 	
 }
