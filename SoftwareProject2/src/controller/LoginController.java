@@ -20,7 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-//probeer het te runnen met internet krijg communication link fouten
+
 
 public class LoginController implements Initializable{
 	@FXML
@@ -33,8 +33,7 @@ public class LoginController implements Initializable{
 	private TextField txtlbGebruikersnaam;
 	@FXML
 	private PasswordField txtlbwachtwoord;
-	//@FXML
-	//private SplitMenuButton smbTaal;
+	
 
 	public void btnLoginAction(ActionEvent event) throws SQLException, IOException
 	{
@@ -68,7 +67,6 @@ public class LoginController implements Initializable{
 		{
 			Personeel ingelogd = new Personeel();
 			PersoneelDAO persDAO = new PersoneelDAO();
-			System.out.println(log.getId());
 			ingelogd = persDAO.getPersoon(log.getId());
 			if(ingelogd.getIsActief() == false)
 			{

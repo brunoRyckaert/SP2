@@ -9,17 +9,26 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.Scanner;
-
-
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.sun.prism.Image;
 
 import view.Gui;
-// gebruikersnaam = trein
+// gebruikersnaam = kassier password = kassier
+// gebruikersnaam = admin   password = admin
 public class Main extends Application {
 	
 	static Stage window;
@@ -39,5 +48,6 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
+	
 	}
 }
