@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import model.Login;
+import model.Ticket;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,6 +39,16 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		launch(args);
+		//launch(args);
+		Ticket t = new Ticket();
+		TicketDAO dao = new TicketDAO();
+		
+		try {
+			t = dao.getTicket(1);
+			dao.setTicket(t);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
