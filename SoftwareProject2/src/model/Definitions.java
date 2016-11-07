@@ -12,7 +12,7 @@ static ArrayList<String> stations = new ArrayList<String>(); //kan je geen insta
 
 public static ArrayList<String> getStations() {
 	try {
-		File bestand = new File("C:\\Users\\max\\git\\SP2\\SoftwareProject2\\src\\controller\\stations.csv");
+		File bestand = new File("../SoftwareProject2/src/controller/stations.csv");
 		Scanner inputStream = new Scanner(bestand);
 		inputStream.next();//de kolomnamen
 		while(inputStream.hasNext())
