@@ -48,10 +48,10 @@ public String getGeboortedatumAsString() {
 	SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy");
 	return "Geboortedatum: " + myFormat.format(geboortedatum.getTime());
 	}
-	public void setGeboortedatum(Date geboortedatum) {
+	public void setGeboortedatum(java.util.Date c) {
 		Calendar cal = Calendar.getInstance();
-		  cal.setTime(geboortedatum);
-		this.geboortedatum = geboortedatum;
+		  cal.setTime(c);
+		this.geboortedatum = (Date) c;
 	}
 	public long getTelefoonnummer() {
 		return telefoonnummer;

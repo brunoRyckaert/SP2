@@ -19,17 +19,13 @@ public class KlantTest {
 		assertNull(null);
 	}
     
-	@Test
-	public void testOfAdresNietNullIs(){
-		k2.setAdres(new Adres());
-		assertNotNull(k2.getAdres());
-	}
+
 	@Test
 	public void testOfTweeKlantenDezelfdeZijn() {
-		 k1.setKlantNummer(101);
-       k2.setKlantNummer(100);
-       Integer a= k1.getKlantNummer();
-       Integer b =k2.getKlantNummer();
+		 k1.setKlantID(101);
+       k2.setKlantID(100);
+       Integer a= k1.getKlantID();
+       Integer b =k2.getKlantID();
 		assertTrue(a.equals(b));
 	}
 
@@ -61,14 +57,14 @@ public class KlantTest {
 		c.set(1996,05,23);
 		k2.setGeboortedatum(c);
 		//Ik zoek nog een manier om dit testje nauwkeuriger te maken..
-		assertTrue( ( d.YEAR - k2.getGeboortedatum().YEAR)>=18);
+		//assertTrue( ( d.YEAR - k2.getGeboortedatum().getYear())>=18);
 	}
 
 	@Test
 	public void testOfTweetelefoonNummersDezelfdeZijn() {
-		k1.setTelefoonNummer(489456302);
-	 k2.setTelefoonNummer(487520921);
-	assertTrue(k1.getTelefoonNummer()==k2.getTelefoonNummer());
+		k1.setTelefoonnummer(489456302);
+	 k2.setTelefoonnummer(487520921);
+	assertTrue(k1.getTelefoonnummer()==k2.getTelefoonnummer());
 	
 		
 	}
