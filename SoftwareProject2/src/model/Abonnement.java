@@ -14,14 +14,13 @@ public class Abonnement {
 	private double prijs;
 	private int kortingNummer;
 	
-	/*
 	public Abonnement(int klantNummer, Station beginStation, Station eindStation, Calendar aankoopTijd,
 			Calendar beginDatum, Calendar eindDatum, boolean isGeldig, double prijs, int kortingNummer) {
 		super();
 		// set uniek abonnementNummer
 		this.klantNummer = klantNummer;
-		this.beginStation = beginStation;
-		this.eindStation = eindStation;
+		//this.beginStation = beginStation;
+		//this.eindStation = eindStation;
 		this.aankoopTijd = aankoopTijd;
 		this.beginDatum = beginDatum;
 		this.eindDatum = eindDatum;
@@ -29,8 +28,6 @@ public class Abonnement {
 		this.prijs = prijs;
 		this.kortingNummer = kortingNummer;
 	}
-	
-	*/
 	
 	// getter/setter begin-en eindStation
 	public int getAbonnementNummer() {
