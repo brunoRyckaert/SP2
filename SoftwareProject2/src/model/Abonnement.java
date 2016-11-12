@@ -14,7 +14,7 @@ public class Abonnement {
 	private double prijs;
 	private int kortingNummer;
 	
-	public Abonnement(int klantNummer, Station beginStation, Station eindStation, Calendar aankoopTijd,
+	public Abonnement(int klantNummer/*, Station beginStation, Station eindStation*/, Calendar aankoopTijd,
 			Calendar beginDatum, Calendar eindDatum, boolean isGeldig, double prijs, int kortingNummer) {
 		super();
 		// set uniek abonnementNummer
