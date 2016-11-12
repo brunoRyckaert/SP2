@@ -65,5 +65,6 @@ public class DAO_Ticket {
 		Ticket b=new Ticket(7,a,heen,terug,"Brussel-Zuid","Brussel-Noord",15,4,1,"00");
 		createTicket(b);
 		System.out.println("tis gemaakt");
+		Ticket c=new Ticket();
 }
 }
