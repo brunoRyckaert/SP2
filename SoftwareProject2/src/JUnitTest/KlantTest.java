@@ -12,6 +12,7 @@ import model.Klant;
 
 public class KlantTest {
       Klant k1= new Klant();
+     
       Klant k2= new Klant();
 	@Test
 	public void testKlantIsNietNull() {
@@ -33,8 +34,8 @@ public class KlantTest {
 
 	@Test
 	public void testVoornaamIsgegeven() {
-		k1.setVoornaam("");
-		assertFalse(k1.getNaam().isEmpty());
+		k1.setNaam(" ");
+		assertTrue(k1.getNaam().isEmpty());
 	}
 
 
@@ -55,7 +56,7 @@ public class KlantTest {
 	    d.setTime(d.getTime());
 		Calendar c = Calendar.getInstance();
 		c.set(1996,05,23);
-		k2.setGeboortedatum(c);
+	//	k2.setGeboortedatum(c);
 		//Ik zoek nog een manier om dit testje nauwkeuriger te maken..
 		//assertTrue( ( d.YEAR - k2.getGeboortedatum().getYear())>=18);
 	}

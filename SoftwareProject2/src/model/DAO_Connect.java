@@ -12,13 +12,16 @@ import java.sql.DriverManager;
 	public class DAO_Connect {
 		  public static void main(String[] args) {      
 			   try {
+				
+				  
 			      Class.forName("com.mysql.jdbc.Driver");
 			      System.out.println("Driver O.K.");
 
 			    //  String url = "jdbc:mysql://dt5.ehb.be:443/phpmyadmin";
 			   
 
-			      DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+			  DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+			     
 			      System.out.println("Connexion effective !");         
 			         System.out.println("conn");
 			    } catch (Exception e) {

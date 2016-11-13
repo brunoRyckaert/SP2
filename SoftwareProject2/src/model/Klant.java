@@ -1,20 +1,24 @@
 package model;
 
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+
 
 public class Klant {
 
 	private int klantID; 
 	private String naam; 
-	private String voornaam; 
-	private Date geboortedatum; 
+	//private String voornaam; 
+	private Calendar geboortedatum; 
 	private long telefoonnummer;
 	private int adresID; 
 	
 	public Klant(){}
-	public Klant(int klantID, String naam, Date geboortedatum, long telefoonnummer, int adresID){
+	public Klant(int klantID, String naam, Calendar geboortedatum, long telefoonnummer, int adresID){
 		this.klantID=klantID; 
 		this.naam=naam; 
 	//this.voornaam=voornaam; 
@@ -34,13 +38,8 @@ public class Klant {
 	public void setNaam(String naam) {
 		this.naam = naam;
 	}
-	public String getVoornaam() {
-		return voornaam;
-	}
-	public void setVoornaam(String voornaam) {
-		this.voornaam = voornaam;
-	}
-	public Date getGeboortedatum() {
+
+	public Calendar getGeboortedatum() {
 		
 		return geboortedatum;
 	}
@@ -48,10 +47,9 @@ public String getGeboortedatumAsString() {
 	SimpleDateFormat myFormat = new SimpleDateFormat("dd.MM.yyyy");
 	return "Geboortedatum: " + myFormat.format(geboortedatum.getTime());
 	}
-	public void setGeboortedatum(java.util.Date c) {
-		Calendar cal = Calendar.getInstance();
-		  cal.setTime(c);
-		this.geboortedatum = (Date) c;
+	public void setGeboortedatum(Calendar c) {
+		
+		this.geboortedatum =  c;
 	}
 	public long getTelefoonnummer() {
 		return telefoonnummer;
@@ -65,5 +63,6 @@ public String getGeboortedatumAsString() {
 	public void setAdresID(int adresID) {
 		this.adresID = adresID;
 	}
+	
 	
 }
