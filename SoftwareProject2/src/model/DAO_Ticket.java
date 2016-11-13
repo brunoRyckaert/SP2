@@ -40,6 +40,38 @@ public class DAO_Ticket {
 		
 	}
 
+	public static Ticket selectTicket(Ticket a) throws SQLException{
+	Ticket retTick= new Ticket();
+		
+		Connection con = null; 
+			PreparedStatement pstmt = null;  
+	     try {
+	       //  con = (Connection) DriverManager.getConnection(
+	         //          "jdbc:default:connection");
+	    	 con = (Connection) DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+
+	         try {
+					pstmt = (PreparedStatement) con.prepareStatement(
+							"SELECT * FROM `Ticket` WHERE TicketID = "+a.getTicketID()+";"
+			);	
+					
+	         } catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	                   
+
+	     
+	        pstmt.execute();
+	     }
+	     finally {
+	         if (pstmt != null) pstmt.close();
+	     }
+	 
+			
+			
+		}
+
 	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws SQLException {
 		   try {
