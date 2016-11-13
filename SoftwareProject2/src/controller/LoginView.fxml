@@ -6,12 +6,10 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="smbTaal" prefHeight="878.0" prefWidth="988.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane fx:id="smbTaal" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
       <TextField fx:id="txtlbGebruikersnaam" alignment="CENTER" layoutX="401.0" layoutY="314.0" promptText="gebruikersnaam" />
       <PasswordField fx:id="txtlbwachtwoord" alignment="CENTER" layoutX="401.0" layoutY="377.0" promptText="password" />
@@ -31,11 +29,6 @@
             <Font size="12.0" />
          </font>
       </Label>
-      <ImageView fitHeight="301.0" fitWidth="345.0" layoutY="-1.0">
-         <image>
-            <Image url="@logo.jpg" />
-         </image>
-      </ImageView>
       <SplitMenuButton fx:id="smbTaal" layoutX="820.0" layoutY="8.0" mnemonicParsing="false" onAction="#smbTaalwijzigAction" text="Taal">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />

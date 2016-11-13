@@ -25,6 +25,7 @@ public class KortingDAO extends DAO {
 				korting.setIsAantal(rs.getBoolean("IsAantal? "));
 				korting.setType(rs.getInt("Type"));
 				con.close();
+			}
 				if (korting.getKortingID() == -1) {
 
 					return null;
@@ -32,12 +33,13 @@ public class KortingDAO extends DAO {
 
 					return korting;
 				}
-			}
+			
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
 			con.close();
 			return null;
+			
 		}
 	}
 

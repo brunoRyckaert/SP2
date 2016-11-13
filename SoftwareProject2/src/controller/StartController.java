@@ -19,12 +19,6 @@ import model.Personeel;
 import model.Settings;
 
 public class StartController implements Initializable{
-	Personeel ingelogde = Settings.getInstance().getIngelogdPersoneelslid();
-	
-	@FXML
-	private Label lblHelloUser = new Label();//gebruiker
-	//@FXML
-	//private SplitMenuButton smbTaal;//talen kiezen
 	@FXML
 	private TextArea txtaOpz;
 	@FXML
@@ -39,6 +33,20 @@ public class StartController implements Initializable{
 	private Button btnVerk;
 	@FXML
 	private Button btnLogOff;
+	@FXML
+	private Label lblHelloUser = new Label();//gebruiker
+	
+	@FXML
+	private void smbTaalwijzigAction(ActionEvent event)
+	{
+		
+	}
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		Personeel ingelogde = Settings.getInstance().getIngelogdPersoneelslid();
+		lblHelloUser.setText("ingelogd: " + ingelogde.getNaam());
+		
+	}
 	@FXML
 	private void btnLogOffAction(ActionEvent event) throws IOException
 	{
@@ -61,18 +69,14 @@ public class StartController implements Initializable{
 		//naar verlorenvoorwerpenview gaan
 	}
 	@FXML
-	private void btnVerkoopAction(ActionEvent event)
+	private void btnVerkoopAction(ActionEvent event) throws IOException
 	{
-		//naar VerkoopView gaan
-	}
-	@FXML
-	private void smbTaalwijzigAction(ActionEvent event)
-	{
-		
-	}
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-	//lblHelloUser.setText("hello " + ingelogde.getNaam());
-	
+		Parent startScherm = FXMLLoader.load(getClass().getResource("VerkoopView.fxml"));
+		Scene startScene = new Scene(startScherm);
+		Stage startStage = new Stage();
+		startStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		startStage.hide();
+		startStage.setScene(startScene);
+		startStage.show();
 	}
 }
