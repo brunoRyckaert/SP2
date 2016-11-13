@@ -67,11 +67,11 @@ public class DAO_Ticket {
 		//System.out.println("tis gemaakt");
 		   TicketSoort a1=new TicketSoort();
 		   a1.setTicketSoortID(1);
-		Ticket b1=new Ticket(7,a1,heen,terug,"Brussel-Zuid","Brussel-Noord",15,4,1,"00");
+		Ticket b1=new Ticket(7,a1,heen,terug,"Brussel-Zuid","Brussel-Noord",15,4,1,"0");
 		createTicket(b1);
 		System.out.println("tis gemaakt");
-		Ticket c1=new Ticket();
+		//Ticket c1=new Ticket();
 
-		byte[] mp3speech = Request.("https://api.irail.be/stations/");
+	
 		}
 }
