@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.junit.runner.Request;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 
@@ -63,11 +65,13 @@ public class DAO_Ticket {
 		//Ticket a=new Ticket();
 	//	createTicket(a);
 		//System.out.println("tis gemaakt");
-		   TicketSoort a=new TicketSoort();
-		   a.setTicketSoortID(1);
-		Ticket b=new Ticket(7,a,heen,terug,"Brussel-Zuid","Brussel-Noord",15,4,1,"00");
-		createTicket(b);
+		   TicketSoort a1=new TicketSoort();
+		   a1.setTicketSoortID(1);
+		Ticket b1=new Ticket(7,a1,heen,terug,"Brussel-Zuid","Brussel-Noord",15,4,1,"00");
+		createTicket(b1);
 		System.out.println("tis gemaakt");
-		Ticket c=new Ticket();
-}
+		Ticket c1=new Ticket();
+
+		byte[] mp3speech = Request.("https://api.irail.be/stations/");
+		}
 }
