@@ -54,9 +54,12 @@ public class DAO_Ticket {
 			      e.printStackTrace();
 			    }      
 			  
-		  
-		Date heen=new Date(2016,5,7);
-		   Date terug=new Date(2016,7,8);
+		  int a,b,c;
+		  a=2016;
+		  b=4;
+		  c=7;
+		Date heen=new Date(a,b,c);
+		   Date terug=new Date(a,b,c+2);
 		//Ticket a=new Ticket();
 	//	createTicket(a);
 		//System.out.println("tis gemaakt");
