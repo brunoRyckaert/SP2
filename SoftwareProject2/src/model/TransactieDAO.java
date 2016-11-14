@@ -19,8 +19,10 @@ public static void createTransactie(Transactie t) throws SQLException{
 
       try {
 				pstmt = (PreparedStatement) con.prepareStatement(
-"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL, '5', '1', '52.33')"		);	
-      } catch (SQLException e) {
+"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL,"+t.getTicket().getTicketID()+", '"+t.getPersoneel().getId()+"', '"+t.getTotaalbedrag()+"')"	
+
+				//		"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL, '1', '1', '55.23');"
+						);	    } catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -40,7 +42,13 @@ public static void createTransactie(Transactie t) throws SQLException{
  public static void main(String[] args) throws SQLException {
 	
 	 Ticket a=new Ticket();
+	 
+	 TicketSoort s=new TicketSoort();
+	 s.setTicketSoortID(1);
+	 a.setTicketsoortID(s);
+	 a.setTicketID(5);
 	 Personeel p=new Personeel();
+	 p.setId(1);
 	 Transactie t =new Transactie(7,a,p,52.33);
 	createTransactie(t);
 	System.out.println("transactie gemaakt");
