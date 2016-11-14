@@ -27,7 +27,7 @@ public class DAO_Ticket {
 
            ;   try {
 				pstmt = (PreparedStatement) con.prepareStatement(
-					"INSERT INTO `Ticket` (`TicketID`, `TicketSoortID`, `HeenDatum`, `TerugDatum`, `BeginStation`, `EindStation`, `Prijs`, `Korting`, `AantalReizigers`, `Aankooptijd`, `Klasse`) VALUES (NULL,'"+ a.getTicketsoortID().getTicketSoortID()+"','"+a.getHeenDatum()+"','"+a.getTerugDatum()+"','"+a.getBeginStation()+"','"+a.getEindStation()+"','"+a.getPrijs()+"','"+ a.getKorting() +"','"+a.getAantalReizigers()+"', CURRENT_TIMESTAMP, '1');"
+					"INSERT INTO `Ticket` (`TicketID`, `TicketSoortID`, `HeenDatum`, `TerugDatum`, `BeginStation`, `EindStation`, `Prijs`, `Korting`, `AantalReizigers`, `Aankooptijd`, `Klasse`) VALUES (NULL,'"+ a.getTicketsoortID()+"','"+a.getHeenDatum()+"','"+a.getTerugDatum()+"','"+a.getBeginStation()+"','"+a.getEindStation()+"','"+a.getPrijs()+"','"+ a.getKorting() +"','"+a.getAantalReizigers()+"', CURRENT_TIMESTAMP, '1');"
 		);	
          } catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -110,7 +110,7 @@ public class DAO_Ticket {
 		   			ResultSet resultat = statement.executeQuery(sql); 
 		   			while(resultat.next()){ 
 		   			eleve.setTicketID(resultat.getInt(1)); 
-		   			eleve.setTicketsoortID(null);//  = resultat.getString(2); 
+		   			eleve.setTicketsoortID(resultat.getInt(2));//  = resultat.getString(2); 
 		   			eleve.setHeenDatum(resultat.getDate(3)); 
 		   			eleve.setTerugDatum(resultat.getDate(4)); 
 		   			eleve.setBeginStation(resultat.getString(5));
@@ -150,24 +150,24 @@ public class DAO_Ticket {
 			      e.printStackTrace();
 			    }      
 			  
-		  int a,b,c;
+		/*  int a,b,c;
 		  a=2016;
 		  b=4;
-		  c=7;
-		Date heen=new Date(a,b,c);
-		   Date terug=new Date(a,b,c+2);
+		  c=7;*/
+		//Date heen=new Date(a,b,c);
+		  // Date terug=new Date(a,b,c+2);
 		//Ticket a=new Ticket();
 	//	createTicket(a);
 		//System.out.println("tis gemaakt");
 		   TicketSoort a1=new TicketSoort();
 		   a1.setTicketSoortID(1);
-		Ticket b1=new Ticket(7,a1,heen,terug,"Brussel-Zuid","Brussel-Noord",15,4,1,"0");
+		Ticket b1=new Ticket();
 		createTicket(b1);
 		System.out.println("tis gemaakt");
 		//Ticket c1=new Ticket();
 	
 		//selectTicket(b1.getTicketID());
-		Ticket q = new Ticket(find(b1.getTicketID()));
+		Ticket q = new Ticket();
 
 	
 		System.out.println(q.toString());

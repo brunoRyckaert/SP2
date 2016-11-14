@@ -39,13 +39,18 @@ public static void createTransactie(Transactie t) throws SQLException{
 		
 }
 
+public static void selectTransactie(int id)
+{
+	
+}
+
  public static void main(String[] args) throws SQLException {
 	
 	 Ticket a=new Ticket();
 	 
 	 TicketSoort s=new TicketSoort();
 	 s.setTicketSoortID(1);
-	 a.setTicketsoortID(s);
+	 a.setTicketsoortID(1);
 	 a.setTicketID(5);
 	 Personeel p=new Personeel();
 	 p.setId(1);
