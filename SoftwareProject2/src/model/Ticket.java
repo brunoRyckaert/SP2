@@ -17,8 +17,11 @@ public class Ticket {
 	public enum Klasse {Eerste , Tweede };
 	
 	
-	
-	public Ticket() {
+	public Ticket()
+	{
+		
+	}
+	public Ticket(Object object) {
 		super();
 	}
 	public Ticket(int ticketID, TicketSoort ticketsoortID, Date heenDatum, Date terugDatum, String beginStation,
@@ -35,6 +38,8 @@ public class Ticket {
 		this.aantalReizigers = aantalReizigers;
 		this.aankoopTijd = aankoopTijd;
 	}
+	
+
 	public int getTicketID() {
 		return ticketID;
 	}
@@ -97,6 +102,14 @@ public class Ticket {
 	public void setTerugDatum(Date terugDatum) {
 		this.terugDatum = terugDatum;
 	}
+	@Override
+	public String toString() {
+		return "Ticket [ticketID=" + ticketID + ", ticketsoortID=" + ticketsoortID + ", heenDatum=" + heenDatum
+				+ ", terugDatum=" + terugDatum + ", beginStation=" + beginStation + ", eindStation=" + eindStation
+				+ ", prijs=" + prijs + ", korting=" + korting + ", aantalReizigers=" + aantalReizigers
+				+ ", aankoopTijd=" + aankoopTijd + "]";
+	}
+
 	
 
 }
