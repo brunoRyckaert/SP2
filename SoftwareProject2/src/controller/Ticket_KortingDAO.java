@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import model.Korting;
 
-public class KortingDAO extends DAO {
+public class Ticket_KortingDAO extends DAO {
 	public Korting getKorting(int kortingID) {
 		try {
 			if (con == null || con.isClosed()) {
@@ -70,3 +70,4 @@ public class KortingDAO extends DAO {
 		}
 	}
 }
+
