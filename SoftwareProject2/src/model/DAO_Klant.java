@@ -19,7 +19,7 @@ public class DAO_Klant extends DAO_Connect {
 		PreparedStatement pstmt = null;  
         try {
             con = (Connection) DriverManager.getConnection(
-                      "jdbc:default:connection");
+            		"jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
 
             try {
 				pstmt = (PreparedStatement) con.prepareStatement(
@@ -52,7 +52,7 @@ public class DAO_Klant extends DAO_Connect {
 		PreparedStatement pstmt = null;  
         try {
             con = (Connection) DriverManager.getConnection(
-                      "jdbc:default:connection");
+            		"jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
 
             try {
 				pstmt = (PreparedStatement) con.prepareStatement(
@@ -62,12 +62,16 @@ public class DAO_Klant extends DAO_Connect {
 				e.printStackTrace();
 			}
                       
-
+           
            pstmt.setInt(1, k.getKlantID());
             pstmt.setInt(2, k.getAdresID());
             pstmt.setString(3, k.getNaam());
             pstmt.setLong(4, k.getTelefoonnummer());
-            pstmt.setTime(5, (Time) k.getGeboortedatum().getTime(), k.getGeboortedatum());
+          
+            pstmt.setDate(5 ,  (java.sql.Date) k.getGeboortedatum().getTime()); // Ik kan geen manier vinden om een Calendar type naar tabel te sturen
+         // pstmt.setTime(5 , k.getGeboortedatum());
+       //     pstmt.setDate(5, k.getGeboortedatum();
+
             pstmt.setInt(6, k.getKlantID());
             pstmt.executeUpdate();
         }
@@ -85,7 +89,7 @@ public class DAO_Klant extends DAO_Connect {
 		PreparedStatement pstmt = null;  
         try {
             con = (Connection) DriverManager.getConnection(
-                      "jdbc:default:connection");
+            		"jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
 
             try {
 				pstmt = (PreparedStatement) con.prepareStatement(
@@ -113,15 +117,15 @@ public class DAO_Klant extends DAO_Connect {
 		 
 		try{
 			Connection conn =   (Connection) DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
-			DAO_Klant dao = new DAO_Klant();
+			
 			Calendar cal = Calendar.getInstance();
 			  cal.set(1998, 2, 14);
-			Klant k = new Klant(101,"Matt",  cal,(long)489635214,2 );
-			dao.createKlant(k);
+			Klant k = new Klant(101,"Matt", cal,(long)489635214,2 );
+			DAO_Klant.createKlant(k);
 			Calendar cal1 = Calendar.getInstance();
-			  cal.set(1998, 2, 14);
-			Klant k1 = new Klant(102,"Jake",  cal1,(long)483625814,3 );
-			dao.createKlant(k1);
+			 cal1.set(1998, 2, 14);
+			Klant k1 = new Klant(102,"Jake", cal1,(long)483625814,3 );
+			DAO_Klant.createKlant(k1);
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
