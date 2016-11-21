@@ -16,7 +16,7 @@ public Personeel getPersoon(int loginID)
 	{
 		if( con == null || con.isClosed())
 		{
-			con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+			con = DAO.getInstance();
 		}
 		if( con == null || con.isClosed())
 		{

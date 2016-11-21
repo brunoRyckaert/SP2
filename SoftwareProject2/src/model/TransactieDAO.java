@@ -17,10 +17,10 @@ public static void createTransactie(Transactie t) throws SQLException{
   try {
     //  con = (Connection) DriverManager.getConnection(
       //          "jdbc:default:connection");
- 	 con = (Connection) DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+ 	 con = DAO.getInstance();
 
       try {
-				pstmt = (PreparedStatement) con.prepareStatement(
+				pstmt = con.prepareStatement(
 "INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL,"+t.getTicket().getTicketID()+", '"+t.getPersoneel().getId()+"', '"+t.getTotaalbedrag()+"')"	
 
 				//		"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL, '1', '1', '55.23');"
@@ -47,7 +47,7 @@ public static Transactie selectTransactie(int id)
 	{
 		if( con == null || con.isClosed())
 		{
-			con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+			con = DAO.getInstance();
 		}
 		if( con == null || con.isClosed())
 		{
@@ -83,7 +83,7 @@ public static int getVerkoper(int ticketID)
 	{
 		if( con == null || con.isClosed())
 		{
-			con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+			con = DAO.getInstance();
 		}
 		if( con == null || con.isClosed())
 		{
@@ -106,20 +106,5 @@ public static int getVerkoper(int ticketID)
 		System.out.println("fout code: "+ exc.getErrorCode());
 		return -1;
 	}
-}
- public static void main(String[] args) throws SQLException {
-	
-	 Ticket a=new Ticket();
-	 
-	 TicketSoort s=new TicketSoort();
-	 s.setTicketSoortID(1);
-	 a.setTicketsoortID(1);
-	 a.setTicketID(5);
-	 Personeel p=new Personeel();
-	 p.setId(1);
-	 Transactie t =new Transactie(7,a,p,52.33);
-	createTransactie(t);
-	System.out.println("transactie gemaakt");
-	
 }
 }

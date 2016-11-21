@@ -9,7 +9,7 @@ public class KortingDAO extends DAO {
 	public Korting getKorting(int kortingID) {
 		try {
 			if (con == null || con.isClosed()) {
-				con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1", "SP2GR1", "6xBfsv");
+				con = DAO.getInstance();
 			}
 			if (con == null || con.isClosed()) {
 				return null;

@@ -1,10 +1,10 @@
 package model;
 
-import java.sql.DriverManager;
+import java.sql.*;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
+
+import controller.DAO;
 
 public class DAO_Personeel extends DAO_Connect {
 
@@ -14,8 +14,7 @@ public class DAO_Personeel extends DAO_Connect {
 		 Connection con = null; 
 		PreparedStatement pstmt = null;  
         try {
-            con = (Connection) DriverManager.getConnection(
-                      "jdbc:default:connection");
+            con = DAO.getInstance();
 
             try {
 				pstmt = (PreparedStatement) con.prepareStatement(
@@ -45,8 +44,7 @@ public class DAO_Personeel extends DAO_Connect {
 		 Connection con = null; 
 		PreparedStatement pstmt = null;  
         try {
-            con = (Connection) DriverManager.getConnection(
-                      "jdbc:default:connection");
+            con = DAO.getInstance();
 
             try {
 				pstmt = (PreparedStatement) con.prepareStatement(
@@ -82,23 +80,7 @@ public class DAO_Personeel extends DAO_Connect {
 		
 		
 	}*/
-	  public static void main(String[] args) {      
-		    try {
-		      Class.forName("com.mysql.jdbc.Driver");
-		      System.out.println("Driver O.K.");
-
-		      String url = "jdbc:mysql://dt5.ehb.be:443/phpmyadmin";
-		      String user = "SP2GR1";
-		      String passwd = "6xBfsv";
-		      
-
-		      DriverManager.getConnection(url, user, passwd);
-		      System.out.println("Connexion effective !");         
-		         System.out.println("conn");
-		    } catch (Exception e) {
-		      e.printStackTrace();
-		    }      
-		  }
+	 
 	
 	
 	

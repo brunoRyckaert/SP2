@@ -133,43 +133,4 @@ public class DAO_Ticket {
 		    return eleve;
 		  
 	 }
-
-	@SuppressWarnings("deprecation")
-	public static void main(String[] args) throws SQLException {
-		   try {
-			      Class.forName("com.mysql.jdbc.Driver");
-			      System.out.println("Driver O.K.");
-
-			    //  String url = "jdbc:mysql://dt5.ehb.be:443/phpmyadmin";
-			   
-
-			      DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
-			      System.out.println("Connexion effective !");         
-			         System.out.println("conn");
-			    } catch (Exception e) {
-			      e.printStackTrace();
-			    }      
-			  
-		/*  int a,b,c;
-		  a=2016;
-		  b=4;
-		  c=7;*/
-		//Date heen=new Date(a,b,c);
-		  // Date terug=new Date(a,b,c+2);
-		//Ticket a=new Ticket();
-	//	createTicket(a);
-		//System.out.println("tis gemaakt");
-		   TicketSoort a1=new TicketSoort();
-		   a1.setTicketSoortID(1);
-		Ticket b1=new Ticket();
-		createTicket(b1);
-		System.out.println("tis gemaakt");
-		//Ticket c1=new Ticket();
-	
-		//selectTicket(b1.getTicketID());
-		Ticket q = new Ticket();
-
-	
-		System.out.println(q.toString());
-		}
 }
