@@ -5,7 +5,7 @@ import java.sql.*;
 import model.Ticket;
 
 public class TicketDAO extends DAO{
-	public Ticket getTicket(int ticketID) throws SQLException {
+	public static Ticket getTicket(int ticketID) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
 				con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1", "SP2GR1", "6xBfsv");
@@ -78,5 +78,9 @@ public class TicketDAO extends DAO{
 			System.out.println("fout code: " + exc.getErrorCode());
 			con.close();
 		}
+	}
+	public static void main(String[] args) throws SQLException {
+		getTicket(1);
+		System.out.println("ticket terug genomen");
 	}
 }

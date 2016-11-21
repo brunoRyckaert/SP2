@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import model.Korting;
 import model.Login;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

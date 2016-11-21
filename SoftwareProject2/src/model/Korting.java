@@ -1,25 +1,22 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Korting {
-
-	private enum Type {
-		Gezin(0), Weekend(1), OuderDan60(2), TrampolineWeekendRijsel(3), EscapadeLuxemburg(4), BeneluxYouth(5);
-		private int getal;
-
-		Type(int getal) {
-			this.setGetal(getal);
-		}
-
-		public void setGetal(int getal) {
-			this.getal = getal;
-		};
+	
+	private String beschrijving;
+	
+	ArrayList<Integer>ticketSoortID = new ArrayList<Integer>();
+	public ArrayList<Integer> getTicketSoortID() {
+		return ticketSoortID;
+	}
+	public void setTicketSoortID(ArrayList<Integer> ticketSoortID) {
+		this.ticketSoortID = ticketSoortID;
 	}
 	private int kortingID;
-	private double prijs;
+	private float prijs;
 	private Boolean isProcent;
 	private int aantal;
-	private Boolean isAantal;
-	private Type type;
 	
 	
 	public int getKortingID() {
@@ -28,10 +25,10 @@ public class Korting {
 	public void setKortingID(int kortingID) {
 		this.kortingID = kortingID;
 	}
-	public double getPrijs() {
+	public float getPrijs() {
 		return prijs;
 	}
-	public void setPrijs(double prijs) {
+	public void setPrijs(float prijs) {
 		this.prijs = prijs;
 	}
 	public Boolean getIsProcent() {
@@ -46,36 +43,10 @@ public class Korting {
 	public void setAantal(int aantal) {
 		this.aantal = aantal;
 	}
-	public Boolean getIsAantal() {
-		return isAantal;
+	public String getBeschrijving() {
+		return beschrijving;
 	}
-	public void setIsAantal(Boolean isAantal) {
-		this.isAantal = isAantal;
-	}
-	public Type getType(){
-		return type;
-	}
-	public int getTypeGetal(){
-		return this.type.getal;
-	}
-	public void setType(int type) {
-		if(type == 0){
-			this.type = Type.Gezin;
-		}
-		if(type == 1){
-			this.type = Type.Weekend;
-		}
-		if(type == 2){
-			this.type = Type.OuderDan60;
-		}
-		if(type == 3){
-			this.type = Type.TrampolineWeekendRijsel;
-		}
-		if(type == 4){
-			this.type = Type.EscapadeLuxemburg;
-		}
-		if(type == 5){
-			this.type = Type.BeneluxYouth;
-		}
+	public void setBeschrijving(String beschrijving) {
+		this.beschrijving = beschrijving;
 	}
 }
