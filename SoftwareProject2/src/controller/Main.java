@@ -48,11 +48,5 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-		//launch(args);
-	Korting k = new Korting();
-	KortingDAO dao = new KortingDAO();
-		k = dao.getKorting(1);
-		System.out.println(k.getPrijs());
-
-	}
+		launch(args);
 }
