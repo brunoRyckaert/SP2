@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import model.Korting;
 import model.Login;
+import model.Ticket;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -46,13 +47,26 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-
 	public static void main(String[] args) {
-		//launch(args);
-	Korting k = new Korting();
-	KortingDAO dao = new KortingDAO();
-		k = dao.getKorting(1);
-		System.out.println(k.getPrijs());
+//	launch(args);
+//	Korting k = new Korting();
+//	KortingDAO dao = new KortingDAO();
+//		k = dao.getKorting(1);
+//		System.out.println(k.getPrijs());
+try {
+	Ticket t = TicketDAO.getTicket(1);
 
+<<<<<<< HEAD
+	TicketDAO.setTicket(t);
+	
+} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+
+=======
+	public static void main(String[] args) {
+		launch(args);
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
 	}
 }

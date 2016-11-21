@@ -4,6 +4,14 @@ import java.util.Date;
 
 public class Ticket extends TicketSoort {
 
+	@Override
+	public String toString() {
+		return "Ticket [klasse=" + klasse + ", ticketID=" + ticketID + ", ticketsoortID=" + ticketsoortID
+				+ ", heenDatum=" + heenDatum + ", terugDatum=" + terugDatum + ", beginStation=" + beginStation
+				+ ", eindStation=" + eindStation + ", prijs=" + prijs + ", korting=" + korting + ", aantalReizigers="
+				+ aantalReizigers + ", aankoopTijd=" + aankoopTijd + ", verkoper=" + verkoper + "]";
+	}
+
 	private enum Klasse {
 		Eerste(0), Tweede(1), Klasseverhoging(2);
 		private int getal;

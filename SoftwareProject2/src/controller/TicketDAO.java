@@ -3,12 +3,14 @@ package controller;
 import java.sql.*;
 
 import model.Ticket;
+import model.Transactie;
+import model.TransactieDAO;
 
 public class TicketDAO extends DAO{
 	public static Ticket getTicket(int ticketID) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
-				con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1", "SP2GR1", "6xBfsv");
+				con = DAO.getInstance();
 			}
 			if (con == null || con.isClosed()) {
 				return null;
@@ -24,7 +26,6 @@ public class TicketDAO extends DAO{
 			while (rs.next()) {
 				ticket.setPrijs(rs.getDouble("Prijs"));
 				ticket.setAantalReizigers(rs.getInt("AantalReizigers"));
-				//ticket.setVerkoper(rs.getInt("Verkoper"));
 				ticket.setHeenDatum(rs.getDate("HeenDatum"));
 				ticket.setTerugDatum(rs.getDate("TerugDatum"));
 				ticket.setBeginStation(rs.getString("BeginStation"));
@@ -34,6 +35,9 @@ public class TicketDAO extends DAO{
 				ticket.setKlasse(rs.getInt("Klasse"));
 				ticket.setTicketSoortID(rs.getInt("TicketSoortID"));
 			}
+			Transactie t = new Transactie();
+			
+			ticket.setVerkoper(TransactieDAO.getVerkoper(ticket.getTicketID()));
 			con.close();
 			if (ticket.getTicketsoortID() == -1) {
 			
@@ -49,10 +53,10 @@ public class TicketDAO extends DAO{
 			return null;
 		}
 	}
-	public void setTicket(Ticket t) throws SQLException {
+	public static void setTicket(Ticket t) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
-				con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1", "SP2GR1", "6xBfsv");
+				con = DAO.getInstance();
 			}
 			if (con == null || con.isClosed()) {
 
@@ -69,8 +73,6 @@ public class TicketDAO extends DAO{
 			stmt.setInt(8, t.getAantalReizigers());
 			stmt.setInt(9, t.getKlasseGetal());
 			int updateCount = stmt.executeUpdate();
-
-			
 			con.close();
 	
 		} catch (SQLException exc) {
@@ -78,9 +80,5 @@ public class TicketDAO extends DAO{
 			System.out.println("fout code: " + exc.getErrorCode());
 			con.close();
 		}
-	}
-	public static void main(String[] args) throws SQLException {
-		getTicket(1);
-		System.out.println("ticket terug genomen");
 	}
 }
