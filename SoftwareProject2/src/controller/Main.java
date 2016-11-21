@@ -48,6 +48,12 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		launch(args);
 	}
 }
+=======
+		launch(args);
+	}
+}
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
