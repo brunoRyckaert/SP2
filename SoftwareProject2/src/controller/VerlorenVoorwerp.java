@@ -47,6 +47,15 @@ public class VerlorenVoorwerp {
 	public void setStation(String station) {
 		this.station = station;
 	}
+
+
+	@Override
+	public String toString() {
+		return "VerlorenVoorwerp [itemId=" + itemId + ", klantId=" + klantId + ", beschrijving=" + beschrijving
+				+ ", station=" + station + "]";
+	}
+	
+	
 	
 	
 	

@@ -2,9 +2,11 @@ package controller;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import controller.DAO;
+import model.Personeel;
 
 public class VerlorenVoorwerpDAo extends DAO {
 	
@@ -42,18 +44,68 @@ public class VerlorenVoorwerpDAo extends DAO {
 			
 			con.close();
 	
+	
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
 			con.close();
 		}
+		finally
+		{
+			con.close();
+		}
+		
 	}
+	
+	public static VerlorenVoorwerp selectVVByNaam(String be) throws SQLException{
+		try
+		{
+			if( con == null || con.isClosed())
+			{
+				con = DAO.getInstance();
+			}
+			if( con == null || con.isClosed())
+			{
+				return null;
+			}
+
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM `VerlorenItem` WHERE `Beschrijving` LIKE ?");
+		stmt.setString(1,be);
+		ResultSet rs = stmt.executeQuery();
+		VerlorenVoorwerp pers = new VerlorenVoorwerp();
+		//pers.setKlantId(null);
+		//int adresID = 0;
+
+		while (rs.next())
+		{
+//		pers.setId(rs.getInt("KassierID"));
+//		pers.setNaam(rs.getString("Naam"));
+//		pers.setGeboorteDatum(rs.getDate("geboortedatum"));
+//		pers.setIsActief(rs.getBoolean("actief"));
+//		adresID = rs.getInt("adresID");
+//		pers.setAdmin(rs.getBoolean("isAdmin"));
+			pers.setItemId(rs.getInt("ItemID"));
+			pers.setKlantId(rs.getInt("KlantID"));
+			pers.setBeschrijving(rs.getString("Beschrijving"));
+			pers.setStation(rs.getString("Station"));
+			
+		}
+		
+		con.close();
+		return pers;
+		//System.out.println(pers.toString());
+		}
+		catch (SQLException exc)
+		{
+			System.out.println("PROBLEEM: "+exc.getMessage());
+			System.out.println("fout code: "+ exc.getErrorCode());
+			return null;
+		}
+	}
+
 	public static void main(String[] args) throws SQLException {
-		VerlorenVoorwerp v=new VerlorenVoorwerp(1,4,"k3 map","Brussel-Noord");
-		//(int itemId, int klantId, String beschrijving, String station
-		
-		insertVerlorenvoorwerp(v);
-		
+		System.out.println(selectVVByNaam("k3 map").toString());
+		//p
 	}
 }
 
