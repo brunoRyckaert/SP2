@@ -107,4 +107,40 @@ public static int getVerkoper(int ticketID)
 		return -1;
 	}
 }
+
+
+public int totaalOmzetBinnenEenBepaaldePeriode(Timestamp a, Timestamp b)
+{
+	try
+	{
+		if( con == null || con.isClosed())
+		{
+			con = DAO.getInstance();
+		}
+		if( con == null || con.isClosed())
+		{
+			return -1;
+		}
+	PreparedStatement stmt = con.prepareStatement("select sum(TotaalBedrag) from Transactie t JOIN Ticket p on( t.TicketID = p.TicketID And p.Aankooptijd BETWEEN ? AND ?)");
+	stmt.setTimestamp(1, a);
+	stmt.setTimestamp(2,b);
+	ResultSet rs = stmt.executeQuery();
+	int i  = -1;
+	while (rs.next())
+	{
+	i = rs.getInt("sum(TotaalBedrag)");
+	}
+	con.close();
+	return i;
+	}
+	catch (SQLException exc)
+	{
+		System.out.println("PROBLEEM: "+exc.getMessage());
+		System.out.println("fout code: "+ exc.getErrorCode());
+		return -1;
+	}
+}
+
+
+
 }

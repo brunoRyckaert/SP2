@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.*;
+import java.util.Calendar;
 
 import model.Ticket;
 import model.Transactie;
@@ -80,5 +81,58 @@ public class TicketDAO extends DAO{
 			System.out.println("fout code: " + exc.getErrorCode());
 			con.close();
 		}
+	}
+	
+	public static int aantalTicketVanEenKassier(int loginid, Timestamp b, Timestamp c)
+	{
+		try {
+			if (con == null || con.isClosed()) {
+				con = DAO.getInstance();
+			}
+			if (con == null || con.isClosed()) {
+
+				
+			}
+			int aantal;
+		//	Timestamp begin ;
+			//Timestamp eind ;
+			PreparedStatement stmt = con.prepareStatement("SELECT count(*) FROM `Ticket` WHERE `Aankooptijd` BETWEEN ? AND ? AND `kassierID` = 3 ;");
+			 
+			stmt.setInt(3, loginid);
+			stmt.setTimestamp(1, b);
+			stmt.setTimestamp(2, c);
+			
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				aantal = rs.getInt("count(*)");
+				return aantal;
+
+			}
+			
+			
+		
+		
+		} catch (SQLException exc) {
+			System.out.println("PROBLEEM: " + exc.getMessage());
+			System.out.println("fout code: " + exc.getErrorCode());
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	public static void main(String[] args) {
+		int loginid = 3; 
+	
+		
+		Timestamp b = null;
+		b.setTime(1480928403);
+		Timestamp c = null;
+		c.setTime(1480930443);
+		System.out.println(aantalTicketVanEenKassier(loginid,b,c));
+		
 	}
 }
