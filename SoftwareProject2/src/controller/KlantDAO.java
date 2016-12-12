@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import model.Klant;
 
 public class KlantDAO extends DAO{
-	public static Klant getKlant(int klantID) throws SQLException {
+	public Klant getKlant(int klantID) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
 				con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1", "SP2GR1", "6xBfsv");

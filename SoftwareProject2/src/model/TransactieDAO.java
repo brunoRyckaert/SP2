@@ -21,10 +21,16 @@ public static void createTransactie(Transactie t) throws SQLException{
 
       try {
 				pstmt = con.prepareStatement(
-"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL,"+t.getTicket().getTicketID()+", '"+t.getPersoneel().getId()+"', '"+t.getTotaalbedrag()+"')"	
+"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL,?,?,?')"	
 
 				//		"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL, '1', '1', '55.23');"
-						);	    } catch (SQLException e) {
+						);	  
+				
+      pstmt.setInt(1, t.getTicket().getTicketID());
+      pstmt.setInt(2, t.getPersoneel().getId());
+      pstmt.setDouble(3, t.getTotaalbedrag());
+      
+      } catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -58,12 +64,13 @@ public static Transactie selectTransactie(int id)
 	ResultSet rs = stmt.executeQuery();
 	Transactie t = new Transactie();
 	PersoneelDAO pDao = new PersoneelDAO();
+	TicketDAO d = new TicketDAO();
 	
 	while (rs.next())
 	{
 	t.setTransactieId(rs.getInt("TransactieID"));
 	t.setPersoneel(pDao.getPersoon(rs.getInt("KassierID")));
-	t.setTicket(TicketDAO.getTicket(rs.getInt("TicketID")));
+	t.setTicket(d.getTicket(rs.getInt("TicketID")));
 	t.setTotaalbedrag(rs.getDouble("totaalBedrag"));
 	}
 	con.close();
@@ -109,7 +116,7 @@ public static int getVerkoper(int ticketID)
 }
 
 
-public int totaalOmzetBinnenEenBepaaldePeriode(Timestamp a, Timestamp b)
+public  int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
 {
 	try
 	{
@@ -122,8 +129,8 @@ public int totaalOmzetBinnenEenBepaaldePeriode(Timestamp a, Timestamp b)
 			return -1;
 		}
 	PreparedStatement stmt = con.prepareStatement("select sum(TotaalBedrag) from Transactie t JOIN Ticket p on( t.TicketID = p.TicketID And p.Aankooptijd BETWEEN ? AND ?)");
-	stmt.setTimestamp(1, a);
-	stmt.setTimestamp(2,b);
+	stmt.setString(1, a);
+	stmt.setString(2,b);
 	ResultSet rs = stmt.executeQuery();
 	int i  = -1;
 	while (rs.next())
@@ -142,5 +149,10 @@ public int totaalOmzetBinnenEenBepaaldePeriode(Timestamp a, Timestamp b)
 }
 
 
-
+public static void main(String[] args) {
+	String a,b;
+	a="2016/12/12";
+	b="2016/12/13";
+	//System.out.println(totaalOmzetBinnenEenBepaaldePeriode(a, b));
+}
 }

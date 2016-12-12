@@ -8,7 +8,7 @@ import model.Transactie;
 import model.TransactieDAO;
 
 public class TicketDAO extends DAO{
-	public static Ticket getTicket(int ticketID) throws SQLException {
+	public Ticket getTicket(int ticketID) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
 				con = DAO.getInstance();
@@ -54,7 +54,7 @@ public class TicketDAO extends DAO{
 			return null;
 		}
 	}
-	public static void setTicket(Ticket t) throws SQLException {
+	public void setTicket(Ticket t) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
 				con = DAO.getInstance();
@@ -83,7 +83,7 @@ public class TicketDAO extends DAO{
 		}
 	}
 	
-	public static int aantalTicketVanEenKassier(int loginid, Timestamp b, Timestamp c)
+	public int aantalTicket(Timestamp b, Timestamp c)
 	{
 		try {
 			if (con == null || con.isClosed()) {
@@ -93,12 +93,12 @@ public class TicketDAO extends DAO{
 
 				
 			}
-			int aantal;
+			int aantal=0;
 		//	Timestamp begin ;
 			//Timestamp eind ;
-			PreparedStatement stmt = con.prepareStatement("SELECT count(*) FROM `Ticket` WHERE `Aankooptijd` BETWEEN ? AND ? AND `kassierID` = 3 ;");
+			PreparedStatement stmt = con.prepareStatement("SELECT count(*) FROM `Ticket` WHERE `Aankooptijd` BETWEEN ? AND ? ;");
 			 
-			stmt.setInt(3, loginid);
+			
 			stmt.setTimestamp(1, b);
 			stmt.setTimestamp(2, c);
 			
@@ -110,7 +110,8 @@ public class TicketDAO extends DAO{
 			}
 			
 			
-		
+			return aantal;
+
 		
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
@@ -132,7 +133,7 @@ public class TicketDAO extends DAO{
 		b.setTime(1480928403);
 		Timestamp c = null;
 		c.setTime(1480930443);
-		System.out.println(aantalTicketVanEenKassier(loginid,b,c));
+		//System.out.println(aantalTicketVanEenKassier(loginid,b,c));
 		
 	}
 }
