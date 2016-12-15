@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 
+import controller.OmzetListener;
+
 public class StatistiekView {
 	
 	JFrame frame =new JFrame("Statistiek");
@@ -10,8 +12,8 @@ public class StatistiekView {
 	JButton omzet = new JButton("Omzet");
 	JButton productiviteit = new JButton("productiviteit");
 	JTable tabel;
-	
-	public JTable tabellen()
+	OmzetListener c = new OmzetListener();
+	/*public JTable tabellen()
 	{
 		  Object[][] data = {
 			      {"Cysboy", "28 ans", "1.80 m"},
@@ -24,15 +26,21 @@ public class StatistiekView {
 		//this.frame.getContentPane().add(new JScrollPane(tabel));
 		return tabel;
 	}
-	
+	*/
+	public JButton omzetlist()
+	{
+	this.omzet.addActionListener(new OmzetListener());
+		
+		return this.omzet;
+	}
 	public StatistiekView ()
 	{
 		
 		frame.add(panel);
 		panel.add(lab);
-		panel.add(omzet);
+		panel.add(omzetlist());
 		panel.add(productiviteit);
-		panel.add(this.tabellen());
+		//panel.add(this.tabellen());
 	//	this.frame.getContentPane().add(new JScrollPane(tabel));
 		
 		frame.setVisible(true);

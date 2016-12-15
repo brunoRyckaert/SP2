@@ -1,21 +1,30 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.JSpinner.DateEditor;
+
+import controller.DagListener;
 
 public class OmzetView {
 
 	JFrame frame = new JFrame("Omzet");
 	JPanel panel =new JPanel();
 	JLabel dag =new JLabel("Van de dag");
+	JButton dag2 = new JButton ("van de dag");
 	JLabel maand =new JLabel("Van maand");
+	JButton maand2 = new JButton("Van maand");
 	JLabel bepaaldeperiode =new JLabel ("Binnen een bepaalde periode");
+	JButton bepPeriode = new JButton("Binnen een bepaalde periode");
 	JLabel jaar =new JLabel ("jaar");
+	JButton bjaar =new JButton ("jaar");
 	JSpinner c=new JSpinner();
 	//JSpinner.DateEditor a=new JSpinner.DateEditor(b);
 	//DateEditor c = new DateEditor(b);
 	
-	
+	public JButton dagg()
+	{
+		dag2.addActionListener(new DagListener());
+		return this.dag2;
+	}
 	
 	public JSpinner datemode()
 	{
@@ -29,9 +38,13 @@ public class OmzetView {
 		
 		frame.add(panel);
 		panel.add(dag);
+		panel.add(this.dagg());
 		panel.add(maand);
+		panel.add(maand2);
 		panel.add(bepaaldeperiode);
+		panel.add(bepPeriode);
 		panel.add(jaar);
+		panel.add(bjaar);		
 		panel.add(this.datemode());
 		
 		frame.setVisible(true);

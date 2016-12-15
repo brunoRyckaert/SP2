@@ -10,7 +10,7 @@ import controller.TicketDAO;
 
 public class TransactieDAO extends DAO {
 
-public static void createTransactie(Transactie t) throws SQLException{
+public void createTransactie(Transactie t) throws SQLException{
 
 	 Connection con = null; 
 		PreparedStatement pstmt = null;  
@@ -116,7 +116,7 @@ public static int getVerkoper(int ticketID)
 }
 
 
-public  int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
+public static int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
 {
 	try
 	{
