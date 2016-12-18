@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 import controller.OmzetListener;
@@ -42,6 +44,9 @@ public class StatistiekView {
 		panel.add(productiviteit);
 		//panel.add(this.tabellen());
 	//	this.frame.getContentPane().add(new JScrollPane(tabel));
+		this.frame.getContentPane().add(lab, BorderLayout.NORTH);
+		// this.frame.getContentPane().add(omzetlist(), BorderLayout.EAST);
+		 //this.frame.getContentPane().add(productiviteit, BorderLayout.WEST);
 		
 		frame.setVisible(true);
 		frame.setSize(400, 400);

@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
 import javax.swing.*;
 
 import controller.DagListener;
@@ -46,9 +49,30 @@ public class OmzetView {
 		panel.add(jaar);
 		panel.add(bjaar);		
 		panel.add(this.datemode());
+		this.frame.setLocationRelativeTo(null);
+		// this.frame.setLayout(new BorderLayout());
+		 this.frame.setLayout(new GridLayout(5, 4));
+		 this.frame.getContentPane().add(dag);
+		 this.frame.getContentPane().add(dagg());
+		 this.frame.getContentPane().add(maand);
+		 this.frame.getContentPane().add(maand2);
+		 this.frame.getContentPane().add(bepaaldeperiode);
+		 this.frame.getContentPane().add(jaar);
+		 this.frame.getContentPane().add(bjaar);
+		 this.frame.getContentPane().add(datemode());
 		
+		/* this.frame.getContentPane().add(dag, BorderLayout.WEST);
+		 this.frame.getContentPane().add(dagg(), BorderLayout.EAST);
+		 this.frame.getContentPane().add(maand, BorderLayout.EAST);
+		 this.frame.getContentPane().add(maand2, BorderLayout.EAST);
+		 this.frame.getContentPane().add(bepaaldeperiode, BorderLayout.EAST);
+		 this.frame.getContentPane().add(bepPeriode, BorderLayout.EAST);
+		 this.frame.getContentPane().add(jaar, BorderLayout.EAST);
+		 this.frame.getContentPane().add(bjaar, BorderLayout.EAST);
+		 this.frame.getContentPane().add(datemode(), BorderLayout.EAST);*/
 		frame.setVisible(true);
 		frame.setSize(400, 400);
+		    
 	}
 	/**
 	 * @param args
