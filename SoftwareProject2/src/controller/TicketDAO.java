@@ -37,8 +37,8 @@ public class TicketDAO extends DAO{
 				ticket.setTicketSoortID(rs.getInt("TicketSoortID"));
 			}
 			Transactie t = new Transactie();
-			
-			ticket.setVerkoper(TransactieDAO.getVerkoper(ticket.getTicketID()));
+			TransactieDAO tran = new TransactieDAO();
+			ticket.setVerkoper(tran.getVerkoper(ticket.getTicketID()));
 			con.close();
 			if (ticket.getTicketsoortID() == -1) {
 			
@@ -83,57 +83,5 @@ public class TicketDAO extends DAO{
 		}
 	}
 	
-	public int aantalTicket(Timestamp b, Timestamp c)
-	{
-		try {
-			if (con == null || con.isClosed()) {
-				con = DAO.getInstance();
-			}
-			if (con == null || con.isClosed()) {
-
-				
-			}
-			int aantal=0;
-		//	Timestamp begin ;
-			//Timestamp eind ;
-			PreparedStatement stmt = con.prepareStatement("SELECT count(*) FROM `Ticket` WHERE `Aankooptijd` BETWEEN ? AND ? ;");
-			 
-			
-			stmt.setTimestamp(1, b);
-			stmt.setTimestamp(2, c);
-			
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				aantal = rs.getInt("count(*)");
-				return aantal;
-
-			}
-			
-			
-			return aantal;
-
-		
-		} catch (SQLException exc) {
-			System.out.println("PROBLEEM: " + exc.getMessage());
-			System.out.println("fout code: " + exc.getErrorCode());
-			try {
-				con.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return 0;
-	}
-	public static void main(String[] args) {
-		int loginid = 3; 
 	
-		
-		Timestamp b = null;
-		b.setTime(1480928403);
-		Timestamp c = null;
-		c.setTime(1480930443);
-		//System.out.println(aantalTicketVanEenKassier(loginid,b,c));
-		
-	}
 }

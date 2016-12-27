@@ -9,8 +9,13 @@ import controller.PersoneelDAO;
 import controller.TicketDAO;
 
 public class TransactieDAO extends DAO {
+	
+	/**
+	 * schrijft een object transactie naar de a databank over
+	 * @param t
+	 */
 
-public void createTransactie(Transactie t) throws SQLException{
+public void createTransactie(Transactie t){
 
 	 Connection con = null; 
 		PreparedStatement pstmt = null;  
@@ -23,7 +28,7 @@ public void createTransactie(Transactie t) throws SQLException{
 				pstmt = con.prepareStatement(
 "INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL,?,?,?')"	
 
-				//		"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL, '1', '1', '55.23');"
+				
 						);	  
 				
       pstmt.setInt(1, t.getTicket().getTicketID());
@@ -37,17 +42,33 @@ public void createTransactie(Transactie t) throws SQLException{
                 
 
   
-      pstmt.executeUpdate();
+      try {
+		pstmt.executeUpdate();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
   finally {
-      if (pstmt != null) pstmt.close();
+      if (pstmt != null)
+		try {
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
   }
 
 		
 		
 }
 
-public static Transactie selectTransactie(int id)
+/**
+ * zoekt een transactie op basis van  de transactieID
+ * @param id
+ * @return
+ */
+public Transactie selectTransactie(int id)
 {
 	try
 	{
@@ -84,7 +105,12 @@ public static Transactie selectTransactie(int id)
 	}
 }
 
-public static int getVerkoper(int ticketID)
+/**
+ * zoekt de transactie voor een bepaalde ticket en geeft dit terug
+ * @param ticketID
+ * @return
+ */
+public int getVerkoper(int ticketID)
 {
 	try
 	{
@@ -116,43 +142,4 @@ public static int getVerkoper(int ticketID)
 }
 
 
-public static int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
-{
-	try
-	{
-		if( con == null || con.isClosed())
-		{
-			con = DAO.getInstance();
-		}
-		if( con == null || con.isClosed())
-		{
-			return -1;
-		}
-	PreparedStatement stmt = con.prepareStatement("select sum(TotaalBedrag) from Transactie t JOIN Ticket p on( t.TicketID = p.TicketID And p.Aankooptijd BETWEEN ? AND ?)");
-	stmt.setString(1, a);
-	stmt.setString(2,b);
-	ResultSet rs = stmt.executeQuery();
-	int i  = -1;
-	while (rs.next())
-	{
-	i = rs.getInt("sum(TotaalBedrag)");
-	}
-	con.close();
-	return i;
-	}
-	catch (SQLException exc)
-	{
-		System.out.println("PROBLEEM: "+exc.getMessage());
-		System.out.println("fout code: "+ exc.getErrorCode());
-		return -1;
-	}
-}
-
-
-public static void main(String[] args) {
-	String a,b;
-	a="2016/12/12";
-	b="2016/12/13";
-	//System.out.println(totaalOmzetBinnenEenBepaaldePeriode(a, b));
-}
 }
