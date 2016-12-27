@@ -37,8 +37,8 @@ public class TicketDAO extends DAO{
 				ticket.setTicketSoortID(rs.getInt("TicketSoortID"));
 			}
 			Transactie t = new Transactie();
-			
-			ticket.setVerkoper(TransactieDAO.getVerkoper(ticket.getTicketID()));
+			TransactieDAO tran = new TransactieDAO();
+			ticket.setVerkoper(tran.getVerkoper(ticket.getTicketID()));
 			con.close();
 			if (ticket.getTicketsoortID() == -1) {
 			
@@ -83,6 +83,12 @@ public class TicketDAO extends DAO{
 		}
 	}
 	
+	/**
+	 * zegt hoeveel ticketten er werden gemaakt tussen 2 momenten
+	 * @param b
+	 * @param c
+	 * @return
+	 */
 	public int aantalTicket(Timestamp b, Timestamp c)
 	{
 		try {
@@ -125,6 +131,10 @@ public class TicketDAO extends DAO{
 		}
 		return 0;
 	}
+	/**
+	 * geeft de 5 stations die het meest verkocht hebben op dalende waarde
+	 * @return
+	 */
 	
 	public String TopVijfMeestStation()
 	{
@@ -162,10 +172,5 @@ public class TicketDAO extends DAO{
 		return null;
 		
 	}
-	public static void main(String[] args) {
-		TicketDAO a = new TicketDAO();
-		System.out.println(a.TopVijfMeestStation());
-		//System.out.println(aantalTicketVanEenKassier(loginid,b,c));
-		
-	}
+	
 }

@@ -12,10 +12,11 @@ import model.Personeel;
 public class VerlorenVoorwerpDAo extends DAO {
 	
 	/**
+	 * voert een insert in de databank van een verlorenvoorwerp object
 	 * @param v
 	 * @throws SQLException
 	 */
-	public static void insertVerlorenvoorwerp (VerlorenVoorwerp v) throws SQLException {
+	public void insertVerlorenvoorwerp (VerlorenVoorwerp v) {
 		
 		try {
 			if (con == null || con.isClosed()) {
@@ -26,11 +27,13 @@ public class VerlorenVoorwerpDAo extends DAO {
 				
 			}
 			PreparedStatement stmt = con.prepareStatement(""
-					+ "INSERT INTO `VerlorenItem` (`ItemID`, `KlantID`, `Beschrijving`, `Station`) VALUES (NULL,?, ?, ?);");
+					+ "INSERT INTO `VerlorenItem` (`ItemID`, `KlantID`, `Beschrijving`, `Station`, `datumGevonden`, `datumOpgehaald`, `kassierID`) VALUES (NULL,?,?,?,CURRENT_DATE, NULL,?);");
 			
 			stmt.setInt(1, v.getKlantId());
 			stmt.setString(2, v.getBeschrijving());
 			stmt.setString(3, v.getStation());
+			
+			stmt.setInt(4,v.getKassierID());
 			/*stmt.setInt(1, t.getTicketSoortID());
 			stmt.setDate(2, (Date) t.getHeenDatum());
 			stmt.setDate(3, (Date) t.getTerugDatum());
@@ -40,7 +43,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 			stmt.setFloat(7, t.getKorting());
 			stmt.setInt(8, t.getAantalReizigers());
 			stmt.setInt(9, t.getKlasseGetal());*/
-			int updateCount = stmt.executeUpdate();
+			stmt.executeUpdate();
 
 			
 			con.close();
@@ -49,16 +52,26 @@ public class VerlorenVoorwerpDAo extends DAO {
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
-			con.close();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		finally
 		{
-			con.close();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
 	
-	public static VerlorenVoorwerp selectVVByNaam(String be) throws SQLException{
+	public VerlorenVoorwerp selectVVByNaam(String be){
 		try
 		{
 			if( con == null || con.isClosed())
@@ -104,7 +117,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 		}
 	}
 	
-	public static ArrayList<VerlorenVoorwerp> selectLijstVVByNaam(String be) throws SQLException{
+	public ArrayList<VerlorenVoorwerp> selectLijstVVByNaam(String be){
 		try
 		{
 			if( con == null || con.isClosed())
@@ -154,7 +167,57 @@ public class VerlorenVoorwerpDAo extends DAO {
 			
 		}
 	}
-	public static void updateVerlorenvoorwerp (int a, int b ) throws SQLException {
+	
+//	update VerlorenItem set datumOpgehaald = CURRENT_DATE where Beschrijving like '%mp3%'
+	/**
+	 * wanneer een voorwerp wordt opgehaald dan wordt de datum overschreven naar de database
+	 * @param besch
+	 */
+	public void ophalenVoorwerp(String besch)
+	{
+
+		try {
+			if (con == null || con.isClosed()) {
+				con = DAO.getInstance();
+			}
+			if (con == null || con.isClosed()) {
+
+				
+			}
+			PreparedStatement stmt = con.prepareStatement(""
+					+ "update VerlorenItem set datumOpgehaald = CURRENT_DATE where Beschrijving like '%' ? '%';");
+			
+			stmt.setString(1, besch);
+			
+			
+			stmt.executeUpdate();
+
+			
+			con.close();
+	
+	
+		} catch (SQLException exc) {
+			System.out.println("PROBLEEM: " + exc.getMessage());
+			System.out.println("fout code: " + exc.getErrorCode());
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		finally
+		{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+			
+	}
+	public void updateVerlorenvoorwerp (int a, int b ) {
 		
 		try {
 			if (con == null || con.isClosed()) {
@@ -179,7 +242,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 			stmt.setFloat(7, t.getKorting());
 			stmt.setInt(8, t.getAantalReizigers());
 			stmt.setInt(9, t.getKlasseGetal());*/
-			int updateCount = stmt.executeUpdate();
+			stmt.executeUpdate();
 
 			
 			con.close();
@@ -188,28 +251,27 @@ public class VerlorenVoorwerpDAo extends DAO {
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
-			con.close();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		finally
 		{
-			con.close();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
 
 	
-	public static void main(String[] args) throws SQLException {
-		//System.out.println(selectVVByNaam("k3").toString());
-		ArrayList<VerlorenVoorwerp> lijst= selectLijstVVByNaam("k");
-		for (int i = 0; i < lijst.size(); i++) {
-			System.out.println(lijst.get(i).toString());
-			
-			
-		}
-		
-		updateVerlorenvoorwerp (8, 15 );
-		//p
-	}
+	
 }
 
 

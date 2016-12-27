@@ -9,8 +9,13 @@ import controller.PersoneelDAO;
 import controller.TicketDAO;
 
 public class TransactieDAO extends DAO {
+	
+	/**
+	 * schrijft een object transactie naar de a databank over
+	 * @param t
+	 */
 
-public void createTransactie(Transactie t) throws SQLException{
+public void createTransactie(Transactie t){
 
 	 Connection con = null; 
 		PreparedStatement pstmt = null;  
@@ -23,7 +28,7 @@ public void createTransactie(Transactie t) throws SQLException{
 				pstmt = con.prepareStatement(
 "INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL,?,?,?')"	
 
-				//		"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL, '1', '1', '55.23');"
+				
 						);	  
 				
       pstmt.setInt(1, t.getTicket().getTicketID());
@@ -37,17 +42,33 @@ public void createTransactie(Transactie t) throws SQLException{
                 
 
   
-      pstmt.executeUpdate();
+      try {
+		pstmt.executeUpdate();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
   finally {
-      if (pstmt != null) pstmt.close();
+      if (pstmt != null)
+		try {
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
   }
 
 		
 		
 }
 
-public static Transactie selectTransactie(int id)
+/**
+ * zoekt een transactie op basis van  de transactieID
+ * @param id
+ * @return
+ */
+public Transactie selectTransactie(int id)
 {
 	try
 	{
@@ -84,7 +105,12 @@ public static Transactie selectTransactie(int id)
 	}
 }
 
-public static int getVerkoper(int ticketID)
+/**
+ * zoekt de transactie voor een bepaalde ticket en geeft dit terug
+ * @param ticketID
+ * @return
+ */
+public int getVerkoper(int ticketID)
 {
 	try
 	{
@@ -115,7 +141,12 @@ public static int getVerkoper(int ticketID)
 	}
 }
 
-public static int totaalOmzetVandeDag()
+/**
+ * geeft het totaal bedrag dat vandaag werdt verkocht
+ * @return
+ */
+
+public int totaalOmzetVandeDag()
 {
 	try
 	{
@@ -146,7 +177,14 @@ public static int totaalOmzetVandeDag()
 	}
 }
 
-public static int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
+/**
+ * geeft de omzet voor een bepaalde periode
+ * @param a
+ * @param b
+ * @return
+ */
+
+public int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
 {
 	try
 	{
@@ -179,9 +217,5 @@ public static int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
 }
 
 
-public static void main(String[] args) {
-	
-	System.out.println(totaalOmzetVandeDag());
-	//System.out.println(totaalOmzetBinnenEenBepaaldePeriode(a, b));
-}
+
 }

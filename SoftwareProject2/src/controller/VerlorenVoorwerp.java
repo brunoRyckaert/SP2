@@ -1,11 +1,15 @@
 package controller;
 
+import java.sql.Date;
+
 public class VerlorenVoorwerp {
 
 	private int itemId;
 	private int klantId;
 	private String beschrijving;
 	private String station;
+	private Date datumGevonden;
+	private int kassierID;
 	
 	
 	
@@ -53,6 +57,26 @@ public class VerlorenVoorwerp {
 	public String toString() {
 		return "VerlorenVoorwerp [itemId=" + itemId + ", klantId=" + klantId + ", beschrijving=" + beschrijving
 				+ ", station=" + station + "]";
+	}
+
+
+	public int getKassierID() {
+		return kassierID;
+	}
+
+
+	public void setKassierID(int kassierID) {
+		this.kassierID = kassierID;
+	}
+
+
+	public Date getDatumGevonden() {
+		return datumGevonden;
+	}
+
+
+	public void setDatumGevonden(Date datumGevonden) {
+		this.datumGevonden = datumGevonden;
 	}
 	
 	

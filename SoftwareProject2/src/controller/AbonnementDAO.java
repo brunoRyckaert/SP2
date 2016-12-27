@@ -29,6 +29,11 @@ public class AbonnementDAO extends DAO {
 	}
 	*/
 	
+	/**
+	 * deze methode voert een insert in de database
+	 * deze methode overschrijft een object abonnement in de database
+	 */
+	
 	public void insertAbonnement(Abonnement a) {
 	
 	try {
@@ -69,6 +74,13 @@ public class AbonnementDAO extends DAO {
 		}
 	}
 }
+	
+	/**
+	 * 
+	 * deze methode dient om een abonnement te verlengen
+	 * @param datum
+	 * @param abid
+	 */
 	public void extendAbonnement(Date datum, int abid)
 	{
 		try {
@@ -104,7 +116,11 @@ public class AbonnementDAO extends DAO {
 		}
 				
 	}
-	
+	/**
+	 * deze methode dient om een abonnement te zoeken op abonnementid
+	 * @param abid
+	 * @return
+	 */
 	public  Abonnement zoekAbonnement(int abid)
 	{
 		try {
@@ -161,7 +177,10 @@ public class AbonnementDAO extends DAO {
 		}
 	}
 	
-	public static ArrayList<Abonnement> lijstAbonnement()
+	/**
+	 * geeft een lijst terug van alle gelidige abonnementen
+	 */
+	public ArrayList<Abonnement> lijstAbonnement()
 	{
 		
 		try {
@@ -223,8 +242,5 @@ public class AbonnementDAO extends DAO {
 	
 
 	
-	public static void main(String[] args) {
-		
-		System.out.println(lijstAbonnement().toString());
-	}
+
 }
