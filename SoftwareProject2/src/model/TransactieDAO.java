@@ -115,6 +115,36 @@ public static int getVerkoper(int ticketID)
 	}
 }
 
+public static int totaalOmzetVandeDag()
+{
+	try
+	{
+		if( con == null || con.isClosed())
+		{
+			con = DAO.getInstance();
+		}
+		if( con == null || con.isClosed())
+		{
+			return -1;
+		}
+	PreparedStatement stmt = con.prepareStatement("select sum(TotaalBedrag) from Transactie t JOIN Ticket p on( t.TicketID = p.TicketID And p.Aankooptijd >=curdate())");
+	
+	ResultSet rs = stmt.executeQuery();
+	int i  = -1;
+	while (rs.next())
+	{
+	i = rs.getInt("sum(TotaalBedrag)");
+	}
+	con.close();
+	return i;
+	}
+	catch (SQLException exc)
+	{
+		System.out.println("PROBLEEM: "+exc.getMessage());
+		System.out.println("fout code: "+ exc.getErrorCode());
+		return -1;
+	}
+}
 
 public static int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
 {
@@ -150,9 +180,8 @@ public static int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
 
 
 public static void main(String[] args) {
-	String a,b;
-	a="2016/12/12";
-	b="2016/12/13";
+	
+	System.out.println(totaalOmzetVandeDag());
 	//System.out.println(totaalOmzetBinnenEenBepaaldePeriode(a, b));
 }
 }

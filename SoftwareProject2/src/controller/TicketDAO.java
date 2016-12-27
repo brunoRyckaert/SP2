@@ -125,14 +125,46 @@ public class TicketDAO extends DAO{
 		}
 		return 0;
 	}
-	public static void main(String[] args) {
-		int loginid = 3; 
 	
+	public String TopVijfMeestStation()
+	{
 		
-		Timestamp b = null;
-		b.setTime(1480928403);
-		Timestamp c = null;
-		c.setTime(1480930443);
+		try {
+			if (con == null || con.isClosed()) {
+				con = DAO.getInstance();
+			}
+			if (con == null || con.isClosed()) {
+
+				
+			}
+			Statement st = con.createStatement();//con.prepareStatement("sELECT BeginStation, count(BeginStation) FROM `Ticket` group BY BeginStation ORDER BY count(BeginStation) desc limit 1");
+			ResultSet rs = st.executeQuery("sELECT BeginStation, count(BeginStation) FROM `Ticket` group BY BeginStation ORDER BY count(BeginStation) desc limit 5");
+			String begin,aantal;
+			while (rs.next()) {
+				begin = rs.getString(1);
+				aantal = rs.getString(2);
+				return begin +" "+ aantal;
+
+			}
+			
+			con.close();
+	
+		} catch (SQLException exc) {
+			System.out.println("PROBLEEM: " + exc.getMessage());
+			System.out.println("fout code: " + exc.getErrorCode());
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return null;
+		
+	}
+	public static void main(String[] args) {
+		TicketDAO a = new TicketDAO();
+		System.out.println(a.TopVijfMeestStation());
 		//System.out.println(aantalTicketVanEenKassier(loginid,b,c));
 		
 	}
