@@ -47,16 +47,9 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args) {
-//	launch(args);
-//	Korting k = new Korting();
-//	KortingDAO dao = new KortingDAO();
-//		k = dao.getKorting(1);
-//		System.out.println(k.getPrijs());
 try {
 	Ticket t = TicketDAO.getTicket(1);
 
-<<<<<<< HEAD
 	TicketDAO.setTicket(t);
 	
 } catch (SQLException e) {
@@ -64,9 +57,7 @@ try {
 	e.printStackTrace();
 }
 
-=======
 	public static void main(String[] args) {
 		launch(args);
->>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
 	}
 }
