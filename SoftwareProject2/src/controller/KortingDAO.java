@@ -47,12 +47,19 @@ public class KortingDAO extends DAO {
 
 	public void setKorting(Korting k) throws SQLException{
 		try {
+<<<<<<< HEAD
 			if (con == null || con.isClosed()) {
 				con = DAO.getInstance();}
 			if (con == null || con.isClosed()) {
 
 			}
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO `Korting` (`kortingID`, `PercentageGetal`, `IsProcent?`, `Aantal`, `Beschrijving`) VALUES (NULL,?,?,?,?)");
+=======
+			
+				con = DAO.getInstance();
+			
+					PreparedStatement stmt = con.prepareStatement("INSERT INTO `Korting` (`kortingID`, `PercentageGetal`, `IsProcent?`, `Aantal`, `Beschrijving`) VALUES (NULL,?,?,?,?)");
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
 			stmt.setInt(1, k.getKortingID());
 			stmt.setDouble(2, k.getPrijs());
 			stmt.setBoolean(3, k.getIsProcent());

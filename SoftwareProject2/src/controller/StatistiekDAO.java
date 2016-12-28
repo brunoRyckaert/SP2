@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,74 +14,7 @@ import model.Settings;
 
 public class StatistiekDAO  extends DAO{
 
-	/*
-	haalt alle tickets op dat dit personeelslid heeft verkocht in 1 week tijd 
-//	 */
-//public TreeMap<Timestamp, Integer> PersoneelAantalTicketten(String usernaam)
-//{
-//	try
-//	{
-//		if( con == null || con.isClosed())
-//		{
-//			con = DAO.getInstance();
-//		}
-//		if( con == null || con.isClosed())
-//		{
-//			return null;
-//		}
-//		int id = -1;
-//	PreparedStatement stmtKassierId = con.prepareStatement("select KassierID from Kassier where LoginID = (select LoginID from Login where Usernaam = ?)");
-//	stmtKassierId.setString(1, usernaam);
-//	ResultSet kassierId = stmtKassierId.executeQuery();
-//	while(kassierId.next())
-//	{
-//		id = kassierId.getInt("KassierID");
-//	}
-////	System.out.println("id: "+ id);	
-//	String vandaag = Settings.getDag();
-//	LocalDate vorigeWeek  = Settings.getLocalDate();
-//	vorigeWeek.minusDays(7);
-//int maand =	vorigeWeek.getDayOfMonth();
-//	int dag = vorigeWeek.getDayOfMonth();
-//	int jaar = vorigeWeek.getYear();
-//
-//	Timestamp tijd = new Timestamp(System.currentTimeMillis());
-//	tijd.setYear(jaar);
-//	tijd.setMonth(maand);
-//	tijd.setDate(dag);
-//	Timestamp tijd2 = tijd;
-//	tijd.setHours(0);
-//	tijd2.setHours(23);
-//	StatistiekDAO dao = new StatistiekDAO();
-//	TreeMap<Timestamp,Integer>map = new TreeMap<Timestamp,Integer>();
-//	for(int i = 0;i<7;i++)
-//	{
-//		map.put(tijd, dao.aantalTicket(tijd,tijd2,id));
-//		if(con.isClosed() || con == null)
-//		{
-//			con = DAO.getInstance();
-//		}
-//		dag++;
-//		maand++;
-//		jaar++;
-//		tijd.setYear(jaar);
-//		tijd.setMonth(maand);
-//		tijd.setDate(dag);
-//		tijd2.setYear(jaar);
-//		tijd2.setMonth(maand);
-//		tijd2.setDate(dag);
-//	}
-//
-//	con.close();
-//	return map;
-//	}
-//	catch (SQLException exc)
-//	{
-//		System.out.println("PROBLEEM: "+exc.getMessage());
-//		System.out.println("fout code: "+ exc.getErrorCode());
-//		return null;
-//	}
-//}
+
 /**
  * geeft het totaal bedrag dat vandaag werdt verkocht
  * @return
@@ -243,48 +177,8 @@ public String TopVijfMeestStation()
 		}
 	}
 	return null;
+	
 }
-//aantal Tickets van een bepaald personeelslid
-//public int aantalTicket(Timestamp b, Timestamp c,int kassierId)
-//{
-//	try {
-//		if (con == null || con.isClosed()) {
-//			con = DAO.getInstance();
-//		}
-//		if (con == null || con.isClosed()) {
-//
-//			
-//		}
-//		int aantal=0;
-//	//	Timestamp begin ;
-//		//Timestamp eind ;
-//		PreparedStatement stmt = con.prepareStatement("SELECT count(*) FROM `Ticket` WHERE `Aankooptijd` BETWEEN ? AND ? AND (KassierID = ?);");
-//		 
-//		
-//		stmt.setTimestamp(1, b);
-//		stmt.setTimestamp(2, c);
-//		stmt.setInt(3, kassierId);
-//		ResultSet rs = stmt.executeQuery();
-//		while (rs.next()) {
-//			aantal = rs.getInt("count(*)");
-//			return aantal;
-//
-//		}
-//		
-//		
-//		return aantal;
-//
-//	
-//	} catch (SQLException exc) {
-//		System.out.println("PROBLEEM: " + exc.getMessage());
-//		System.out.println("fout code: " + exc.getErrorCode());
-//		try {
-//			con.close();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-//	return 0;
-//}
+
 }
+

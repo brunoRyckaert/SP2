@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.*;
+import java.util.Calendar;
 
 import model.Ticket;
 import model.Transactie;
@@ -35,8 +36,13 @@ public class TicketDAO extends DAO{
 				ticket.setTicketSoortID(rs.getInt("TicketSoortID"));
 			}
 			Transactie t = new Transactie();
+
 			TransactieDAO transDAO = new TransactieDAO();
 			ticket.setVerkoper(transDAO.getVerkoper(ticket.getTicketID()));
+
+			TransactieDAO tran = new TransactieDAO();
+			ticket.setVerkoper(tran.getVerkoper(ticket.getTicketID()));
+
 			con.close();
 			if (ticket.getTicketsoortID() == -1) {
 			
@@ -80,4 +86,6 @@ public class TicketDAO extends DAO{
 			con.close();
 		}
 	}
+	
+	
 }

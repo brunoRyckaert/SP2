@@ -5,8 +5,9 @@ public class Adres {
 	private String stad;
 	private String straat;
 	private int nr;
-	private String gemeente;
+	private String provincie;
 	private int bus;
+<<<<<<< HEAD
 	private int id;
 	public int getId() {
 		return id;
@@ -14,6 +15,27 @@ public class Adres {
 
 	public void setId(int id) {
 		this.id = id;
+=======
+
+	public Adres(int adresID, String stad, String straat, int nr, String provincie, int bus) {
+		this.adresID = adresID;
+		this.stad = stad;
+		this.straat = straat;
+		this.nr = nr;
+		this.provincie = provincie;
+		this.bus = bus;
+	}
+	
+	public Adres(int adresID, String stad, String straat, int nr, String provincie) {
+		this.adresID = adresID;
+		this.stad = stad;
+		this.straat = straat;
+		this.nr = nr;
+		this.provincie = provincie;
+	}
+
+	public Adres() {
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
 	}
 
 	public int getAdresID() {
@@ -48,12 +70,12 @@ public class Adres {
 		this.nr = nr;
 	}
 
-	public String getGemeente() {
-		return gemeente;
+	public String getProvincie() {
+		return provincie;
 	}
 
-	public void setGemeente(String gemeente) {
-		this.gemeente = gemeente;
+	public void setProvincie(String provincie) {
+		this.provincie = provincie;
 	}
 
 	public int getBus() {

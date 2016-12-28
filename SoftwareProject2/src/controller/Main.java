@@ -69,24 +69,10 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
+
 	public static void main(String[] args) {
 	launch(args);
-		
-//		StatistiekDAO dao = new StatistiekDAO();
-//		TreeMap<Timestamp, Integer>map = new TreeMap<Timestamp,Integer>();
-//		try
-//		{
-//			map = dao.PersoneelAantalTicketten("kassier");
-//			for(Map.Entry<Timestamp,Integer> entry : map.entrySet()) {
-//				  Timestamp key = entry.getKey();
-//				  Integer value = entry.getValue();
-//
-//				  System.out.println(key + " => " + value);
-//				}
-//		}
-//		catch(NullPointerException exc)
-//		{
-//			System.out.println("zwz");
-//		}
+
 	}
+
 }

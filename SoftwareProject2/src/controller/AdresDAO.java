@@ -3,6 +3,7 @@ package controller;
 import java.sql.*;
 
 import model.Adres;
+import model.Klant;
 
 public class AdresDAO extends DAO {
 
@@ -24,7 +25,7 @@ public class AdresDAO extends DAO {
 				adr.setStad(rs.getString("Stad"));
 				adr.setStraat(rs.getString("straat"));
 				adr.setNr(rs.getInt("nr"));
-				adr.setGemeente(rs.getString("provincie"));
+				adr.setProvincie(rs.getString("provincie"));
 				adr.setBus(rs.getInt("bus"));
 				adr.setAdresID(rs.getInt("AdresID"));
 			}
@@ -41,6 +42,7 @@ public class AdresDAO extends DAO {
 			return null;
 		}
 	}
+
 	public Boolean setAdres(Adres adr)
 	{
 		try {
@@ -50,11 +52,11 @@ public class AdresDAO extends DAO {
 			if (con == null || con.isClosed()) {
 				return false;
 			}
-			PreparedStatement stmt = con.prepareStatement("INSERT INTO `Adres` (`AdresID`, `Stad`, `straat`, `nr`, `gemeente`, `bus`) VALUES (NULL, ?,?,?,?,?);");
+			PreparedStatement stmt = con.prepareStatement("INSERT INTO `Adres` (`AdresID`, `Stad`, `straat`, `nr`, `provincie`, `bus`) VALUES (NULL, ?,?,?,?,?);");
 			stmt.setString(1, adr.getStad());
 			stmt.setString(2, adr.getStraat());
 			stmt.setInt(3, adr.getNr());
-			stmt.setString(4, adr.getGemeente());
+			stmt.setString(4, adr.getProvincie());
 			stmt.setInt(5, adr.getBus());
 			stmt.executeQuery();
 			con.close();
@@ -72,4 +74,29 @@ public class AdresDAO extends DAO {
 			return false;
 		}
 	}
+
+	
+	public void add(Adres obj) throws SQLException {
+		try {
+			if (con == null || con.isClosed()) {
+				con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1", "SP2GR1", "6xBfsv");
+			}
+			
+			PreparedStatement stmt = con.prepareStatement("UPDATE `Adres` SET Stad = ?, straat = ?, nr = ?, provincie = ?, bus = ? WHERE AdresID = ?;");
+			stmt.setString(1, obj.getStad());
+			stmt.setString(2, obj.getStraat());
+			stmt.setInt(3, obj.getNr());
+			stmt.setString(4, obj.getProvincie());
+			stmt.setInt(5, obj.getBus());
+			
+			int updateCount = stmt.executeUpdate();
+
+			con.close();
+	
+		} catch (SQLException exc) {
+			System.out.println("PROBLEEM: " + exc.getMessage());
+			System.out.println("fout code: " + exc.getErrorCode());
+			con.close();
+		}
+	}                      
 }

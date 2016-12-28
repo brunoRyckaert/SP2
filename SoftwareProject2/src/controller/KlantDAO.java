@@ -8,10 +8,23 @@ import java.sql.SQLException;
 import model.Klant;
 
 public class KlantDAO extends DAO{
+
 	public Klant getKlant(int klantID) throws SQLException {
+
+	/**
+	 * geeft een klant terug op basis van zijn klantid
+	 * @param klantID
+	 * @return
+	 */
+
 		try {
 			if (con == null || con.isClosed()) {
+
 				con = DAO.getInstance();	}
+
+				con = DAO.getInstance();
+			
+
 			if (con == null || con.isClosed()) {
 				return null;
 				
@@ -38,17 +51,30 @@ public class KlantDAO extends DAO{
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
-			con.close();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return null;
 		}
 	}
-	public void setTicket(Klant k) throws SQLException {
+	
+	/**
+	 * voegt een klant toe in de databank dankzij een object klant
+	 * @param k
+	 */
+	public void setTicket(Klant k) {
 		try {
 			if (con == null || con.isClosed()) {
-				con = DAO.getInstance();}
-		
-			if (con == null || con.isClosed()) {
 
+				con = DAO.getInstance();}
+
+				con = DAO.getInstance();
+
+			if (con == null || con.isClosed()) {
+				System.out.println("no connection");
 				
 			}
 			PreparedStatement stmt = con.prepareStatement("INSERT INTO `Klant` (`KlantID`, `AdresID`, `Naam`, `telefoonnummer`, `geboortedatum`) VALUES (?,?,?,?,?)");
@@ -66,7 +92,12 @@ public class KlantDAO extends DAO{
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
-			con.close();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
