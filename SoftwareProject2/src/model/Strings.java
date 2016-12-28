@@ -15,4 +15,20 @@ public abstract class Strings {
 	public static final String[] loginFrame = { "Inloggen", "S'identifier", "Login"};
 	public static final String[] vanStation = { "Van", "De", "From"};
 	public static final String[] naarStation = { "Naar", "A", "To"};
+	public static final String[] fout = { "fout !", "faux !", "wrong !"};
+	public static final String[] legeNaam = { "gelieve de naam in te vullen", "veuillez remplir le nom ", "please enter a username"};
+	public static final String[] leegWachtwoord = { "vul uw wachtwoord in", "remplissez le mot de pass", "fill in your password"};
+	public static final String[] geenConnectie = { "geen Connectie", "pas de reseau", "no connection"};
+	public static final String[] actiefAccount = { "account is niet actief", "votre compte n'est pas activer", "your account is not active"};
+	public static final String[] allesInvullen = { "gelieve alles in te vullen", "veuillez remplisez tout", "fill in all the blanks"};
+	public static final String[] begroeting= { "hallo, ", "bonjour, ", "hello, "};
+	public static final String[] logOff= { "afmelden", "déconnecter", "log off"};
+	public static final String[] rbHeen= { "heen", "aller", "single"};
+	public static final String[] rbHeenTerug= { "heen & terug", "aller et retour", "outward and return"};
+	public static final String[] uur = { "uur", "heure", "hour"};
+	public static final String[] volgende= { "next", "prochain", "next"};
+	public static final String[] bestaan= { "bestaat niet", "n'exsiste pas", "doesn't exist"};
+	
+	
+	
 }

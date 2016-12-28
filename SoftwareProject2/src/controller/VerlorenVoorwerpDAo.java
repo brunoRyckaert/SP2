@@ -14,7 +14,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 	 * @param v
 	 * @throws SQLException
 	 */
-	public static void insertVerlorenvoorwerp (VerlorenVoorwerp v) throws SQLException {
+	public void insertVerlorenvoorwerp (VerlorenVoorwerp v) throws SQLException {
 		
 		try {
 			if (con == null || con.isClosed()) {
@@ -57,7 +57,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 		
 	}
 	
-	public static VerlorenVoorwerp selectVVByNaam(String be) throws SQLException{
+	public VerlorenVoorwerp selectVVByNaam(String be) throws SQLException{
 		try
 		{
 			if( con == null || con.isClosed())
@@ -103,10 +103,6 @@ public class VerlorenVoorwerpDAo extends DAO {
 		}
 	}
 
-	public static void main(String[] args) throws SQLException {
-		System.out.println(selectVVByNaam("k3 map").toString());
-		//p
-	}
 }
 
 

@@ -16,7 +16,7 @@ import model.LocalizedLabel;
 import model.Strings;
 
 public class VerkoopTab extends JPanel {
-	 ArrayList<String>stations = Definitions.getStations();
+	// ArrayList<String>stations = Definitions.getStations();
 	public VerkoopTab() {
 		this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 		

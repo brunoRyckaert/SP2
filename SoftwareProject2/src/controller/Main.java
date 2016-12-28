@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import model.Korting;
 import model.Login;
+import model.Settings;
 import model.Ticket;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,8 +23,11 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.sun.prism.Image;
@@ -33,13 +37,31 @@ import view.Gui;
 // gebruikersnaam = admin   password = admin
 public class Main extends Application {
 	
-	static Stage window;
-	static Scene scene;
-	static Parent root;
+	private static Stage window;
+	private static Scene scene;
+	private static Parent root;
+	public static Stage getWindow() {
+		return window;
+	}
+	public static void setWindow(Stage window) {
+		Main.window = window;
+	}
+	public static Scene getScene() {
+		return scene;
+	}
+	public static void setScene(Scene scene) {
+		Main.scene = scene;
+	}
+	public static Parent getRoot() {
+		return root;
+	}
+	public static void setRoot(Parent root) {
+		Main.root = root;
+	}
 	@Override
 	public  void start(Stage primaryStage) {
 		try {
-			root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
+			root = FXMLLoader.load(getClass().getResource("LoginPopup.fxml"));
 			scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -48,25 +70,23 @@ public class Main extends Application {
 		}
 	}
 	public static void main(String[] args) {
-//	launch(args);
-//	Korting k = new Korting();
-//	KortingDAO dao = new KortingDAO();
-//		k = dao.getKorting(1);
-//		System.out.println(k.getPrijs());
-try {
-	Ticket t = TicketDAO.getTicket(1);
-
-<<<<<<< HEAD
-	TicketDAO.setTicket(t);
-	
-} catch (SQLException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-
-=======
-	public static void main(String[] args) {
-		launch(args);
->>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
+	launch(args);
+		
+//		StatistiekDAO dao = new StatistiekDAO();
+//		TreeMap<Timestamp, Integer>map = new TreeMap<Timestamp,Integer>();
+//		try
+//		{
+//			map = dao.PersoneelAantalTicketten("kassier");
+//			for(Map.Entry<Timestamp,Integer> entry : map.entrySet()) {
+//				  Timestamp key = entry.getKey();
+//				  Integer value = entry.getValue();
+//
+//				  System.out.println(key + " => " + value);
+//				}
+//		}
+//		catch(NullPointerException exc)
+//		{
+//			System.out.println("zwz");
+//		}
 	}
 }

@@ -1,16 +1,13 @@
-package model;
+package controller;
 
 
 import java.sql.*;
 
-
-import controller.DAO;
-import controller.PersoneelDAO;
-import controller.TicketDAO;
+import model.Transactie;
 
 public class TransactieDAO extends DAO {
 
-public static void createTransactie(Transactie t) throws SQLException{
+public void createTransactie(Transactie t) throws SQLException{
 
 	 Connection con = null; 
 		PreparedStatement pstmt = null;  
@@ -41,7 +38,7 @@ public static void createTransactie(Transactie t) throws SQLException{
 		
 }
 
-public static Transactie selectTransactie(int id)
+public Transactie selectTransactie(int id)
 {
 	try
 	{
@@ -58,12 +55,12 @@ public static Transactie selectTransactie(int id)
 	ResultSet rs = stmt.executeQuery();
 	Transactie t = new Transactie();
 	PersoneelDAO pDao = new PersoneelDAO();
-	
+	TicketDAO tickDAO = new TicketDAO();
 	while (rs.next())
 	{
 	t.setTransactieId(rs.getInt("TransactieID"));
 	t.setPersoneel(pDao.getPersoon(rs.getInt("KassierID")));
-	t.setTicket(TicketDAO.getTicket(rs.getInt("TicketID")));
+	t.setTicket(tickDAO.getTicket(rs.getInt("TicketID")));
 	t.setTotaalbedrag(rs.getDouble("totaalBedrag"));
 	}
 	con.close();
@@ -77,7 +74,7 @@ public static Transactie selectTransactie(int id)
 	}
 }
 
-public static int getVerkoper(int ticketID)
+public int getVerkoper(int ticketID)
 {
 	try
 	{

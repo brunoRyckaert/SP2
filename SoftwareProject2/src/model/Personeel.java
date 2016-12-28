@@ -11,6 +11,13 @@ public class Personeel {
 	private Boolean isActief;
 	private Date geboorteDatum;
 	private Boolean Admin;
+	private String Station;
+	public String getStation() {
+		return Station;
+	}
+	public void setStation(String station) {
+		Station = station;
+	}
 	public Boolean getAdmin() {
 		return Admin;
 	}

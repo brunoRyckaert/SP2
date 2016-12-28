@@ -8,9 +8,9 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 public abstract class Definitions {
-static ArrayList<String> stations = new ArrayList<String>(); //kan je geen instantie van maken
+static TreeSet<String> stations = new TreeSet<String>(); //kan je geen instantie van maken
 
-public static ArrayList<String> getStations() {
+public static TreeSet<String> getStations() {
 	try {
 		File bestand = new File("../SoftwareProject2/src/controller/stations.csv");
 		Scanner inputStream = new Scanner(bestand);
@@ -30,7 +30,7 @@ public static ArrayList<String> getStations() {
 	return stations;
 }
 
-public void setStations(ArrayList<String> stations) {
+public void setStations(TreeSet<String> stations) {
 	this.stations = stations;
 }
 }
