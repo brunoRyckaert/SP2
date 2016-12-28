@@ -43,7 +43,7 @@ public class AdresDAO extends DAO {
 		}
 	}
 
-	public Boolean setAdres(Adres adr)
+	public Boolean add(Adres adr)
 	{
 		try {
 			if (con == null || con.isClosed()) {
@@ -67,7 +67,6 @@ public class AdresDAO extends DAO {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			}
@@ -76,13 +75,13 @@ public class AdresDAO extends DAO {
 	}
 
 	
-	public void add(Adres obj) throws SQLException {
+	public void update(Adres obj) {
 		try {
 			if (con == null || con.isClosed()) {
 				con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1", "SP2GR1", "6xBfsv");
 			}
 			
-			PreparedStatement stmt = con.prepareStatement("UPDATE `Adres` SET Stad = ?, straat = ?, nr = ?, provincie = ?, bus = ? WHERE AdresID = ?;");
+			PreparedStatement stmt = con.prepareStatement("UPDATE Adres SET Stad = ?, straat = ?, nr = ?, provincie = ?, bus = ? WHERE AdresID = ?;");
 			stmt.setString(1, obj.getStad());
 			stmt.setString(2, obj.getStraat());
 			stmt.setInt(3, obj.getNr());
@@ -96,7 +95,11 @@ public class AdresDAO extends DAO {
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
-			con.close();
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}                      
 }
