@@ -150,6 +150,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 			pers.setKlantId(rs.getInt("KlantID"));
 			pers.setBeschrijving(rs.getString("Beschrijving"));
 			pers.setStation(rs.getString("Station"));
+			pers.setTreinid(res.getString(""));
 			
 			lijst.add(pers);
 			//pers = null;

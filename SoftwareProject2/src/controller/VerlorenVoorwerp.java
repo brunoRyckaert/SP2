@@ -10,6 +10,7 @@ public class VerlorenVoorwerp {
 	private String station;
 	private Date datumGevonden;
 	private int kassierID;
+	private String treinid;
 	
 	
 	
@@ -77,6 +78,16 @@ public class VerlorenVoorwerp {
 
 	public void setDatumGevonden(Date datumGevonden) {
 		this.datumGevonden = datumGevonden;
+	}
+
+
+	public String getTreinid() {
+		return treinid;
+	}
+
+
+	public void setTreinid(String treinid) {
+		this.treinid = treinid;
 	}
 	
 	
