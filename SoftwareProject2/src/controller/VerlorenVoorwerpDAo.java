@@ -1,13 +1,13 @@
 package controller;
 
-import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import controller.DAO;
-import model.Personeel;
+
 
 public class VerlorenVoorwerpDAo extends DAO {
 	
@@ -150,7 +150,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 			pers.setKlantId(rs.getInt("KlantID"));
 			pers.setBeschrijving(rs.getString("Beschrijving"));
 			pers.setStation(rs.getString("Station"));
-			pers.setTreinid(res.getString(""));
+			pers.setTreinid(rs.getString(""));
 			
 			lijst.add(pers);
 			//pers = null;
@@ -170,6 +170,59 @@ public class VerlorenVoorwerpDAo extends DAO {
 	}
 	
 //	update VerlorenItem set datumOpgehaald = CURRENT_DATE where Beschrijving like '%mp3%'
+	
+	public ArrayList<VerlorenVoorwerp> selectLijstVVByStation(String be){
+		try
+		{
+			if( con == null || con.isClosed())
+			{
+				con = DAO.getInstance();
+			}
+			if( con == null || con.isClosed())
+			{
+				return null;
+			}
+
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM `VerlorenItem` WHERE Station like '%' ? '%'");
+		stmt.setString(1,be);
+		ResultSet rs = stmt.executeQuery();
+		ArrayList<VerlorenVoorwerp> lijst = new ArrayList<VerlorenVoorwerp>();
+		
+		//pers.setKlantId(null);
+		//int adresID = 0;
+
+		while (rs.next())
+		{
+//		pers.setId(rs.getInt("KassierID"));
+//		pers.setNaam(rs.getString("Naam"));
+//		pers.setGeboorteDatum(rs.getDate("geboortedatum"));
+//		pers.setIsActief(rs.getBoolean("actief"));
+//		adresID = rs.getInt("adresID");
+//		pers.setAdmin(rs.getBoolean("isAdmin"));
+			VerlorenVoorwerp pers = new VerlorenVoorwerp();
+			pers.setItemId(rs.getInt("ItemID"));
+			pers.setKlantId(rs.getInt("KlantID"));
+			pers.setBeschrijving(rs.getString("Beschrijving"));
+			pers.setStation(rs.getString("Station"));
+			pers.setTreinid(rs.getString("treinid"));
+			
+			lijst.add(pers);
+			//pers = null;
+		}
+		
+		con.close();
+		return lijst;
+		//System.out.println(pers.toString());
+		}
+		catch (SQLException exc)
+		{
+			System.out.println("PROBLEEM: "+exc.getMessage());
+			System.out.println("fout code: "+ exc.getErrorCode());
+			return null;
+			
+		}
+	}
+	
 	/**
 	 * wanneer een voorwerp wordt opgehaald dan wordt de datum overschreven naar de database
 	 * @param besch
@@ -271,7 +324,64 @@ public class VerlorenVoorwerpDAo extends DAO {
 		
 	}
 
+	public ArrayList<VerlorenVoorwerp> selectLijstVVByDAte(String be){
+		try
+		{
+			if( con == null || con.isClosed())
+			{
+				con = DAO.getInstance();
+			}
+			if( con == null || con.isClosed())
+			{
+				return null;
+			}
+
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM `VerlorenItem` WHERE `datumGevonden` = ?");
+		stmt.setString(1,be);
+		ResultSet rs = stmt.executeQuery();
+		ArrayList<VerlorenVoorwerp> lijst = new ArrayList<VerlorenVoorwerp>();
+		
+		//pers.setKlantId(null);
+		//int adresID = 0;
+
+		while (rs.next())
+		{
+//		pers.setId(rs.getInt("KassierID"));
+//		pers.setNaam(rs.getString("Naam"));
+//		pers.setGeboorteDatum(rs.getDate("geboortedatum"));
+//		pers.setIsActief(rs.getBoolean("actief"));
+//		adresID = rs.getInt("adresID");
+//		pers.setAdmin(rs.getBoolean("isAdmin"));
+			VerlorenVoorwerp pers = new VerlorenVoorwerp();
+			pers.setItemId(rs.getInt("ItemID"));
+			pers.setKlantId(rs.getInt("KlantID"));
+			pers.setBeschrijving(rs.getString("Beschrijving"));
+			pers.setStation(rs.getString("Station"));
+			pers.setTreinid(rs.getString("treinid"));
+			
+			lijst.add(pers);
+			//pers = null;
+		}
+		
+		con.close();
+		return lijst;
+		//System.out.println(pers.toString());
+		}
+		catch (SQLException exc)
+		{
+			System.out.println("PROBLEEM: "+exc.getMessage());
+			System.out.println("fout code: "+ exc.getErrorCode());
+			return null;
+			
+		}
+	}
 	
+	public static void main(String[] args) {
+	
+		VerlorenVoorwerpDAo t = new VerlorenVoorwerpDAo();
+		
+		System.out.println(t.selectLijstVVByDAte("2016-12-29").toString());
+	}
 	
 }
 
