@@ -70,7 +70,7 @@ public class AbonnementDAO extends DAO {
 			stmt.setTimestamp(8, a.getAankoopTijd());
 
 			stmt.executeUpdate();
-
+			con.close();
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
@@ -82,13 +82,6 @@ public class AbonnementDAO extends DAO {
 		}
 	}
 
-	/**
-	 * 
-	 * deze methode dient om een abonnement te verlengen
-	 * 
-	 * @param datum
-	 * @param abid
-	 */
 	public void update(Abonnement obj) {
 		try {
 			try {
@@ -126,12 +119,6 @@ public class AbonnementDAO extends DAO {
 
 	}
 
-	/**
-	 * deze methode dient om een abonnement te zoeken op abonnementid
-	 * 
-	 * @param abid
-	 * @return
-	 */
 	public Abonnement zoekAbonnement(int abid) {
 		try {
 			if (con == null || con.isClosed()) {
@@ -141,8 +128,6 @@ public class AbonnementDAO extends DAO {
 				return null;
 
 			}
-
-			// ArrayList<Abonnement>lijst=new ArrayList<Abonnement>();
 			Abonnement ab = new Abonnement();
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM `Abonnement` WHERE abonnementId = 1");
 
@@ -182,9 +167,6 @@ public class AbonnementDAO extends DAO {
 		}
 	}
 
-	/**
-	 * geeft een lijst terug van alle gelidige abonnementen
-	 */
 	public ArrayList<Abonnement> lijstAbonnement() {
 
 		try {
@@ -225,7 +207,6 @@ public class AbonnementDAO extends DAO {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return null;
@@ -233,7 +214,6 @@ public class AbonnementDAO extends DAO {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
