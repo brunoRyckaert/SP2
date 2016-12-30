@@ -2,9 +2,11 @@ package controller;
 
 import java.sql.Date;
 
+import javafx.scene.control.cell.PropertyValueFactory;
+
 public class VerlorenVoorwerp {
 
-	private int itemId;
+	private Integer itemId;
 	private int klantId;
 	private String beschrijving;
 	private String station;
@@ -88,6 +90,12 @@ public class VerlorenVoorwerp {
 
 	public void setTreinid(String treinid) {
 		this.treinid = treinid;
+	}
+
+
+	public void setItemId(PropertyValueFactory<VerlorenVoorwerp, Integer> propertyValueFactory) {
+		// TODO Auto-generated method stub
+		//this.itemId.valueOf(  propertyValueFactory)   ;
 	}
 	
 	

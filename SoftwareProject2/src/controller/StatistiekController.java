@@ -61,5 +61,7 @@ public class StatistiekController implements Initializable{
 	        	 series3.getData().add(new XYChart.Data(a.get(i).getAantal(), a.get(i).getNaam()));
 			}
 	}
+	
+	
 
 }

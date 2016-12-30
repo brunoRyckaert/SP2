@@ -21,6 +21,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -46,49 +48,109 @@ public class VerlorenVoorwerpController implements Initializable {
 		
 			
 	@FXML
-	private TableView<VerlorenVoorwerp> tabel = new TableView<VerlorenVoorwerp>();
+	private TableView tabel;
 	@FXML
-	private TableColumn<VerlorenVoorwerp, Integer> kolom1 = new TableColumn<VerlorenVoorwerp, Integer>();
+	private TableColumn<VerlorenVoorwerp, Integer> kolom1;
 	@FXML
-	private TableColumn<VerlorenVoorwerp, Integer> kolom2 = new TableColumn<VerlorenVoorwerp, Integer>();
+	private TableColumn<VerlorenVoorwerp, Integer> kolom2;
 	@FXML
-	private TableColumn<VerlorenVoorwerp, String> kolom3 = new TableColumn<VerlorenVoorwerp, String>();
+	private TableColumn<VerlorenVoorwerp, String> kolom3;
 	@FXML
-	private TableColumn<VerlorenVoorwerp, String> kolom4 = new TableColumn<VerlorenVoorwerp, String>();
+	private TableColumn<VerlorenVoorwerp, String> kolom4;
 	@FXML
-	private TableColumn<VerlorenVoorwerp, Date> kolom5 = new TableColumn<VerlorenVoorwerp, Date>();
+	private TableColumn<VerlorenVoorwerp, Date> kolom5;
 	@FXML
-	private TableColumn<VerlorenVoorwerp, Date> kolom6 = new TableColumn<VerlorenVoorwerp, Date>();
+	private TableColumn<VerlorenVoorwerp, Date> kolom6;
 	@FXML
-	private TableColumn<VerlorenVoorwerp, Integer> kolom7 = new TableColumn<VerlorenVoorwerp, Integer>();
+	private TableColumn<VerlorenVoorwerp, Integer> kolom7;
 	@FXML
-	private TableColumn<VerlorenVoorwerp, String> kolom8 = new TableColumn<VerlorenVoorwerp, String>();
+	private TableColumn<VerlorenVoorwerp, String> kolom8;
 	@FXML
-	private Label kassierid = new Label();
+	private Label kassierid;
 	@FXML
-	private ReadOnlyIntegerProperty kass = new TextField().anchorProperty();
+	private ReadOnlyIntegerProperty kass ;
 	@FXML
-	private TextField txtbeschrijving = new TextField();
+	private TextField txtbeschrijving ;
 	@FXML
-	private Label lblbeschr = new Label();
+	private Label lblbeschr;
 	@FXML
-	private Label LStation = new Label();
+	private Label LStation;
 	@FXML
-	private TextField textStation = new TextField();
+	private TextField textStation;
 	@FXML
-	private Label lblDate = new Label();
+	private Label lblDate ;
 	@FXML
-	private DatePicker datum = new DatePicker();
+	private DatePicker datum;
 	@FXML
-	private Label lblTreinid = new Label();
+	private Label lblTreinid;
 	@FXML
-	private TextField textTreinid = new TextField();
+	private TextField textTreinid;
 	@FXML
-	private Button btnzoek = new Button();
+	private Button btnzoek;
 	@FXML
-	private Button btnIns = new Button();
+	private Button btnIns;
+	@FXML
+	private TextField vvid;
+	@FXML
+    private TextArea resultArea;
+	@FXML
+	private Label lblklantid;
+	@FXML
+	private ReadOnlyIntegerProperty TFKlantid;
+	@FXML
+	private Label lbItemid;
+	@FXML
+	private ReadOnlyIntegerProperty TFItemid;
 	
 	
+	public void zoekVoorwerp (ActionEvent actionEvent) throws SQLException
+	{
+		VerlorenVoorwerpDAo b = new VerlorenVoorwerpDAo();
+		VerlorenVoorwerp a = b.selectVVByNaam(vvid.getText());
+		populateAndShowVoorwerp(a);
+	}
+	
+	public void populateAndShowVoorwerp(VerlorenVoorwerp v)
+	{
+		 if (v != null) {
+	            populateVerlorenVoorwerp(v);
+	            setVVInfoToTextArea(v);
+	        } else {
+	            resultArea.setText("This item does not exist!\n");
+	        }
+		
+	}
+	
+	private void setVVInfoToTextArea(VerlorenVoorwerp v2) {
+		// TODO Auto-generated method stub
+		 resultArea.setText("Beschrijving: " + v2.getBeschrijving() + "\n" +
+	                "ID: " + v2.getItemId());
+	}
+
+	private void populateVerlorenVoorwerp(VerlorenVoorwerp v2) {
+		// TODO Auto-generated method stub
+		 //Declare and ObservableList for table view
+        ObservableList<VerlorenVoorwerp> empData = FXCollections.observableArrayList();
+        //Add employee to the ObservableList
+        empData.add(v2);
+        //Set items to the employeeTable
+        tabel.setItems(empData);
+		
+	}
+
+	@FXML
+	private void populateVerlorenVoorwerpen(ObservableList<VerlorenVoorwerp> vvdata )
+	{
+		tabel.setItems(vvdata);
+		
+	}
+	@FXML
+	private void searchVerlorenVoorwerpen(ActionEvent actionEvent)
+	{
+		VerlorenVoorwerpDAo b = new VerlorenVoorwerpDAo();
+		ObservableList<VerlorenVoorwerp> vvdata = (ObservableList<VerlorenVoorwerp>) b.selectLijstVVByNaam( txtbeschrijving.getText());
+	populateVerlorenVoorwerpen(vvdata);
+	}
 	public void zoekbutton(ActionEvent event)
 	{
 		
@@ -125,7 +187,18 @@ public class VerlorenVoorwerpController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 	
-		ArrayList<VerlorenVoorwerp> a =new ArrayList<VerlorenVoorwerp>();
+		
+
+		kolom1.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("itemId"));
+		kolom2.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("klantId"));
+		kolom3.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("beschrijving"));
+		kolom4.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("station"));
+		kolom5.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumGevonden"));
+	//	kolom6.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumOpgehaald"));
+		kolom7.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("kassierID"));
+		kolom8.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("treinid"));
+		
+	/*	ArrayList<VerlorenVoorwerp> a =new ArrayList<VerlorenVoorwerp>();
 		VerlorenVoorwerpDAo v = new VerlorenVoorwerpDAo();
 		
 		
@@ -154,14 +227,6 @@ public class VerlorenVoorwerpController implements Initializable {
   });
  }*/
 	
-		kolom1.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("itemId"));
-		kolom2.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("klantId"));
-		kolom3.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("beschrijving"));
-		kolom4.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("station"));
-		kolom5.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumGevonden"));
-	//	kolom6.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumOpgehaald"));
-		kolom7.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("kassierID"));
-		kolom8.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("treinid"));
 		
 	/*	kolom1.setCellValueFactory(cellData -> cellData.getValue().getItemId().asObject());
 	        kolom2.setCellValueFactory(cellData -> cellData.getValue().getKlantId().asObject());
@@ -170,7 +235,7 @@ public class VerlorenVoorwerpController implements Initializable {
 	        kolom5.setCellValueFactory(cellData -> cellData.getValue().getDatumGevonden());
 	        kolom6.setCellValueFactory(cellData -> cellData.getValue().getDatumOpgehaald());
 	        kolom7.setCellValueFactory(cellData -> cellData.getValue().getKassierID().asObject());
-	        kolom8.setCellValueFactory(cellData -> cellData.getValue().getTreinid());*/
+	        kolom8.setCellValueFactory(cellData -> cellData.getValue().getTreinid());
 	      
 	        try {
 				tabel.setItems( FXCollections.observableArrayList(v.getAlles()));
@@ -180,7 +245,7 @@ public class VerlorenVoorwerpController implements Initializable {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 	}
 
 	
@@ -209,6 +274,7 @@ public class VerlorenVoorwerpController implements Initializable {
 		VerlorenVoorwerpDAo b = new VerlorenVoorwerpDAo();
 		b.insertVerlorenvoorwerp(v);
 		refresh();
+		 resultArea.setText("Item inserted! \n");
 	}
 	
 	public void vulTabel()
@@ -322,4 +388,20 @@ public class VerlorenVoorwerpController implements Initializable {
 				e.printStackTrace();
 			}
 	}
-*/}
+*/
+	 @FXML
+	    private void updateVerlorenVoorwerp (ActionEvent actionEvent) 
+	    {VerlorenVoorwerpDAo a= new VerlorenVoorwerpDAo();
+	           a.updateVerlorenvoorwerp(this.TFKlantid.get(),this.TFItemid.get() );
+	            resultArea.setText("Item has been found for itemid: " + this.TFItemid.get() + "\n");
+	    }
+	 
+	
+public static void main(String[] args) {
+	/*Parent startScherm = FXMLLoader.load(getClass().getResource("VerlorenVoorwerpView"));
+	Scene startScene = new Scene(startScherm);
+	Stage startStage = new Stage();*/
+}
+
+
+}
