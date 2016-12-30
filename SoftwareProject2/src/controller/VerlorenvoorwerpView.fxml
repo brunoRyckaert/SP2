@@ -26,7 +26,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView fx:id="tabel" layoutX="1.0" layoutY="1.0" prefHeight="495.0" prefWidth="602.0">
+                  <TableView fx:id="tabel" layoutX="14.0" layoutY="5.0" onSort="#vulTabel" prefHeight="495.0" prefWidth="602.0">
                     <columns>
                       <TableColumn fx:id="kolom1" prefWidth="75.0" text="ItemID" />
                       <TableColumn fx:id="kolom2" prefWidth="75.0" text="klantid" />
@@ -42,7 +42,7 @@
                      </columnResizePolicy>
                   </TableView>
                   <Label fx:id="lblbeschr" layoutX="628.0" layoutY="68.0" prefHeight="17.0" prefWidth="98.0" text="Beschrijving" />
-                  <TextField fx:id="txtbeschrijving" layoutX="807.0" layoutY="64.0" />
+                  <TextField fx:id="txtbeschrijving" layoutX="807.0" layoutY="64.0" text="mp3" />
                   <Label fx:id="LStation" layoutX="628.0" layoutY="107.0" prefHeight="17.0" prefWidth="69.0" text="Station" />
                   <Label fx:id="lblDate" layoutX="628.0" layoutY="147.0" prefHeight="17.0" prefWidth="159.0" text="Datum dat werd gevonden" />
                   <DatePicker fx:id="datum" layoutX="807.0" layoutY="143.0" />
@@ -53,8 +53,11 @@
                   </Label>
                   <Label fx:id="lblTreinid" layoutX="628.0" layoutY="190.0" text="TreinID" />
                   <AutoCompleteTextField fx:id="textTreinid" layoutX="807.0" layoutY="186.0" />
-                  <Button fx:id="btnzoek" layoutX="868.0" layoutY="249.0" mnemonicParsing="false" onAction="#zoekbutton" text="zoek" />
+                  <Button fx:id="btnzoek" layoutX="874.0" layoutY="316.0" mnemonicParsing="false" onAction="#vulTabel" text="zoek" />
                   <AutoCompleteTextField fx:id="textStation" layoutX="807.0" layoutY="103.0" />
+                  <Button fx:id="btnIns" layoutX="770.0" layoutY="316.0" mnemonicParsing="false" onAction="#inserten" text="Insert" />
+                  <Label layoutX="634.0" layoutY="231.0" text="Kassier id" />
+                  <TextField fx:id="kass" layoutX="807.0" layoutY="227.0" />
                </children>
             </AnchorPane>
         </items>

@@ -83,5 +83,14 @@ public class TicketDAO extends DAO{
 		}
 	}
 	
+	public static void main(String[] args) {
+		TicketDAO a = new TicketDAO();
+		try {
+			System.out.println(a.getTicket(1).toString());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }

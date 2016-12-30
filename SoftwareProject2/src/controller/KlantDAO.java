@@ -33,14 +33,7 @@ public class KlantDAO extends DAO{
 				klant.setTelefoonnummer(rs.getString("Telefoonnummer"));
 				klant.setGeboortedatum(rs.getString("Geboortedatum"));
 			}
-			con.close();
-			if (klant.getKlantID() == -1) {
-			
-				return null;
-			} else {
-				
-				return klant;
-			}
+			return klant;
 		} catch (SQLException exc) {
 			System.out.println("PROBLEEM: " + exc.getMessage());
 			System.out.println("fout code: " + exc.getErrorCode());
