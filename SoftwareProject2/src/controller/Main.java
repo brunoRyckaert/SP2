@@ -41,6 +41,8 @@ public class Main extends Application {
 		try {
 			root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
 			scene = new Scene(root);
+			//System.out.println(System.getProperty("user.dir"));
+			scene.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
@@ -48,25 +50,20 @@ public class Main extends Application {
 		}
 	}
 	public static void main(String[] args) {
-//	launch(args);
-//	Korting k = new Korting();
-//	KortingDAO dao = new KortingDAO();
-//		k = dao.getKorting(1);
-//		System.out.println(k.getPrijs());
-try {
-	Ticket t = TicketDAO.getTicket(1);
-
-<<<<<<< HEAD
-	TicketDAO.setTicket(t);
-	
-} catch (SQLException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-
-=======
-	public static void main(String[] args) {
 		launch(args);
->>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
+//		Korting k = new Korting();
+//		KortingDAO dao = new KortingDAO();
+//			k = dao.getKorting(1);
+//			System.out.println(k.getPrijs());
+//		try {
+//			Ticket t = TicketDAO.getTicket(1);
+//		
+//			TicketDAO.setTicket(t);
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 	}
 }
