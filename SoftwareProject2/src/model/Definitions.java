@@ -24,6 +24,14 @@ public static void main(String[] args) {
 	
 }
 
+public static Station getStationByName(String name) {
+	for (Station station : stations) {
+		if (station.getNaam().get(0).equals(name))
+			return station;
+	}
+	return null;
+}
+
 public static TreeSet<String> getStationsNamen() {
 	TreeSet<String> stationsNamen = new TreeSet<>();
 	for (Station station : stations) {
