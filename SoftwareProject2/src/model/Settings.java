@@ -14,11 +14,21 @@ public class Settings {
 	 * Houdt bij welk personeelslid is aangemeld, of null indien geen personeelslid.
 	 * Design pattern: Singleton (private constructor, public getInstance())
 	 */
+	//api key restricties 
+	/*
+	 2,500 free elements per day, calculated as the sum of client-side and server-side queries.
+	Maximum of 25 origins or 25 destinations per request.
+	100 elements per request.
+	100 elements per second, calculated as the sum of client-side and server-side queries.
+	 */
+	private static String api_key = "AIzaSyA9W6a84C5eHWbDcKj4LDtwK0PL5bwCL4o";
 	private static Settings settings;
 	private static Time tijd;
 	private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private static LocalDate localDate = LocalDate.now();
 	private Taal taal;
+	private static double prijsPerStation = 0.33;
+	private static double prijsPerKilometer= 0.33;
 	
 	static {
 		settings = new Settings();
@@ -68,5 +78,6 @@ public class Settings {
 	{
 		return localDate;
 	}
+
 }
 
