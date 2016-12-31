@@ -5,8 +5,24 @@ public class Adres {
 	private String stad;
 	private String straat;
 	private int nr;
-	private String gemeente;
+	private String provincie;
 	private int bus;
+	
+	
+
+	public Adres() {
+		super();
+	}
+
+	public Adres(int adresID, String stad, String straat, int nr, String gemeente, int bus) {
+		super();
+		this.adresID = adresID;
+		this.stad = stad;
+		this.straat = straat;
+		this.nr = nr;
+		this.provincie = gemeente;
+		this.bus = bus;
+	}
 
 	public int getAdresID() {
 		return adresID;
@@ -40,12 +56,12 @@ public class Adres {
 		this.nr = nr;
 	}
 
-	public String getGemeente() {
-		return gemeente;
+	public String getProvince() {
+		return provincie;
 	}
 
-	public void setGemeente(String gemeente) {
-		this.gemeente = gemeente;
+	public void setProvincie(String gemeente) {
+		this.provincie = gemeente;
 	}
 
 	public int getBus() {
@@ -55,4 +71,11 @@ public class Adres {
 	public void setBus(int bus) {
 		this.bus = bus;
 	}
+
+	@Override
+	public String toString() {
+		return "Adres [getAdresID()=" + getAdresID() + ", getStad()=" + getStad() + ", getStraat()=" + getStraat()
+				+ ", getNr()=" + getNr() + ", getProvince()=" + getProvince() + ", getBus()=" + getBus() + "]";
+	}
+	
 }

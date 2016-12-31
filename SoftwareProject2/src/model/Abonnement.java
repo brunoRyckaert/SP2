@@ -8,6 +8,14 @@ public class Abonnement {
 	private int abonnementNummer;
 	private int klantNummer;
 	private String beginStation;
+	
+	private String eindStation;
+	private Timestamp aankoopTijd;
+	private Date beginDatum;
+	private Date eindDatum;
+	private boolean isGeldig;
+	private double prijs;
+	private int kortingNummer;
 	public String getBeginStation() {
 		return beginStation;
 	}
@@ -23,13 +31,6 @@ public class Abonnement {
 	public void setEindStation(String eindStation) {
 		this.eindStation = eindStation;
 	}
-	private String eindStation;
-	private Timestamp aankoopTijd;
-	private Date beginDatum;
-	private Date eindDatum;
-	private boolean isGeldig;
-	private double prijs;
-	private int kortingNummer;
 	
 	public Abonnement( int klantNummer, String beginStation, String eindStation, Timestamp aankoopTijd,
 			Date beginDatum, Date eindDatum, boolean isGeldig, double prijs, int kortingNummer){

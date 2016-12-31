@@ -397,11 +397,14 @@ public class VerlorenVoorwerpController implements Initializable {
 	    }
 	 
 	
-public static void main(String[] args) {
-	/*Parent startScherm = FXMLLoader.load(getClass().getResource("VerlorenVoorwerpView"));
+public static void main(String[] args) throws IOException {
+	URL startScherm2 = VerlorenVoorwerpController.class.getResource("controller.VerlorenvoorwerpView") ;
+	
+	Parent startScherm = FXMLLoader.load(startScherm2);
+	
 	Scene startScene = new Scene(startScherm);
-	Stage startStage = new Stage();*/
-}
+	Stage startStage = new Stage();
+	}
 
 
 }

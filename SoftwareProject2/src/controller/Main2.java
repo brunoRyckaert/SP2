@@ -38,7 +38,7 @@ public class Main2 extends Application {
         try {
             //First, load root layout from RootLayout.fxml
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/RootLayout.fxml"));
+            loader.setLocation(Main.class.getResource("RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
             //Second, show the scene containing the root layout.
@@ -61,7 +61,7 @@ public class Main2 extends Application {
         try {
             //First, load EmployeeView from EmployeeView.fxml
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("controller/VerlorenvoorwerpView.fxml"));
+            loader.setLocation(Main.class.getResource("VerlorenvoorwerpView.fxml"));
             AnchorPane employeeOperationsView = (AnchorPane) loader.load();
 
             // Set Employee Operations view into the center of root layout.

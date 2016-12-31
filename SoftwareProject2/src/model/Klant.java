@@ -49,5 +49,11 @@ public class Klant {
 	public void setGeboortedatum(String geboortedatum) {
 		this.geboortedatum = geboortedatum;
 	}
+
+	@Override
+	public String toString() {
+		return "Klant [getKlantID()=" + getKlantID() + ", getAdresID()=" + getAdresID() + ", getNaam()=" + getNaam()
+				+ ", getTelefoonnummer()=" + getTelefoonnummer() + ", getGeboortedatum()=" + getGeboortedatum() + "]";
+	}
 	
 }
