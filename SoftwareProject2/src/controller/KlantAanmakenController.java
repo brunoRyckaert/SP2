@@ -8,6 +8,8 @@ import javafx.beans.property.ReadOnlyLongProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -102,7 +104,19 @@ public class KlantAanmakenController implements Initializable {
 		p.setAdresID(b.selectAdres(a).getAdresID());
 		//	public Klant(int klantID, int adresID, String naam, String telefoonnummer, String geboortedatum) {
 
+		if(k.alleKlanten().contains(p))
+		{
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Information Dialog");
+			alert.setHeaderText(null);
+			alert.setContentText("Deze klant bestaat al");
+
+			alert.showAndWait();
+			
+		}
+		else{
 		k.insertKlant(p);
 		area.setText("Klant werd aangemaakt");
+		}
 	}
 }

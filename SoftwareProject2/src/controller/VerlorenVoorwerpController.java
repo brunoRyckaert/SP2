@@ -46,7 +46,7 @@ public class VerlorenVoorwerpController implements Initializable {
 	
 	 ObservableList<VerlorenVoorwerp> vwerpen;
 		
-			
+	
 	@FXML
 	private TableView tabel;
 	@FXML
@@ -89,8 +89,7 @@ public class VerlorenVoorwerpController implements Initializable {
 	private Button btnzoek;
 	@FXML
 	private Button btnIns;
-	@FXML
-	private TextField vvid;
+	
 	@FXML
     private TextArea resultArea;
 	@FXML
@@ -101,12 +100,14 @@ public class VerlorenVoorwerpController implements Initializable {
 	private Label lbItemid;
 	@FXML
 	private ReadOnlyIntegerProperty TFItemid;
+	@FXML
+	private Button btnUpdate;
 	
 	
 	public void zoekVoorwerp (ActionEvent actionEvent) throws SQLException
 	{
 		VerlorenVoorwerpDAo b = new VerlorenVoorwerpDAo();
-		VerlorenVoorwerp a = b.selectVVByNaam(vvid.getText());
+		VerlorenVoorwerp a = b.selectVVByNaam(txtbeschrijving.getText());
 		populateAndShowVoorwerp(a);
 	}
 	
@@ -144,6 +145,7 @@ public class VerlorenVoorwerpController implements Initializable {
 		tabel.setItems(vvdata);
 		
 	}
+	
 	@FXML
 	private void searchVerlorenVoorwerpen(ActionEvent actionEvent)
 	{
@@ -151,6 +153,7 @@ public class VerlorenVoorwerpController implements Initializable {
 		ObservableList<VerlorenVoorwerp> vvdata = (ObservableList<VerlorenVoorwerp>) b.selectLijstVVByNaam( txtbeschrijving.getText());
 	populateVerlorenVoorwerpen(vvdata);
 	}
+	
 	public void zoekbutton(ActionEvent event)
 	{
 		
@@ -197,58 +200,7 @@ public class VerlorenVoorwerpController implements Initializable {
 	//	kolom6.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumOpgehaald"));
 		kolom7.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("kassierID"));
 		kolom8.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("treinid"));
-		
-	/*	ArrayList<VerlorenVoorwerp> a =new ArrayList<VerlorenVoorwerp>();
-		VerlorenVoorwerpDAo v = new VerlorenVoorwerpDAo();
-		
-		
-		
-		txtbeschrijving.setText(null);
-		textStation.clear();
-		
-	
-		
-		
-		
-		
-		
-		/*private int itemId;
-	private int klantId;
-	private String beschrijving;
-	private String station;
-	private Date datumGevonden;
-	private int kassierID;
-	private String treinid;*/
-		/*firstNameCol.setCellValueFactory(new Callback<CellDataFeatures<Person, String>, ObservableValue<String>>() {
-     public ObservableValue<String> call(CellDataFeatures<Person, String> p) {
-         // p.getValue() returns the Person instance for a particular TableView row
-         return p.getValue().firstNameProperty();
-     }
-  });
- }*/
-	
-		
-	/*	kolom1.setCellValueFactory(cellData -> cellData.getValue().getItemId().asObject());
-	        kolom2.setCellValueFactory(cellData -> cellData.getValue().getKlantId().asObject());
-	        kolom3.setCellValueFactory(cellData -> cellData.getValue().getBeschrijving());
-	        kolom4.setCellValueFactory(cellData -> cellData.getValue().getStation());
-	        kolom5.setCellValueFactory(cellData -> cellData.getValue().getDatumGevonden());
-	        kolom6.setCellValueFactory(cellData -> cellData.getValue().getDatumOpgehaald());
-	        kolom7.setCellValueFactory(cellData -> cellData.getValue().getKassierID().asObject());
-	        kolom8.setCellValueFactory(cellData -> cellData.getValue().getTreinid());
-	      
-	        try {
-				tabel.setItems( FXCollections.observableArrayList(v.getAlles()));
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
 	}
-
-	
 	public void refresh() {
 		VerlorenVoorwerpDAo a= new VerlorenVoorwerpDAo();
 		try {
@@ -298,102 +250,25 @@ public class VerlorenVoorwerpController implements Initializable {
 	
 		
 		
-		
-		
-		
-		/*private int itemId;
-	private int klantId;
-	private String beschrijving;
-	private String station;
-	private Date datumGevonden;
-	private int kassierID;
-	private String treinid;*/
-	
-		/*kolom1.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("itemId"));
-		kolom2.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("klantId"));
-		kolom3.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("beschrijving"));
-		kolom4.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("station"));
-		kolom5.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumGevonden"));
-	//	kolom6.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumOpgehaald"));
-		kolom7.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("kassierID"));
-		kolom8.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("treinid"));*/
-		
-	/*kolom1.setCellValueFactory(cellData -> cellData.getValue().getItemId().asObject());
-	        kolom2.setCellValueFactory(cellData -> cellData.getValue().getKlantId().asObject());
-	        kolom3.setCellValueFactory(cellData -> cellData.getValue().getBeschrijving());
-	        kolom4.setCellValueFactory(cellData -> cellData.getValue().getStation());
-	        kolom5.setCellValueFactory(cellData -> cellData.getValue().getDatumGevonden());
-	        kolom6.setCellValueFactory(cellData -> cellData.getValue().getDatumOpgehaald());
-	        kolom7.setCellValueFactory(cellData -> cellData.getValue().getKassierID().asObject());
-	        kolom8.setCellValueFactory(cellData -> cellData.getValue().getTreinid());*/
-	      
-	        tabel.setItems(vwerpen);
+		tabel.setItems(vwerpen);
 	}
-	/*public static void main(String[] args) {
-		launch(args);
-		System.out.println("ii");
-	}
-
-
-	@Override
-	public void start(Stage arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
-		// TODO Auto-generated method stub
-		
-		ArrayList<VerlorenVoorwerp> a =new ArrayList<VerlorenVoorwerp>();
-		VerlorenVoorwerpDAo v = new VerlorenVoorwerpDAo();
 		
 		
-		
-		txtbeschrijving.setText(null);
-		textStation.clear();
-		
-		
-		
-		/*private int itemId;
-	private int klantId;
-	private String beschrijving;
-	private String station;
-	private Date datumGevonden;
-	private int kassierID;
-	private String treinid;*/
-		/*
-	
-		kolom1.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("itemId"));
-		kolom2.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("klantId"));
-		kolom3.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("beschrijving"));
-		kolom4.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("station"));
-		kolom5.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumGevonden"));
-	//	kolom6.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("datumOpgehaald"));
-		kolom7.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("kassierID"));
-		kolom8.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("treinid"));
-		
-	/*	kolom1.setCellValueFactory(cellData -> cellData.getValue().getItemId().asObject());
-	        kolom2.setCellValueFactory(cellData -> cellData.getValue().getKlantId().asObject());
-	        kolom3.setCellValueFactory(cellData -> cellData.getValue().getBeschrijving());
-	        kolom4.setCellValueFactory(cellData -> cellData.getValue().getStation());
-	        kolom5.setCellValueFactory(cellData -> cellData.getValue().getDatumGevonden());
-	        kolom6.setCellValueFactory(cellData -> cellData.getValue().getDatumOpgehaald());
-	        kolom7.setCellValueFactory(cellData -> cellData.getValue().getKassierID().asObject());
-	        kolom8.setCellValueFactory(cellData -> cellData.getValue().getTreinid());*/
-	      /*
-	        try {
-				tabel.setItems( FXCollections.observableArrayList(v.getAlles()));
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	}
-*/
 	 @FXML
-	    private void updateVerlorenVoorwerp (ActionEvent actionEvent) 
-	    {VerlorenVoorwerpDAo a= new VerlorenVoorwerpDAo();
-	           a.updateVerlorenvoorwerp(this.TFKlantid.get(),this.TFItemid.get() );
-	            resultArea.setText("Item has been found for itemid: " + this.TFItemid.get() + "\n");
+	 private void updateVerlorenVoorwerp (ActionEvent actionEvent) 
+	    {
+		 		VerlorenVoorwerpDAo a= new VerlorenVoorwerpDAo();
+		 		if(this.TFKlantid.get() == 0 || this.TFKlantid.asObject()==null )
+		 		{
+	            a.updateVerlorenvoorwerp(0,this.TFItemid.get() );
+	           
+		 		}
+		 		else{
+		 		   a.updateVerlorenvoorwerp(this.TFKlantid.get(),this.TFItemid.get() );
+		 		
+		 		}
+		 		resultArea.setText("Item has been found for itemid: " + this.TFItemid.get() + "\n");
+		 		
 	    }
 	 
 	

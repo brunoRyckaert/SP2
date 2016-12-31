@@ -55,5 +55,42 @@ public class Klant {
 		return "Klant [getKlantID()=" + getKlantID() + ", getAdresID()=" + getAdresID() + ", getNaam()=" + getNaam()
 				+ ", getTelefoonnummer()=" + getTelefoonnummer() + ", getGeboortedatum()=" + getGeboortedatum() + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + adresID;
+		result = prime * result + ((geboortedatum == null) ? 0 : geboortedatum.hashCode());
+		result = prime * result + klantID;
+		result = prime * result + ((naam == null) ? 0 : naam.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Klant other = (Klant) obj;
+		if (adresID != other.adresID)
+			return false;
+		if (geboortedatum == null) {
+			if (other.geboortedatum != null)
+				return false;
+		} else if (!geboortedatum.equals(other.geboortedatum))
+			return false;
+		if (klantID != other.klantID)
+			return false;
+		if (naam == null) {
+			if (other.naam != null)
+				return false;
+		} else if (!naam.equals(other.naam))
+			return false;
+		return true;
+	}
 	
 }
