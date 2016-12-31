@@ -1,13 +1,13 @@
 package controller;
 
 import java.sql.*;
+import java.util.Calendar;
 
 import model.Ticket;
 import model.Transactie;
-import model.TransactieDAO;
 
 public class TicketDAO extends DAO{
-	public static Ticket getTicket(int ticketID) throws SQLException {
+	public Ticket getTicket(int ticketID) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
 				con = DAO.getInstance();
@@ -36,8 +36,13 @@ public class TicketDAO extends DAO{
 				ticket.setTicketSoortID(rs.getInt("TicketSoortID"));
 			}
 			Transactie t = new Transactie();
-			
-			ticket.setVerkoper(TransactieDAO.getVerkoper(ticket.getTicketID()));
+
+			TransactieDAO transDAO = new TransactieDAO();
+			ticket.setVerkoper(transDAO.getVerkoper(ticket.getTicketID()));
+
+			TransactieDAO tran = new TransactieDAO();
+			ticket.setVerkoper(tran.getVerkoper(ticket.getTicketID()));
+
 			con.close();
 			if (ticket.getTicketsoortID() == -1) {
 			
@@ -53,7 +58,7 @@ public class TicketDAO extends DAO{
 			return null;
 		}
 	}
-	public static void setTicket(Ticket t) throws SQLException {
+	public void setTicket(Ticket t) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
 				con = DAO.getInstance();
@@ -81,4 +86,6 @@ public class TicketDAO extends DAO{
 			con.close();
 		}
 	}
+	
+	
 }

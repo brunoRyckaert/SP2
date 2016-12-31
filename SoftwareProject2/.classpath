@@ -5,9 +5,9 @@
 	<classpathentry kind="src" path="doc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="mysql-connector-java-5.1.40-bin.jar"/>
-	<classpathentry kind="lib" path="D:/Bruno/Documents/EhB/2016-2017/Software_Project_2/git/SP2/SoftwareProject2/jackson-core-2.8.1.jar"/>
-	<classpathentry kind="lib" path="D:/Bruno/Documents/EhB/2016-2017/Software_Project_2/git/SP2/SoftwareProject2/jackson-databind-2.8.5.jar"/>
-	<classpathentry kind="lib" path="D:/Bruno/Documents/EhB/2016-2017/Software_Project_2/git/SP2/SoftwareProject2/jackson-annotations-2.8.0.jar"/>
+	<classpathentry kind="lib" path="jackson-core-2.8.1.jar"/>
+	<classpathentry kind="lib" path="jackson-databind-2.8.5.jar"/>
+	<classpathentry kind="lib" path="jackson-annotations-2.8.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>

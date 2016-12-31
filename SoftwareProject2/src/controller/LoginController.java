@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import model.Login;
 import model.Personeel;
 import model.Settings;
+import model.Strings;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,53 +26,48 @@ import javafx.fxml.Initializable;
 
 public class LoginController implements Initializable{
 	@FXML
-	private Label lblGebruikersnaam;
+	private Label lblError;
 	@FXML
-	private Label lblWachtwoord;
-	@FXML
-	private Label lblMessage;
+	private Label lblLogin;
 	@FXML
 	private TextField txtlbGebruikersnaam;
 	@FXML
-	private PasswordField txtlbwachtwoord;
+	private PasswordField txtlbWachtwoord;
 	
 
 	public void btnLoginAction(ActionEvent event) throws SQLException, IOException
 	{
 		Login log = new Login();
-		if(txtlbGebruikersnaam.getLength() == 0 || txtlbwachtwoord.getLength() == 0)
+		if(txtlbGebruikersnaam.getLength() == 0 || txtlbWachtwoord.getLength() == 0)
 		{
-			if(txtlbGebruikersnaam.getLength() == 0)
-			lblGebruikersnaam.setText("Vul in");
-			else
+			if(txtlbGebruikersnaam.getLength() == 0 && txtlbWachtwoord.getLength() == 0)
+			lblError.setText(Strings.allesInvullen[Settings.getInstance().getTaal().getValue()]);
+			else if (txtlbWachtwoord.getLength() == 0)
 			{
-				lblGebruikersnaam.setText("");
+					lblError.setText(Strings.loginPasword[Settings.getInstance().getTaal().getValue()]);
 			}
-			if(txtlbwachtwoord.getLength() == 0)
-			lblWachtwoord.setText("Vul in");
 			else
-			{
-				lblWachtwoord.setText("");
+				{
+					lblError.setText(Strings.legeNaam[Settings.getInstance().getTaal().getValue()]);
+				}
 			}
-		}
 		else
 		{
-		lblGebruikersnaam.setText("");
-		lblWachtwoord.setText("");
+		lblError.setText("");
 		log.setUsername(txtlbGebruikersnaam.getText());
-		log.setWachtwoord(log.Sha512(txtlbwachtwoord.getText()));
+		log.setWachtwoord(log.Sha512(txtlbWachtwoord.getText()));
 		LoginDAO loginDAO = new LoginDAO();
 		log = loginDAO.checkLogin(log);
 		try
 		{
-		if (log != null)
+		if (log.getId() != -1)
 		{
 			Personeel ingelogd = new Personeel();
 			PersoneelDAO persDAO = new PersoneelDAO();
 			ingelogd = persDAO.getPersoon(log.getId());
 			if(ingelogd.getIsActief() == false)
 			{
-				lblWachtwoord.setText("account niet actief");
+				lblError.setText(Strings.actiefAccount[Settings.getInstance().getTaal().getValue()]);
 			}
 			else
 			{
@@ -79,46 +76,59 @@ public class LoginController implements Initializable{
 
 			if(ingelogd.getAdmin())
 			{
-				Parent startScherm = FXMLLoader.load(getClass().getResource("StartScherm.fxml"));
+				Parent startScherm = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
 				Scene startScene = new Scene(startScherm);
 				Stage startStage = new Stage();
+				
 				startStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 				startStage.hide();
 				startStage.setScene(startScene);
+				startStage.setTitle(Strings.guiTitle[Settings.getInstance().getTaal().getValue()]);
+		
 				startStage.show();
+				Main.setRoot(startScherm);
+				Main.setScene(startScene);
+				Main.setWindow(startStage);
 			}
 			else
 			{
-			Parent startScherm = FXMLLoader.load(getClass().getResource("StartScherm.fxml"));
+			Parent startScherm = FXMLLoader.load(getClass().getResource("applicatie.fxml"));
 			Scene startScene = new Scene(startScherm);
 			Stage startStage = new Stage();
 			startStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			startStage.hide();
 			startStage.setScene(startScene);
+			startStage.setTitle(Strings.guiTitle[Settings.getInstance().getTaal().getValue()]);
+	
 			startStage.show();
+			Main.setRoot(startScherm);
+			Main.setScene(startScene);
+			Main.setWindow(startStage);
+
 			}
 		}
 		}
-		else 
+		else if(log.getId() == -1)
 		{
-			lblWachtwoord.setText("Fout ! ");
+			lblError.setText(Strings.fout[Settings.getInstance().getTaal().getValue()]);
 		}
 		}
 		catch(NullPointerException exc)
 		{
-			lblWachtwoord.setText("Geen Connectie");
+			lblError.setText(Strings.geenConnectie[Settings.getInstance().getTaal().getValue()]);
 		}
 		}
 	}
 	@FXML
-	private void smbTaalwijzigAction(ActionEvent event)
+	public void CancelAction(ActionEvent event)
 	{
-		
+		Platform.exit();
 	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+		txtlbGebruikersnaam.setPromptText(Strings.loginUsername[Settings.getInstance().getTaal().getValue()]);
+		txtlbWachtwoord.setPromptText(Strings.loginPasword[Settings.getInstance().getTaal().getValue()]);
 	}
 	
 }

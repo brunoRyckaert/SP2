@@ -9,8 +9,13 @@ import controller.PersoneelDAO;
 import controller.TicketDAO;
 
 public class TransactieDAO extends DAO {
+	
+	/**
+	 * schrijft een object transactie naar de a databank over
+	 * @param t
+	 */
 
-public static void createTransactie(Transactie t) throws SQLException{
+public void createTransactie(Transactie t){
 
 	 Connection con = null; 
 		PreparedStatement pstmt = null;  
@@ -21,27 +26,49 @@ public static void createTransactie(Transactie t) throws SQLException{
 
       try {
 				pstmt = con.prepareStatement(
-"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL,"+t.getTicket().getTicketID()+", '"+t.getPersoneel().getId()+"', '"+t.getTotaalbedrag()+"')"	
+"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL,?,?,?')"	
 
-				//		"INSERT INTO `Transactie` (`TransactieID`, `TicketID`, `KassierID`, `TotaalBedrag`) VALUES (NULL, '1', '1', '55.23');"
-						);	    } catch (SQLException e) {
+				
+						);	  
+				
+      pstmt.setInt(1, t.getTicket().getTicketID());
+      pstmt.setInt(2, t.getPersoneel().getId());
+      pstmt.setDouble(3, t.getTotaalbedrag());
+      
+      } catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
                 
 
   
-      pstmt.executeUpdate();
+      try {
+		pstmt.executeUpdate();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
   finally {
-      if (pstmt != null) pstmt.close();
+      if (pstmt != null)
+		try {
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
   }
 
 		
 		
 }
 
-public static Transactie selectTransactie(int id)
+/**
+ * zoekt een transactie op basis van  de transactieID
+ * @param id
+ * @return
+ */
+public Transactie selectTransactie(int id)
 {
 	try
 	{
@@ -58,12 +85,13 @@ public static Transactie selectTransactie(int id)
 	ResultSet rs = stmt.executeQuery();
 	Transactie t = new Transactie();
 	PersoneelDAO pDao = new PersoneelDAO();
+	TicketDAO d = new TicketDAO();
 	
 	while (rs.next())
 	{
 	t.setTransactieId(rs.getInt("TransactieID"));
 	t.setPersoneel(pDao.getPersoon(rs.getInt("KassierID")));
-	t.setTicket(TicketDAO.getTicket(rs.getInt("TicketID")));
+	t.setTicket(d.getTicket(rs.getInt("TicketID")));
 	t.setTotaalbedrag(rs.getDouble("totaalBedrag"));
 	}
 	con.close();
@@ -77,7 +105,12 @@ public static Transactie selectTransactie(int id)
 	}
 }
 
-public static int getVerkoper(int ticketID)
+/**
+ * zoekt de transactie voor een bepaalde ticket en geeft dit terug
+ * @param ticketID
+ * @return
+ */
+public int getVerkoper(int ticketID)
 {
 	try
 	{
@@ -107,4 +140,6 @@ public static int getVerkoper(int ticketID)
 		return -1;
 	}
 }
+
+
 }
