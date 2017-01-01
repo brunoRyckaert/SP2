@@ -149,10 +149,13 @@ public class VerlorenVoorwerpDAo extends DAO {
 //		adresID = rs.getInt("adresID");
 //		pers.setAdmin(rs.getBoolean("isAdmin"));
 			VerlorenVoorwerp pers = new VerlorenVoorwerp();
-			pers.setItemId(rs.getInt("ItemID"));
-			pers.setKlantId(rs.getInt("KlantID"));
-			pers.setBeschrijving(rs.getString("Beschrijving"));
-			pers.setStation(rs.getString("Station"));
+            pers.setItemId(rs.getInt(1));
+            pers.setKlantId(rs.getInt(2));
+            pers.setBeschrijving(rs.getString(3));
+            pers.setStation(rs.getString(4));
+            pers.setDatumGevonden(rs.getDate(5));
+            pers.setDatumOpgehaald(rs.getDate(6));
+            pers.setKassierID(rs.getInt(7));
 			
 			lijst.add(pers);
 			//pers = null;
@@ -357,7 +360,7 @@ public  ObservableList<VerlorenVoorwerp> getAlles() throws SQLException, ClassNo
             empList.add(emp);
         }
         //return empList (ObservableList of Employees)
-        System.out.println(empList.toString());
+        
         return empList;
     } 
 		catch (SQLException exc) {
