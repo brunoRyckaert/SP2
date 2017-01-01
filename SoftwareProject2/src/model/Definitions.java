@@ -8,18 +8,53 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 public abstract class Definitions {
-static TreeSet<String> stations = new TreeSet<String>(); //kan je geen instantie van maken
+static ArrayList<Station> stations = new ArrayList<>(); //kan je geen instantie van maken
 
-public static TreeSet<String> getStations() {
+static {
+	stations = getStations(); // terug uncommenten
+}
+
+public static void main(String[] args) {
+	System.out.println(getStationsNamen());
+	/*String st = "http://irail.be/stations/NMBS/008883006,Braine-le-Comte,,'s Gravenbrakel,,,be,4.137662,50.605079,160.14161849711";
+	String[] values = st.split(",");
+	for (int i = 0; i < values.length; i++) {
+		System.out.println("values["+i+"] = " + values[i]);
+	}*/
+	
+}
+
+public static Station getStationByName(String name) {
+	for (Station station : stations) {
+		if (station.getNaam().get(0).equals(name))
+			return station;
+	}
+	return null;
+}
+
+public static TreeSet<String> getStationsNamen() {
+	TreeSet<String> stationsNamen = new TreeSet<>();
+	for (Station station : stations) {
+		stationsNamen.add(station.getNaam().get(0));
+	}
+	
+	return stationsNamen;
+}
+
+public static ArrayList<Station> getStations() {
+	ArrayList<Station> stations = new ArrayList<>();
 	try {
 		File bestand = new File("../SoftwareProject2/src/controller/stations.csv");
 		Scanner inputStream = new Scanner(bestand);
-		inputStream.next();//de kolomnamen
+		inputStream.nextLine();//de kolomnamen
 		while(inputStream.hasNext())
 		{
-			String data = inputStream.next();//zit een hele lijn in 
+			
+			String data = inputStream.nextLine();//zit een hele lijn in 
 			String[] values = data.split(",");//string parsen
-			stations.add(values[1]);
+			ArrayList<String> namen = new ArrayList<>();
+			namen.add(values[1]);
+			stations.add(new Station(namen,values[7],values[8]));
 		}
 		inputStream.close();
 	} catch ( IOException e) {//catched io exception en file not found
@@ -30,7 +65,7 @@ public static TreeSet<String> getStations() {
 	return stations;
 }
 
-public void setStations(TreeSet<String> stations) {
+public void setStations(ArrayList<Station> stations) {
 	this.stations = stations;
 }
 }

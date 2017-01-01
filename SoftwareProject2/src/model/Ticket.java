@@ -1,8 +1,17 @@
 package model;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class Ticket extends TicketSoort {
 
@@ -12,6 +21,55 @@ public class Ticket extends TicketSoort {
 				+ ", heenDatum=" + heenDatum + ", terugDatum=" + terugDatum + ", beginStation=" + beginStation
 				+ ", eindStation=" + eindStation + ", prijs=" + prijs + ", korting=" + korting + ", aantalReizigers="
 				+ aantalReizigers + ", aankoopTijd=" + aankoopTijd + ", verkoper=" + verkoper + "]";
+	}
+	
+	
+	public static void main(String[] args) {
+		Ticket t = new Ticket();
+		t.setBeginStation("Koksijde");
+		t.setEindStation("Brussel-Zuid");
+		System.out.println(t.berekenPrijs("0.1k"));
+		
+	}
+	public double berekenPrijs(String formule)
+	{
+		Station beginStation = Definitions.getStationByName(this.beginStation);
+		Station eindStation = Definitions.getStationByName(this.eindStation);
+		prijs = -1;
+		Expression e = new ExpressionBuilder(formule)
+		        .variables("k")
+		        .build()
+		        .setVariable("k", Ticket.getAfstandByStations(beginStation,eindStation));
+		 prijs = e.evaluate();
+		return prijs;
+	}
+	
+	public static int getAfstandByStations(Station beginStation, Station eindStation) {
+		int afstand = -1;
+		String key = "AIzaSyA9W6a84C5eHWbDcKj4LDtwK0PL5bwCL4o";
+		URL url;
+		
+		try {
+			url = new URL("https://maps.googleapis.com/maps/api/distancematrix/json?units=SI&origins=" + beginStation.getLatitude() + "," + beginStation.getLongitude() + "&destinations=" + eindStation.getLatitude() + "," + eindStation.getLongitude()+"&key=" + key);
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode rootNode = mapper.readValue(url, JsonNode.class);
+			afstand = Integer.parseInt(rootNode.get("rows").get(0).get("elements").get(0).get("distance").get("text").asText().split(" ")[0]);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return afstand;
+		//maps.googleapis.com/maps/api/distancematrix/json?units=SI&origins=51.079197,2.65277&destinations=50.835707,4.336531&key=AIzaSyA9W6a84C5eHWbDcKj4LDtwK0PL5bwCL4o
 	}
 
 	private enum Klasse {
@@ -39,6 +97,7 @@ public class Ticket extends TicketSoort {
 	private int aantalReizigers;
 	private String aankoopTijd;
 	private int verkoper;
+	private String formule;
 
 	public int getTicketID() {
 		return ticketID;

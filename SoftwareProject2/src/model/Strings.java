@@ -28,7 +28,14 @@ public abstract class Strings {
 	public static final String[] uur = { "uur", "heure", "hour"};
 	public static final String[] volgende= { "next", "prochain", "next"};
 	public static final String[] bestaan= { "bestaat niet", "n'exsiste pas", "doesn't exist"};
-	
-	
+	public static final String[] klantId= { "klantId", "nr de client", "customerId"};
+	public static final String[] beschrijving= { "beschrijving", "description", "description"};
+	public static final String[] datumGevonden= { "datum gevonden", "date trouver", "finding date"};
+	public static final String[] datumOpgehaald= { "datum opgehaald", "date chercher", "pick up date"};
+	public static final String[] itemId= { "itemId", "nr de object", "itemId"};
+	public static final String[] kassierId= { "kassierId", "nr de personnel", "cashierId"};
+	public static final String[] treinId= { "treinId", "nr de train", "trainId"};
+	public static final String[] nietGevonden={ "niet gevonden", "pas trouver","not found"};
+	public static final String[] Gevonden={ "item gevonden", "trouver un item","item has been found"};
 	
 }

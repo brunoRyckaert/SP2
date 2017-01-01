@@ -1,13 +1,15 @@
 package model;
 
+import java.sql.Date;
+
 public class Klant {
 	private int klantID;
 	private int adresID;
 	private String naam;
 	private String telefoonnummer;
-	private String geboortedatum;
+	private Date geboortedatum;
 
-	public Klant(int klantID, int adresID, String naam, String telefoonnummer, String geboortedatum) {
+	public Klant(int klantID, int adresID, String naam, String telefoonnummer, Date geboortedatum) {
 		super();
 		this.klantID = klantID;
 		this.adresID = adresID;
@@ -43,10 +45,10 @@ public class Klant {
 	public void setTelefoonnummer(String telefoonnummer) {
 		this.telefoonnummer = telefoonnummer;
 	}
-	public String getGeboortedatum() {
+	public Date getGeboortedatum() {
 		return geboortedatum;
 	}
-	public void setGeboortedatum(String geboortedatum) {
+	public void setGeboortedatum(Date geboortedatum) {
 		this.geboortedatum = geboortedatum;
 	}
 	

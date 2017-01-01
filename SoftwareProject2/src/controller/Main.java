@@ -20,6 +20,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
@@ -61,7 +62,7 @@ public class Main extends Application {
 	@Override
 	public  void start(Stage primaryStage) {
 		try {
-			root = FXMLLoader.load(getClass().getResource("LoginPopup.fxml"));
+			root = FXMLLoader.load(getClass().getResource("VerlorenVoorwerpenView.fxml"));
 			scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -72,7 +73,7 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 	launch(args);
-
+	
 	}
 
 }

@@ -3,14 +3,14 @@ package model;
 public class Transactie {
 	
 	private int transactieId;
-	private Ticket ticket;
-	private Personeel personeel;
+	private int ticketId;
+	private int personeelId;
 	private double totaalbedrag;
-	public Transactie(int transactieId, Ticket ticket, Personeel personeel, double totaalbedrag) {
+	public Transactie(int transactieId, int ticketId, int personeelId, double totaalbedrag) {
 		super();
 		this.transactieId = transactieId;
-		this.ticket = ticket;
-		this.personeel = personeel;
+		this.ticketId = ticketId;
+		this.personeelId = personeelId;
 		this.totaalbedrag = totaalbedrag;
 	}
 	public Transactie() {
@@ -22,17 +22,17 @@ public class Transactie {
 	public void setTransactieId(int transactieId) {
 		this.transactieId = transactieId;
 	}
-	public Ticket getTicket() {
-		return ticket;
+	public int getTicketId() {
+		return ticketId;
 	}
-	public void setTicket(Ticket ticket) {
-		this.ticket = ticket;
+	public void setTicket(int ticketId) {
+		this.ticketId = ticketId;
 	}
-	public Personeel getPersoneel() {
-		return personeel;
+	public int getPersoneelId() {
+		return personeelId;
 	}
-	public void setPersoneel(Personeel personeel) {
-		this.personeel = personeel;
+	public void setPersoneel(int personeelId) {
+		this.personeelId = personeelId;
 	}
 	public double getTotaalbedrag() {
 		return totaalbedrag;

@@ -1,24 +1,20 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Korting {
 	
 	private String beschrijving;
-	
-	ArrayList<Integer>ticketSoortID = new ArrayList<Integer>();
-	public ArrayList<Integer> getTicketSoortID() {
-		return ticketSoortID;
-	}
-	public void setTicketSoortID(ArrayList<Integer> ticketSoortID) {
-		this.ticketSoortID = ticketSoortID;
-	}
 	private int kortingID;
 	private float prijs;
 	private Boolean isProcent;
 	private int aantal;
+	int ticketSoortID;
 	
-	
+	public int getTicketSoortID() {
+		return ticketSoortID;
+	}
+	public void setTicketSoortID(int ticketSoortID) {
+		this.ticketSoortID = ticketSoortID;
+	}
 	public int getKortingID() {
 		return kortingID;
 	}

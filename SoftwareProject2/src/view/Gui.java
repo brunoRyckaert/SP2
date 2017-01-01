@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -16,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.Border;
 
+import controller.KortingDAO;
+import model.Korting;
 import model.LocalizedFrame;
 import model.LocalizedLabel;
 import model.LocalizedMenu;
@@ -39,6 +42,9 @@ public class Gui extends Ui {
 		initFrame();
 		new LoginView(frame);
 	}
+	
+	
+	
 	private static void initFrame() {
 		frame= new LocalizedFrame(Strings.guiTitle);
 		frame.setPreferredSize(new Dimension(800,600));

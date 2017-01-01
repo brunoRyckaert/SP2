@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import controller.DAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Personeel;
 
 public class VerlorenVoorwerpDAo extends DAO {
@@ -269,6 +271,60 @@ public class VerlorenVoorwerpDAo extends DAO {
 			}
 		}
 		
+	}
+public  ObservableList<VerlorenVoorwerp> getAlles() throws SQLException, ClassNotFoundException {
+        
+		try
+		{
+			if( con == null || con.isClosed())
+			{
+				con = DAO.getInstance();
+			}
+			if( con == null || con.isClosed())
+			{
+				return null;
+			}
+
+		PreparedStatement stmt = con.prepareStatement("SELECT * FROM `VerlorenItem`");
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		//Declare a observable List which comprises of Employee objects
+        ObservableList<VerlorenVoorwerp> empList = FXCollections.observableArrayList(); ;
+
+        while (rs.next()) {
+        	VerlorenVoorwerp emp = new VerlorenVoorwerp();
+            emp.setItemId(rs.getInt(1));
+            emp.setKlantId(rs.getInt(2));
+            emp.setBeschrijving(rs.getString(3));
+            emp.setStation(rs.getString(4));
+            emp.setDatumGevonden(rs.getDate(5));
+            //emp.setDatumOpgehaald(rs.getDate(6));
+            emp.setKassierID(rs.getInt(7));
+          //  emp.setTreinid(rs.getString(8)); uncommenten!
+           
+            //Add employee to the ObservableList
+            empList.add(emp);
+        }
+        //return empList (ObservableList of Employees)
+        System.out.println(empList.toString());
+        return empList;
+    } 
+		catch (SQLException exc) {
+		System.out.println("PROBLEEM: " + exc.getMessage());
+		System.out.println("fout code: " + exc.getErrorCode());
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			con.close();
+		}
+}
+		return null;
 	}
 }
 
