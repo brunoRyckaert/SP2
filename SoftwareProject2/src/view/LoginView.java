@@ -44,7 +44,7 @@ public class LoginView {
 		
 		JPanel jp_password = new JPanel();
 		jp_password.add(new LocalizedLabel(Strings.loginPasword));
-		JTextField jt_password = new JTextField();
+		JTextField jt_password = new JPasswordField();
 		jt_password.setPreferredSize(new Dimension(100,20));
 		jp_password.add(jt_password);
 		jf.add(jp_password);
@@ -57,9 +57,14 @@ public class LoginView {
 			public void actionPerformed(ActionEvent e) {
 				LoginDAO ldao = new LoginDAO();
 				try {
-					if (ldao.getLogin(jt_username.getText(),Login.Sha512(jt_password.getText())).getUsername() != null) {
-						System.out.println("Ingelogd!");
+					Login login = ldao.getLogin(jt_username.getText(),Login.Sha512(jt_password.getText()));
+					if (login.getUsername() != null) {
+						System.out.println("Ingelogd als " + login.getUsername() + "!");
 						Settings.getInstance().setIngelogdPersoneelslid(new Personeel());
+						if (parentJf != null) {
+							parentJf.enable();
+						}
+						jf.dispose();	
 					}
 					else {
 						System.out.println("Inloggen mislukt!");
@@ -68,10 +73,6 @@ public class LoginView {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				if (parentJf != null) {
-					parentJf.enable();
-				}
-				jf.dispose();	
 			}
 			
 		});

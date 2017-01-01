@@ -1,6 +1,6 @@
 package controller;
 
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import controller.DAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import model.Personeel;
 
 public class VerlorenVoorwerpDAo extends DAO {
 	
@@ -18,8 +18,8 @@ public class VerlorenVoorwerpDAo extends DAO {
 	 * @param v
 	 * @throws SQLException
 	 */
-	public void insertVerlorenvoorwerp (VerlorenVoorwerp v) {
-		
+
+	public void insertVerlorenvoorwerp (VerlorenVoorwerp v) throws SQLException {
 		try {
 			if (con == null || con.isClosed()) {
 				con = DAO.getInstance();
@@ -36,7 +36,15 @@ public class VerlorenVoorwerpDAo extends DAO {
 			stmt.setString(3, v.getStation());
 			
 			stmt.setInt(4,v.getKassierID());
-		
+			/*stmt.setInt(1, t.getTicketSoortID());
+			stmt.setDate(2, (Date) t.getHeenDatum());
+			stmt.setDate(3, (Date) t.getTerugDatum());
+			stmt.setString(4, t.getBeginStation());
+			stmt.setString(5, t.getEindStation());
+			stmt.setDouble(6, t.getPrijs());
+			stmt.setFloat(7, t.getKorting());
+			stmt.setInt(8, t.getAantalReizigers());
+			stmt.setInt(9, t.getKlasseGetal());*/
 			stmt.executeUpdate();
 
 			
@@ -65,7 +73,9 @@ public class VerlorenVoorwerpDAo extends DAO {
 		
 	}
 	
-	public VerlorenVoorwerp selectVVByNaam(String be){
+
+	public VerlorenVoorwerp selectVVByNaam(String be) throws SQLException{
+
 		try
 		{
 			if( con == null || con.isClosed())
@@ -86,7 +96,12 @@ public class VerlorenVoorwerpDAo extends DAO {
 
 		while (rs.next())
 		{
-//		
+//		pers.setId(rs.getInt("KassierID"));
+//		pers.setNaam(rs.getString("Naam"));
+//		pers.setGeboorteDatum(rs.getDate("geboortedatum"));
+//		pers.setIsActief(rs.getBoolean("actief"));
+//		adresID = rs.getInt("adresID");
+//		pers.setAdmin(rs.getBoolean("isAdmin"));
 			pers.setItemId(rs.getInt("ItemID"));
 			pers.setKlantId(rs.getInt("KlantID"));
 			pers.setBeschrijving(rs.getString("Beschrijving"));
@@ -96,7 +111,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 		
 		con.close();
 		return pers;
-	
+		//System.out.println(pers.toString());
 		}
 		catch (SQLException exc)
 		{
@@ -117,7 +132,6 @@ public class VerlorenVoorwerpDAo extends DAO {
 			{
 				return null;
 			}
-
 		PreparedStatement stmt = con.prepareStatement("SELECT * FROM `VerlorenItem` WHERE Beschrijving like '%' ? '%'");
 		stmt.setString(1,be);
 		ResultSet rs = stmt.executeQuery();
@@ -128,21 +142,25 @@ public class VerlorenVoorwerpDAo extends DAO {
 
 		while (rs.next())
 		{
-
+//		pers.setId(rs.getInt("KassierID"));
+//		pers.setNaam(rs.getString("Naam"));
+//		pers.setGeboorteDatum(rs.getDate("geboortedatum"));
+//		pers.setIsActief(rs.getBoolean("actief"));
+//		adresID = rs.getInt("adresID");
+//		pers.setAdmin(rs.getBoolean("isAdmin"));
 			VerlorenVoorwerp pers = new VerlorenVoorwerp();
 			pers.setItemId(rs.getInt("ItemID"));
 			pers.setKlantId(rs.getInt("KlantID"));
 			pers.setBeschrijving(rs.getString("Beschrijving"));
 			pers.setStation(rs.getString("Station"));
-			pers.setTreinid(rs.getString("treinid"));
 			
 			lijst.add(pers);
-			
+			//pers = null;
 		}
 		
 		con.close();
 		return lijst;
-	
+		//System.out.println(pers.toString());
 		}
 		catch (SQLException exc)
 		{
@@ -153,54 +171,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 		}
 	}
 	
-
-	
-	public ArrayList<VerlorenVoorwerp> selectLijstVVByStation(String be){
-		try
-		{
-			if( con == null || con.isClosed())
-			{
-				con = DAO.getInstance();
-			}
-			if( con == null || con.isClosed())
-			{
-				return null;
-			}
-
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM `VerlorenItem` WHERE Station like '%' ? '%'");
-		stmt.setString(1,be);
-		ResultSet rs = stmt.executeQuery();
-		ArrayList<VerlorenVoorwerp> lijst = new ArrayList<VerlorenVoorwerp>();
-		
-		
-
-		while (rs.next())
-		{
-
-			VerlorenVoorwerp pers = new VerlorenVoorwerp();
-			pers.setItemId(rs.getInt("ItemID"));
-			pers.setKlantId(rs.getInt("KlantID"));
-			pers.setBeschrijving(rs.getString("Beschrijving"));
-			pers.setStation(rs.getString("Station"));
-			pers.setTreinid(rs.getString("treinid"));
-			
-			lijst.add(pers);
-		
-		}
-		
-		con.close();
-		return lijst;
-		
-		}
-		catch (SQLException exc)
-		{
-			System.out.println("PROBLEEM: "+exc.getMessage());
-			System.out.println("fout code: "+ exc.getErrorCode());
-			return null;
-			
-		}
-	}
-	
+//	update VerlorenItem set datumOpgehaald = CURRENT_DATE where Beschrijving like '%mp3%'
 	/**
 	 * wanneer een voorwerp wordt opgehaald dan wordt de datum overschreven naar de database
 	 * @param besch
@@ -264,7 +235,16 @@ public class VerlorenVoorwerpDAo extends DAO {
 			
 			stmt.setInt(1,a);
 			stmt.setInt(2,b);
-		
+			
+			/*stmt.setInt(1, t.getTicketSoortID());
+			stmt.setDate(2, (Date) t.getHeenDatum());
+			stmt.setDate(3, (Date) t.getTerugDatum());
+			stmt.setString(4, t.getBeginStation());
+			stmt.setString(5, t.getEindStation());
+			stmt.setDouble(6, t.getPrijs());
+			stmt.setFloat(7, t.getKorting());
+			stmt.setInt(8, t.getAantalReizigers());
+			stmt.setInt(9, t.getKlasseGetal());*/
 			stmt.executeUpdate();
 
 			
@@ -292,53 +272,7 @@ public class VerlorenVoorwerpDAo extends DAO {
 		}
 		
 	}
-
-	public ArrayList<VerlorenVoorwerp> selectLijstVVByDAte(String be){
-		try
-		{
-			if( con == null || con.isClosed())
-			{
-				con = DAO.getInstance();
-			}
-			if( con == null || con.isClosed())
-			{
-				return null;
-			}
-
-		PreparedStatement stmt = con.prepareStatement("SELECT * FROM `VerlorenItem` WHERE `datumGevonden` = ?");
-		stmt.setString(1,be);
-		ResultSet rs = stmt.executeQuery();
-		ArrayList<VerlorenVoorwerp> lijst = new ArrayList<VerlorenVoorwerp>();
-		
-		
-
-		while (rs.next())
-		{
-
-			VerlorenVoorwerp pers = new VerlorenVoorwerp();
-			pers.setItemId(rs.getInt("ItemID"));
-			pers.setKlantId(rs.getInt("KlantID"));
-			pers.setBeschrijving(rs.getString("Beschrijving"));
-			pers.setStation(rs.getString("Station"));
-			pers.setTreinid(rs.getString("treinid"));
-			
-			lijst.add(pers);
-		
-		}
-		
-		con.close();
-		return lijst;
-		
-		}
-		catch (SQLException exc)
-		{
-			System.out.println("PROBLEEM: "+exc.getMessage());
-			System.out.println("fout code: "+ exc.getErrorCode());
-			return null;
-			
-		}
-	}
-public ArrayList<VerlorenVoorwerp> getAlles() throws SQLException, ClassNotFoundException {
+public  ObservableList<VerlorenVoorwerp> getAlles() throws SQLException, ClassNotFoundException {
         
 		try
 		{
@@ -356,8 +290,8 @@ public ArrayList<VerlorenVoorwerp> getAlles() throws SQLException, ClassNotFound
 		ResultSet rs = stmt.executeQuery();
 		
 		//Declare a observable List which comprises of Employee objects
-        ArrayList<VerlorenVoorwerp> empList = new ArrayList<VerlorenVoorwerp>();
- 
+        ObservableList<VerlorenVoorwerp> empList = FXCollections.observableArrayList(); ;
+
         while (rs.next()) {
         	VerlorenVoorwerp emp = new VerlorenVoorwerp();
             emp.setItemId(rs.getInt(1));
@@ -367,7 +301,7 @@ public ArrayList<VerlorenVoorwerp> getAlles() throws SQLException, ClassNotFound
             emp.setDatumGevonden(rs.getDate(5));
             //emp.setDatumOpgehaald(rs.getDate(6));
             emp.setKassierID(rs.getInt(7));
-            emp.setTreinid(rs.getString(8));
+          //  emp.setTreinid(rs.getString(8)); uncommenten!
            
             //Add employee to the ObservableList
             empList.add(emp);
@@ -392,21 +326,8 @@ public ArrayList<VerlorenVoorwerp> getAlles() throws SQLException, ClassNotFound
 }
 		return null;
 	}
-
-	public static void main(String[] args) {
-		VerlorenVoorwerpDAo a = new VerlorenVoorwerpDAo();
-		System.out.println(a.selectLijstVVByNaam("mp3").toString());
-		try {
-			System.out.println(a.getAlles().toString());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
 
 
 
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2

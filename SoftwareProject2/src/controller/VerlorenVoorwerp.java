@@ -1,18 +1,16 @@
+
 package controller;
 
 import java.sql.Date;
 
-import javafx.scene.control.cell.PropertyValueFactory;
-
 public class VerlorenVoorwerp {
 
-	private Integer itemId;
+	private int itemId;
 	private int klantId;
 	private String beschrijving;
 	private String station;
 	private Date datumGevonden;
 	private int kassierID;
-	private String treinid;
 	
 	
 	
@@ -81,25 +79,10 @@ public class VerlorenVoorwerp {
 	public void setDatumGevonden(Date datumGevonden) {
 		this.datumGevonden = datumGevonden;
 	}
-
-
-	public String getTreinid() {
-		return treinid;
-	}
-
-
-	public void setTreinid(String treinid) {
-		this.treinid = treinid;
-	}
-
-
-	public void setItemId(PropertyValueFactory<VerlorenVoorwerp, Integer> propertyValueFactory) {
-		// TODO Auto-generated method stub
-		//this.itemId.valueOf(  propertyValueFactory)   ;
-	}
 	
 	
 	
 	
 	
 }
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2

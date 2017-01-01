@@ -16,6 +16,8 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
+import model.Settings;
+import model.Strings;
 
 public class StatistiekController implements Initializable{
 
@@ -23,17 +25,18 @@ public class StatistiekController implements Initializable{
 	@FXML
 	private Label lblstat = new Label();
 	@FXML
-	private RadioButton btnEen = new RadioButton ("Omzet van de dag");
+	private RadioButton btnEen = new RadioButton (Strings.OmzetvanDag[Settings.getInstance().getTaal().getValue()]);
 	@FXML
-	private RadioButton btntwee = new RadioButton ("Omzet tussen 2 data");
+	private RadioButton btntwee = new RadioButton (Strings.Omzet2date[Settings.getInstance().getTaal().getValue()]);
 	@FXML
-	private RadioButton btndrie = new RadioButton ("Aantal verkochte ticketten binnen 2 data");
+	private RadioButton btndrie = new RadioButton (Strings.tickets2date[Settings.getInstance().getTaal().getValue()]);
 	@FXML
-	private RadioButton btnVier = new RadioButton ("Top 5 meest productieve stations");
+	private RadioButton btnVier = new RadioButton (Strings.top5stations[Settings.getInstance().getTaal().getValue()]);
 	@FXML
 	final NumberAxis xAxis = new NumberAxis();
 	@FXML
     final CategoryAxis yAxis = new CategoryAxis();
+	
 	@FXML
     final BarChart<Number,String> bc = new BarChart<Number,String>(xAxis,yAxis);
 	@FXML
@@ -55,6 +58,8 @@ public class StatistiekController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
+	
 		this.btnEen.setToggleGroup(group);
 		this.btntwee.setToggleGroup(group);
 		this.btndrie.setToggleGroup(group);

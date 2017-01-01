@@ -5,17 +5,9 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 public class Abonnement {
-	private int abonnementNummer;
-	private int klantNummer;
+	private int abonnementId;
+	private int klantId;
 	private String beginStation;
-	
-	private String eindStation;
-	private Timestamp aankoopTijd;
-	private Date beginDatum;
-	private Date eindDatum;
-	private boolean isGeldig;
-	private double prijs;
-	private int kortingNummer;
 	public String getBeginStation() {
 		return beginStation;
 	}
@@ -31,12 +23,18 @@ public class Abonnement {
 	public void setEindStation(String eindStation) {
 		this.eindStation = eindStation;
 	}
+	private String eindStation;
+	private Timestamp aankoopTijd;
+	private Date beginDatum;
+	private Date eindDatum;
+	private boolean isGeldig;
+	private double prijs;
+	private int kortingId;
 	
-	public Abonnement( int klantNummer, String beginStation, String eindStation, Timestamp aankoopTijd,
-			Date beginDatum, Date eindDatum, boolean isGeldig, double prijs, int kortingNummer){
+	public Abonnement( int klantId, String beginStation, String eindStation, Timestamp aankoopTijd,
+			Date beginDatum, Date eindDatum, boolean isGeldig, double prijs, int kortingId){
 		super();
-		// set uniek abonnementNummer
-		this.klantNummer = klantNummer;
+		this.klantId = klantId;
 		this.beginStation = beginStation;
 		this.eindStation = eindStation;
 		this.aankoopTijd = aankoopTijd;
@@ -44,19 +42,16 @@ public class Abonnement {
 		this.eindDatum = eindDatum;
 		this.isGeldig = true;
 		this.prijs = prijs;
-		this.kortingNummer = kortingNummer;
+		this.kortingId = kortingId;
 	}
 	
 	public Abonnement() {
-		// TODO Auto-generated constructor stub
 	}
-
-	// getter/setter begin-en eindStation
-	public int getAbonnementNummer() {
-		return abonnementNummer;
+	public int getAbonnementId() {
+		return abonnementId;
 	}
-	public int getKlantNummer() {
-		return klantNummer;
+	public int getKlantId() {
+		return klantId;
 	}
 	public Timestamp getAankoopTijd() {
 		return aankoopTijd;
@@ -67,32 +62,27 @@ public class Abonnement {
 	public Date getEindDatum() {
 		return eindDatum;
 	}
-	public boolean isGeldig() {
+	public boolean getIsGeldig() {
 		return isGeldig;
 	}
 	public double getPrijs() {
 		return prijs;
 	}
-	public int getKortingNummer() {
-		return kortingNummer;
+	public int getKortingId() {
+		return kortingId;
 	}
-	public void setKlantNummer(int klantNummer) {
-		this.klantNummer = klantNummer;
+	public void setKlantId(int klantId) {
+		this.klantId = klantId;
 	}
 	public void setBeginDatum(Date beginDatum) {
 		this.beginDatum = beginDatum;
-		
 	}
 	public void setEindDatum(Date eindDatum) {
 		this.eindDatum = eindDatum;
-				
-	
 	}
 	
-	
-	
-	public void setAbonnementNummer(int abonnementNummer) {
-		this.abonnementNummer = abonnementNummer;
+	public void setAbonnementId(int abonnementId) {
+		this.abonnementId = abonnementId;
 	}
 
 	public void setAankoopTijd(Timestamp aankoopTijd) {
@@ -106,17 +96,18 @@ public class Abonnement {
 	@Override
 	public String toString() {
 		return "Abonnement [getBeginStation()=" + getBeginStation() + ", getEindStation()=" + getEindStation()
-				+ ", getAbonnementNummer()=" + getAbonnementNummer() + ", getKlantNummer()=" + getKlantNummer()
+				+ ", getAbonnementId()=" + getAbonnementId() + ", getKlantNummer()=" + getKlantId()
 				+ ", getAankoopTijd()=" + getAankoopTijd() + ", getBeginDatum()=" + getBeginDatum()
 				+ ", getEindDatum()=" + getEindDatum() + ", isGeldig()=" + isGeldig() + ", getPrijs()=" + getPrijs()
-				+ ", getKortingNummer()=" + getKortingNummer() + "]";
+				+ ", getKortingNummer()=" + getKortingId() + "]";
 	}
 
 	public void setGeldig(boolean isGeldig) {
 		this.isGeldig = isGeldig;
 	}
-	public void setKortingNummer(int kortingNummer) {
-		this.kortingNummer = kortingNummer;
+	public void setKortingId(int kortingId) {
+		this.kortingId = kortingId;
 	}
 
 }
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2

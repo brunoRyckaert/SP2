@@ -7,21 +7,35 @@ public class Adres {
 	private int nr;
 	private String provincie;
 	private int bus;
-	
-	
-
-	public Adres() {
-		super();
+<<<<<<< HEAD
+	private int id;
+	public int getId() {
+		return id;
 	}
 
-	public Adres(int adresID, String stad, String straat, int nr, String gemeente, int bus) {
-		super();
+	public void setId(int id) {
+		this.id = id;
+=======
+
+	public Adres(int adresID, String stad, String straat, int nr, String provincie, int bus) {
 		this.adresID = adresID;
 		this.stad = stad;
 		this.straat = straat;
 		this.nr = nr;
-		this.provincie = gemeente;
+		this.provincie = provincie;
 		this.bus = bus;
+	}
+	
+	public Adres(int adresID, String stad, String straat, int nr, String provincie) {
+		this.adresID = adresID;
+		this.stad = stad;
+		this.straat = straat;
+		this.nr = nr;
+		this.provincie = provincie;
+	}
+
+	public Adres() {
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
 	}
 
 	public int getAdresID() {
@@ -56,12 +70,12 @@ public class Adres {
 		this.nr = nr;
 	}
 
-	public String getProvince() {
+	public String getProvincie() {
 		return provincie;
 	}
 
-	public void setProvincie(String gemeente) {
-		this.provincie = gemeente;
+	public void setProvincie(String provincie) {
+		this.provincie = provincie;
 	}
 
 	public int getBus() {
@@ -71,11 +85,4 @@ public class Adres {
 	public void setBus(int bus) {
 		this.bus = bus;
 	}
-
-	@Override
-	public String toString() {
-		return "Adres [getAdresID()=" + getAdresID() + ", getStad()=" + getStad() + ", getStraat()=" + getStraat()
-				+ ", getNr()=" + getNr() + ", getProvince()=" + getProvince() + ", getBus()=" + getBus() + "]";
-	}
-	
 }
