@@ -1,6 +1,8 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -17,16 +19,29 @@ import javafx.scene.control.*;
 
 public class StatistiekController implements Initializable{
 
+	final ToggleGroup group = new ToggleGroup();;
 	@FXML
 	private Label lblstat = new Label();
 	@FXML
-	private ChoiceBox<String> kies = new ChoiceBox<String>();
+	private RadioButton btnEen = new RadioButton ("Omzet van de dag");
+	@FXML
+	private RadioButton btntwee = new RadioButton ("Omzet tussen 2 data");
+	@FXML
+	private RadioButton btndrie = new RadioButton ("Aantal verkochte ticketten binnen 2 data");
+	@FXML
+	private RadioButton btnVier = new RadioButton ("Top 5 meest productieve stations");
 	@FXML
 	final NumberAxis xAxis = new NumberAxis();
 	@FXML
     final CategoryAxis yAxis = new CategoryAxis();
 	@FXML
     final BarChart<Number,String> bc = new BarChart<Number,String>(xAxis,yAxis);
+	@FXML
+	private TextArea tekst;
+	@FXML
+	private DatePicker begin;
+	@FXML
+	private DatePicker eind;
 
 	
 
@@ -40,15 +55,15 @@ public class StatistiekController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-	kies.getItems().addAll("top 5 meest productieve stations","omzet van de dag","omzet tussen twee data","aantal verkochte ticketten");
-		kies.show();
-		kies.setVisible(true);
-		
+		this.btnEen.setToggleGroup(group);
+		this.btntwee.setToggleGroup(group);
+		this.btndrie.setToggleGroup(group);
+		this.btnVier.setToggleGroup(group);
 		
 	}
 	
 	
-	public void TopVijf()
+	public void TopVijf(ActionEvent event)
 	{
 		   ArrayList<StatStation> a=new ArrayList<StatStation>();
 	    	StatistiekDAO b = new StatistiekDAO(); 
@@ -61,8 +76,38 @@ public class StatistiekController implements Initializable{
 	        	 series3.getData().add(new XYChart.Data(a.get(i).getAantal(), a.get(i).getNaam()));
 			}
 	        bc.getData().addAll(series3);
+	        this.btndrie.setSelected(false);
+	        this.btnEen.setSelected(false);
+	        this.btntwee.setSelected(false);
 	}
 	
+	public void omzetdag(ActionEvent event)
+	{
+		StatistiekDAO s = new StatistiekDAO();
+		
+		tekst.setText("De omzet van vandaag is " + s.totaalOmzetVandeDag() + "euro");
+		  this.btndrie.setSelected(false);
+	        this.btnVier.setSelected(false);
+	        this.btntwee.setSelected(false);
+	}
+	
+	public void OmzetTweeData(ActionEvent event)
+	{
+		 this.btndrie.setSelected(false);
+	        this.btnVier.setSelected(false);
+	        this.btnEen.setSelected(false);
+	        
+	        while(this.begin.getValue() ==null || this.begin.getValue().isBefore(this.eind.getValue()) == true || this.eind.getValue() == null)
+	        {
+	        	this.tekst.setText("FOUTIEVE INVOER SCHRIJF DATUM");
+	        	this.begin.setValue(LocalDate.now());
+	        	this.eind.setValue(LocalDate.now());
+	        }
+	        StatistiekDAO s = new StatistiekDAO();
+	        
+	        this.tekst.setText("De omzet tussen "+ this.begin.getValue().toString() + "en "+this.eind.getValue().toString() +" is van "+ s.totaalOmzetBinnenEenBepaaldePeriode(this.begin.getValue().toString(), this.eind.getValue().toString()));
+	        
+	}
 	
 
 }

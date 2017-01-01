@@ -15,4 +15,6 @@ public abstract class Strings {
 	public static final String[] loginFrame = { "Inloggen", "S'identifier", "Login"};
 	public static final String[] vanStation = { "Van", "De", "From"};
 	public static final String[] naarStation = { "Naar", "A", "To"};
+	public static final String[] OmzetvanDag = { "Omzet Van de dag", "Chiffres d'affaires de la journée", "Today's revenue"};
+	
 }
