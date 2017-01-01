@@ -62,7 +62,7 @@ public class Main extends Application {
 	@Override
 	public  void start(Stage primaryStage) {
 		try {
-			root = FXMLLoader.load(getClass().getResource("VerlorenVoorwerpenView.fxml"));
+			root = FXMLLoader.load(getClass().getResource("LoginPopup.fxml"));
 			scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
