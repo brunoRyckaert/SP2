@@ -89,7 +89,7 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </padding>
                                        <center>
-                                          <fx:include source="../../bin/controller/StatistiekenTab.fxml" />
+                                          <fx:include source="StatistiekView.fxml" />
                                        </center>
                                     </BorderPane>
                                  </children></AnchorPane>

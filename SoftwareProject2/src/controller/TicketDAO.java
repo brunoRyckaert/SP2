@@ -39,10 +39,10 @@ public class TicketDAO extends DAO{
 			Transactie t = new Transactie();
 
 			TransactieDAO transDAO = new TransactieDAO();
-			ticket.setVerkoper(transDAO.getVerkoper(ticket.getTicketID()));
+		//	ticket.setVerkoper(transDAO.getVerkoper(ticket.getTicketID()));
 
 			TransactieDAO tran = new TransactieDAO();
-			ticket.setVerkoper(tran.getVerkoper(ticket.getTicketID()));
+			//ticket.setVerkoper(tran.get(ticket.getTicketID()));
 
 			con.close();
 			if (ticket.getTicketsoortID() == -1) {

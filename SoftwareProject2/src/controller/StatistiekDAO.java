@@ -1,12 +1,19 @@
-<<<<<<< HEAD
+
 package controller;
 
+
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.TreeMap;
+
+import model.Settings;
+
 
 public class StatistiekDAO  extends DAO{
 
@@ -151,20 +158,19 @@ public ArrayList<StatStation> TopVijfMeestStation()
 			
 		}
 		Statement st = con.createStatement();//con.prepareStatement("sELECT BeginStation, count(BeginStation) FROM `Ticket` group BY BeginStation ORDER BY count(BeginStation) desc limit 1");
-		ResultSet rs = st.executeQuery("sELECT BeginStation, count(BeginStation) FROM `Ticket` group BY BeginStation ORDER BY count(BeginStation) desc limit 5");
-		ArrayList<StatStation> stations = new ArrayList<StatStation>();
+		ResultSet rs = st.executeQuery("select BeginStation, count(BeginStation) FROM `Ticket` group BY BeginStation ORDER BY count(BeginStation) desc limit 5");
+		String begin,aantal;
+		ArrayList<StatStation>lijst = new ArrayList<StatStation>();
 		while (rs.next()) {
-			StatStation az= new StatStation();
-			az.setAantal(rs.getInt(2));
-			az.setNaam(rs.getString(1));
-			stations.add(az);
-			
-
+			StatStation station = new StatStation();
+			station.setNaam(rs.getString(1));
+			station.setAantal(rs.getInt(2));
+			lijst.add(station);
 		}
 		
 		con.close();
+		return lijst;
 
-		return stations;
 	} catch (SQLException exc) {
 		System.out.println("PROBLEEM: " + exc.getMessage());
 		System.out.println("fout code: " + exc.getErrorCode());
@@ -178,10 +184,7 @@ public ArrayList<StatStation> TopVijfMeestStation()
 	return null;
 	
 }
-public static void main(String[] args) {
-	ArrayList<StatStation> a=new ArrayList<StatStation>();
-	StatistiekDAO b = new StatistiekDAO(); 
-	System.out.println(b.TopVijfMeestStation().toString());
+
 }
-}
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2
 

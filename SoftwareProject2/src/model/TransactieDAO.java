@@ -31,7 +31,7 @@ public void createTransactie(Transactie t){
 				
 						);	  
 				
-      pstmt.setInt(1, t.getTicket().getTicketID());
+      pstmt.setInt(1, t.getTicketId());
       pstmt.setInt(2, t.getPersoneel().getId());
       pstmt.setDouble(3, t.getTotaalbedrag());
       

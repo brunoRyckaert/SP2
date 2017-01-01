@@ -10,6 +10,17 @@ public class VerlorenVoorwerp {
 	private String beschrijving;
 	private String station;
 	private Date datumGevonden;
+	private Date datumOpgehaald;
+	public Date getDatumOpgehaald() {
+		return datumOpgehaald;
+	}
+
+
+	public void setDatumOpgehaald(Date datumOpgehaald) {
+		this.datumOpgehaald = datumOpgehaald;
+	}
+
+
 	private int kassierID;
 	
 	
