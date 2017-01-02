@@ -4,7 +4,6 @@ package controller;
 import java.sql.*;
 
 import model.Adres;
-import model.Klant;
 
 public class AdresDAO extends DAO {
 
@@ -98,4 +97,3 @@ public class AdresDAO extends DAO {
 		}
 	}                      
 }
->>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2

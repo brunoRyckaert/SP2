@@ -135,7 +135,7 @@ public class KlantDAO extends DAO{
 				klant.setAdresID(rs.getInt(2));
 				klant.setNaam(rs.getString("Naam"));
 				klant.setTelefoonnummer(rs.getString("Telefoonnummer"));
-				klant.setGeboortedatum(rs.getString("Geboortedatum"));
+				klant.setGeboortedatum(rs.getDate("Geboortedatum"));
 				
 				klanten.add(klant);
 			}
