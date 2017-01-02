@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ConcurrentModificationException;
+
 public class CacheThread implements Runnable {
 	private int intervalInSeconden;
 	private boolean enabled;
@@ -19,12 +21,16 @@ public class CacheThread implements Runnable {
 	@Override
 	public void run() {
 		while (enabled) {
-			CacheController.push();
 			try {
+				CacheController.push();
 				//System.out.println(Thread.currentThread().getName());
+			} catch(ConcurrentModificationException e)  {
+				//e.printStackTrace();
+			} 
+			try {
 				Thread.sleep(intervalInSeconden*1000);
 			} catch (InterruptedException e) {
-				//e.printStackTrace();
+				
 			}
 		}
 		
