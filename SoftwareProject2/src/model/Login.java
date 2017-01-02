@@ -10,7 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.Stage;
 
-public class Login {
+public class Login implements SerializableVoorCache  {
 	/**
 	 * Deze functie gaat na of de combinatie van username en wachtwoord correct is of niet. Indien correct, dan stuurt het het personeelslid terug; zoniet dan stuurt het null terug.
 	 * 

@@ -9,6 +9,8 @@ import java.util.TreeSet;
 
 public abstract class Definitions {
 static ArrayList<Station> stations = new ArrayList<>(); //kan je geen instantie van maken
+private static File cacheRoot = new File("Caches");
+private static File cacheFile = new File(cacheRoot + "\\cache.ser");
 
 static {
 	stations = getStations(); // terug uncommenten
@@ -67,5 +69,21 @@ public static ArrayList<Station> getStations() {
 
 public void setStations(ArrayList<Station> stations) {
 	this.stations = stations;
+}
+
+public static File getCacheRoot() {
+	return cacheRoot;
+}
+
+public static void setCacheRoot(File cacheRoot) {
+	Definitions.cacheRoot = cacheRoot;
+}
+
+public static File getCacheFile() {
+	return cacheFile;
+}
+
+public static void setCacheFile(File cacheFile) {
+	Definitions.cacheFile = cacheFile;
 }
 }

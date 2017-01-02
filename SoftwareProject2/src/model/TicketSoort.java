@@ -1,6 +1,6 @@
 package model;
 
-public class TicketSoort {
+public class TicketSoort implements SerializableVoorCache  {
 	
 	private int ticketSoortID;
 	private String Naam;

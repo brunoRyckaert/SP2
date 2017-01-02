@@ -1,8 +1,14 @@
 package model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -10,7 +16,14 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class Ticket extends TicketSoort {
+import controller.CacheController;
+
+public class Ticket extends TicketSoort implements SerializableVoorCache {
+
+	/**
+	 * 
+	 */
+	//private static final long serialVersionUID = 8421807318242705395L;
 
 	@Override
 	public String toString() {
@@ -189,5 +202,13 @@ public class Ticket extends TicketSoort {
 			this.klasse = Klasse.Klasseverhoging;
 		}
 	}
+	
+	/*public boolean serialize() {
+		return serialize(Definitions.getCacheFile());
+	}
+	
+	public boolean serialize(File destination) {
+		return CacheController.serialize(this,destination);
+	}*/
 
 }

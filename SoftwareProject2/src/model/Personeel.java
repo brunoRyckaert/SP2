@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class Personeel {
+public class Personeel implements SerializableVoorCache  {
 	private int personneelsId;
 	private int adresId;
 	private int loginID;

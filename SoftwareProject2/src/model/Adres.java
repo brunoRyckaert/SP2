@@ -1,6 +1,6 @@
 package model;
 
-public class Adres {
+public class Adres implements SerializableVoorCache  {
 	private int adresID;
 	private String stad;
 	private String straat;
