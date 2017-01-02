@@ -40,10 +40,4 @@ public class Transactie {
 	public void setTotaalbedrag(double totaalbedrag) {
 		this.totaalbedrag = totaalbedrag;
 	}
-	
-	
-	
-	
-		
-
 }
