@@ -34,6 +34,9 @@ import java.util.TreeSet;
 import com.sun.prism.Image;
 
 import view.Gui;
+
+import controller.CacheController;
+
 // gebruikersnaam = kassier password = kassier
 // gebruikersnaam = admin   password = admin
 public class Main extends Application {
@@ -72,8 +75,9 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-	launch(args);
-	
+		CacheController.init();
+		launch(args);
+		CacheController.stop();
 	}
 
 }

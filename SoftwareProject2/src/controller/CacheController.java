@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Abonnement;
@@ -15,11 +16,47 @@ import model.Definitions;
 import model.Ticket;
 
 public class CacheController {
+	private static Thread thread;
+	private static CacheThread cacheThread;
 	public static void push() {
-		
+		System.out.println("Pushing...");
+		ArrayList<Serializable> objecten = deserialize(Definitions.getCacheFile());
+		for (Serializable object : objecten) {
+			// Switch werkt hier niet omdat cases een constante expressie verwachten.
+			String klasseNaam = object.getClass().getName();
+			if (klasseNaam.equals(Ticket.class.getName())) {
+				System.out.println("Ticket wegschrijven");
+				TicketDAO tdao = new TicketDAO();
+				/*try {
+					//tdao.setTicket((Ticket) object);
+					//objecten.remove(object);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} */
+			}
+			else {
+				System.out.println("Error: u kunt deze klasse (" + klasseNaam + ") niet wegschrijven naar de database.");
+			}
+		}
+		//CacheController.serialize(objecten);
 	}
 	private CacheController() {
 		
+	}
+	public static void init() {
+		cacheThread = new CacheThread(5);
+		thread = new Thread(cacheThread);
+		thread.start();
+	}
+	
+	public static void stop() {
+		thread.interrupt();
+		cacheThread.disable();
+	}
+	
+	static {
+		System.out.println("Caching ingeschakeld.");
 	}
 	
 	public static void main(String[] args) {
@@ -37,6 +74,7 @@ public class CacheController {
 		t.setBeginStation("Koksijde");
 		t.setEindStation("Gent-Dampoort");
 		t.setAantalReizigers(1);
+		t.setKlasse(2);
 		System.out.println(t.serialize());
 		//System.out.println("Eerste deserialize in main: " +CacheController.deserialize(new File(cacheRoot + "\\ticket.ser")));
 		Abonnement a = new Abonnement();
@@ -83,18 +121,20 @@ public class CacheController {
 		try {
 			//System.out.println(destination.getAbsolutePath() + "\\ticket.ser");
 			//System.out.println("Bestaat bestand? : " + destination.exists());
-			ArrayList<Serializable> tickets = CacheController.deserialize(destination);
+			ArrayList<Serializable> objecten = CacheController.deserialize(destination);
 			FileOutputStream fileOut = new FileOutputStream(destination);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			if (tickets == null) { 
-				tickets = new ArrayList<Serializable>();
+			if (objecten == null) { 
+				objecten = new ArrayList<Serializable>();
 				System.out.println("Geen objecten gevonden; nieuwe lijst gemaakt");
 			}
 			else {
-				System.out.println("Objecten reeds in cache: " + tickets.size());
+				System.out.println("Objecten reeds in cache: " + objecten.size());
 			}
-			tickets.add(source);
-	        out.writeObject(tickets);
+			System.out.println(source.getClass());
+			objecten.add(source);
+	        
+			out.writeObject(objecten);
 	        out.close();
 	        fileOut.close();
 		} catch (IOException e) {
