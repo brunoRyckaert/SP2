@@ -1,4 +1,3 @@
-
 package controller;
 
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import model.Settings;
-
+import model.StatStation;
 
 public class StatistiekDAO  extends DAO{
 
@@ -61,7 +60,7 @@ public int totaalOmzetVandeDag()
  * @return
  */
 
-public int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
+public int totaalOmzetBinnenEenBepaaldePeriode(Date a, Date b)
 {
 	try
 	{
@@ -73,14 +72,14 @@ public int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
 		{
 			return -1;
 		}
-	PreparedStatement stmt = con.prepareStatement("select sum(TotaalBedrag) from Transactie t JOIN Ticket p on( t.TicketID = p.TicketID And p.Aankooptijd BETWEEN ? AND ?)");
-	stmt.setString(1, a);
-	stmt.setString(2,b);
+	PreparedStatement stmt = con.prepareStatement("SELECT sum(Prijs) from Ticket where Aankooptijd between ? and ?;");
+	stmt.setDate(1,a);
+	stmt.setDate(2,b);
 	ResultSet rs = stmt.executeQuery();
 	int i  = -1;
 	while (rs.next())
 	{
-	i = rs.getInt("sum(TotaalBedrag)");
+	i = rs.getInt("sum(Prijs)");
 	}
 	con.close();
 	return i;
@@ -99,7 +98,7 @@ public int totaalOmzetBinnenEenBepaaldePeriode(String a, String b)
  * @param c
  * @return
  */
-public int aantalTicket(Timestamp b, Timestamp c)
+public int aantalTicket(Date b, Date c)
 {
 	try {
 		if (con == null || con.isClosed()) {
@@ -115,8 +114,8 @@ public int aantalTicket(Timestamp b, Timestamp c)
 		PreparedStatement stmt = con.prepareStatement("SELECT count(*) FROM `Ticket` WHERE `Aankooptijd` BETWEEN ? AND ? ;");
 		 
 		
-		stmt.setTimestamp(1, b);
-		stmt.setTimestamp(2, c);
+		stmt.setDate(1, b);
+		stmt.setDate(2, c);
 		
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
@@ -186,5 +185,4 @@ public ArrayList<StatStation> TopVijfMeestStation()
 }
 
 }
->>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2
 
