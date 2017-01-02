@@ -1,3 +1,4 @@
+
 package controller;
 
 
@@ -8,9 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import model.Settings;
+
 
 public class StatistiekDAO  extends DAO{
 
@@ -143,7 +146,7 @@ public int aantalTicket(Timestamp b, Timestamp c)
  * @return
  */
 
-public String TopVijfMeestStation()
+public ArrayList<StatStation> TopVijfMeestStation()
 {
 	
 	try {
@@ -155,16 +158,18 @@ public String TopVijfMeestStation()
 			
 		}
 		Statement st = con.createStatement();//con.prepareStatement("sELECT BeginStation, count(BeginStation) FROM `Ticket` group BY BeginStation ORDER BY count(BeginStation) desc limit 1");
-		ResultSet rs = st.executeQuery("sELECT BeginStation, count(BeginStation) FROM `Ticket` group BY BeginStation ORDER BY count(BeginStation) desc limit 5");
+		ResultSet rs = st.executeQuery("select BeginStation, count(BeginStation) FROM `Ticket` group BY BeginStation ORDER BY count(BeginStation) desc limit 5");
 		String begin,aantal;
+		ArrayList<StatStation>lijst = new ArrayList<StatStation>();
 		while (rs.next()) {
-			begin = rs.getString(1);
-			aantal = rs.getString(2);
-			return begin +" "+ aantal;
-
+			StatStation station = new StatStation();
+			station.setNaam(rs.getString(1));
+			station.setAantal(rs.getInt(2));
+			lijst.add(station);
 		}
 		
 		con.close();
+		return lijst;
 
 	} catch (SQLException exc) {
 		System.out.println("PROBLEEM: " + exc.getMessage());
@@ -181,4 +186,5 @@ public String TopVijfMeestStation()
 }
 
 }
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2
 

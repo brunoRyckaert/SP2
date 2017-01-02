@@ -1,3 +1,4 @@
+
 package controller;
 
 import java.sql.*;
@@ -97,3 +98,4 @@ public class AdresDAO extends DAO {
 		}
 	}                      
 }
+>>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2

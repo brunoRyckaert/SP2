@@ -69,4 +69,3 @@ public class Settings {
 		return localDate;
 	}
 }
-

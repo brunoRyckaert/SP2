@@ -15,15 +15,17 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 
 import controller.CacheController;
 
 public class Ticket extends TicketSoort implements SerializableVoorCache {
 
-	/**
-	 * 
-	 */
-	//private static final long serialVersionUID = 8421807318242705395L;
+
+
+
 
 	@Override
 	public String toString() {
@@ -35,7 +37,23 @@ public class Ticket extends TicketSoort implements SerializableVoorCache {
 	
 	
 	public static void main(String[] args) {
-		Ticket.getAfstandByStations(Definitions.getStationByName("Koksijde"), Definitions.getStationByName("Brussel-Zuid"));
+		Ticket t = new Ticket();
+		t.setBeginStation("Koksijde");
+		t.setEindStation("Brussel-Zuid");
+		System.out.println(t.berekenPrijs("0.1k"));
+		
+	}
+	public double berekenPrijs(String formule)
+	{
+		Station beginStation = Definitions.getStationByName(this.beginStation);
+		Station eindStation = Definitions.getStationByName(this.eindStation);
+		prijs = -1;
+		Expression e = new ExpressionBuilder(formule)
+		        .variables("k")
+		        .build()
+		        .setVariable("k", Ticket.getAfstandByStations(beginStation,eindStation));
+		 prijs = e.evaluate();
+		return prijs;
 	}
 	
 	public static int getAfstandByStations(Station beginStation, Station eindStation) {
@@ -91,6 +109,7 @@ public class Ticket extends TicketSoort implements SerializableVoorCache {
 	private int aantalReizigers;
 	private String aankoopTijd;
 	private int verkoper;
+	private String formule;
 
 	public int getTicketID() {
 		return ticketID;

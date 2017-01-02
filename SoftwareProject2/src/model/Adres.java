@@ -7,7 +7,6 @@ public class Adres implements SerializableVoorCache  {
 	private int nr;
 	private String provincie;
 	private int bus;
-<<<<<<< HEAD
 	private int id;
 	public int getId() {
 		return id;
@@ -15,7 +14,7 @@ public class Adres implements SerializableVoorCache  {
 
 	public void setId(int id) {
 		this.id = id;
-=======
+	}
 
 	public Adres(int adresID, String stad, String straat, int nr, String provincie, int bus) {
 		this.adresID = adresID;
@@ -35,7 +34,6 @@ public class Adres implements SerializableVoorCache  {
 	}
 
 	public Adres() {
->>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
 	}
 
 	public int getAdresID() {
