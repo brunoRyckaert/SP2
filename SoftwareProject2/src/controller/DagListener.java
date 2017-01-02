@@ -10,7 +10,8 @@ import model.TransactieDAO;
 public class DagListener implements ActionListener {
 
 	JOptionPane p = new JOptionPane();
-	Integer a = TransactieDAO.totaalOmzetBinnenEenBepaaldePeriode("2016-12-14 00:00:00","2016-12-15 23:59:59");
+	StatistiekDAO statistiekDAO = new StatistiekDAO();
+	Integer a = statistiekDAO.totaalOmzetBinnenEenBepaaldePeriode("2016-12-14 00:00:00","2016-12-15 23:59:59");
 	String b = "de omzet van de dag is "+a.toString() + ".";
 	@Override
 	public void actionPerformed(ActionEvent e) {

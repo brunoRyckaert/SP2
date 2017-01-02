@@ -1,10 +1,14 @@
 package model;
 
+import java.io.File;
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-public class Abonnement {
+import controller.CacheController;
+
+public class Abonnement implements SerializableVoorCache {
 	private int abonnementId;
 	private int klantId;
 	private String beginStation;
@@ -108,5 +112,7 @@ public class Abonnement {
 	public void setKortingId(int kortingId) {
 		this.kortingId = kortingId;
 	}
-
+	public boolean isGeldig() {
+		return isGeldig;
+	}
 }

@@ -26,7 +26,7 @@ import model.Strings;
 
 public class VerkoopController implements Initializable{
 	Personeel ingelogde = Settings.getIngelogdPersoneelslid();
-	TreeSet<String>stations = Definitions.getStations();
+	TreeSet<String>stations = Definitions.getStationsNamen();
 
 	@FXML
 	private TextField txtfVan = new TextField();

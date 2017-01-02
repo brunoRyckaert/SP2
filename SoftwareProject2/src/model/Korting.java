@@ -1,6 +1,6 @@
 package model;
 
-public class Korting {
+public class Korting implements SerializableVoorCache  {
 	
 	private String beschrijving;
 	private int kortingID;

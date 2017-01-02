@@ -1,9 +1,11 @@
+
 package controller;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.Klant;
 
@@ -112,4 +114,44 @@ public class KlantDAO extends DAO{
 		}
 
 	}
+	public ArrayList<Klant> alleKlanten()
+	{
+		try {
+			if (con == null || con.isClosed()) {
+				con = DAO.getInstance();
+			}
+			if (con == null || con.isClosed()) {
+				return null;
+				
+			}
+			PreparedStatement stmt = con.prepareStatement("select * from Klant ");
+			
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<Klant> klanten = new ArrayList<Klant>();
+			
+			while (rs.next()) {
+				Klant klant=new Klant();
+				klant.setKlantID(rs.getInt(1));
+				klant.setAdresID(rs.getInt(2));
+				klant.setNaam(rs.getString("Naam"));
+				klant.setTelefoonnummer(rs.getString("Telefoonnummer"));
+				klant.setGeboortedatum(rs.getDate("Geboortedatum"));
+				
+				klanten.add(klant);
+			}
+			return klanten;
+		} catch (SQLException exc) {
+//			System.out.println("PROBLEEM: " + exc.getMessage());
+//			System.out.println("fout code: " + exc.getErrorCode());
+			System.out.println("SQLException");
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
 }
+

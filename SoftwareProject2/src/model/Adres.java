@@ -1,13 +1,12 @@
 package model;
 
-public class Adres {
+public class Adres implements SerializableVoorCache  {
 	private int adresID;
 	private String stad;
 	private String straat;
 	private int nr;
 	private String provincie;
 	private int bus;
-<<<<<<< HEAD
 	private int id;
 	public int getId() {
 		return id;
@@ -15,7 +14,7 @@ public class Adres {
 
 	public void setId(int id) {
 		this.id = id;
-=======
+	}
 
 	public Adres(int adresID, String stad, String straat, int nr, String provincie, int bus) {
 		this.adresID = adresID;
@@ -35,7 +34,6 @@ public class Adres {
 	}
 
 	public Adres() {
->>>>>>> branch 'dev' of https://github.com/brunoRyckaert/SP2.git
 	}
 
 	public int getAdresID() {

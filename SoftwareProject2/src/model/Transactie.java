@@ -1,6 +1,6 @@
 package model;
 
-public class Transactie {
+public class Transactie implements SerializableVoorCache {
 	
 	private int transactieId;
 	private int ticketId;

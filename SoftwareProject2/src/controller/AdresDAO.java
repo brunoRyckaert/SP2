@@ -1,9 +1,9 @@
+
 package controller;
 
 import java.sql.*;
 
 import model.Adres;
-import model.Klant;
 
 public class AdresDAO extends DAO {
 
