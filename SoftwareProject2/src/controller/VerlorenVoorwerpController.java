@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Application;
@@ -111,6 +112,7 @@ public class VerlorenVoorwerpController implements Initializable {
 	{
 		VerlorenVoorwerpDAo b = new VerlorenVoorwerpDAo();
 		VerlorenVoorwerp a = b.selectVVByNaam(txtbeschrijving.getText());
+		System.out.println(a.toString());
 		populateAndShowVoorwerp(a);
 	}
 	
@@ -159,8 +161,7 @@ public class VerlorenVoorwerpController implements Initializable {
 	
 	public void zoekbutton(ActionEvent event)
 	{
-		
-		ArrayList<VerlorenVoorwerp> a =new ArrayList<VerlorenVoorwerp>();
+		ObservableList<VerlorenVoorwerp> a = FXCollections.observableArrayList();
 		VerlorenVoorwerpDAo v = new VerlorenVoorwerpDAo();
 		
 		if(txtbeschrijving.getLength()!= 0){
@@ -170,39 +171,59 @@ public class VerlorenVoorwerpController implements Initializable {
 		
 		else if (textStation.getLength()!= 0)
 		{
-			a = v.selectLijstVVByNaam(textStation.getText());
+			a = v.selectLijstVVByStation(textStation.getText());
 		}
 		
 		else if (datum.getEditor().getLength() != 0)
 		{
-			a = v.selectLijstVVByNaam(datum.toString());
+			a = v.selectLijstVVByDate(datum.toString());
 		}
 		vwerpen = (ObservableList<VerlorenVoorwerp>) a;
 		
 		txtbeschrijving.setText(null);
-		textStation.clear();
 		
 		
+		this.clearalleVelden();
 		
 		tabel.setItems(vwerpen);
 		
 	}
 	
+	
+	public void clearalleVelden()
+	{
+		this.TFItemid.clear();
+		this.TFKlantid.clear();
+		this.kass.clear();
+		this.datum.setValue(LocalDate.now());
+		textStation.clear();
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 	
-		
+		kolom1.setText(Strings.itemId[Settings.getInstance().getTaal().getValue()]);
+		kolom2.setText(Strings.klantId[Settings.getInstance().getTaal().getValue()]);
+		kolom3.setText(Strings.beschrijving[Settings.getInstance().getTaal().getValue()]);
+		kolom4.setText("station");
+		kolom5.setText(Strings.datumGevonden[Settings.getInstance().getTaal().getValue()]);
+		kolom6.setText(Strings.datumOpgehaald[Settings.getInstance().getTaal().getValue()]);
+		kolom7.setText(Strings.kassierId[Settings.getInstance().getTaal().getValue()]);
+		kolom8.setText(Strings.treinId[Settings.getInstance().getTaal().getValue()]);
 
-		kolom1.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>(Strings.itemId[Settings.getInstance().getTaal().getValue()]));
-		kolom2.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>(Strings.klantId[Settings.getInstance().getTaal().getValue()]));
-		kolom3.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>(Strings.beschrijving[Settings.getInstance().getTaal().getValue()]));
-		kolom4.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("station"));
-		kolom5.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>(Strings.datumGevonden[Settings.getInstance().getTaal().getValue()]));
-		kolom6.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>(Strings.datumOpgehaald[Settings.getInstance().getTaal().getValue()]));
-		kolom7.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>(Strings.kassierId[Settings.getInstance().getTaal().getValue()]));
-		kolom8.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>(Strings.treinId[Settings.getInstance().getTaal().getValue()]));
+		
+		kolom1.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("itemId"));
+		kolom2.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("klantId"));
+		kolom3.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("beschrijving"));
+		kolom4.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("Station"));
+		kolom5.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("DatumGevonden"));
+		kolom6.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Date>("DatumOpgehaald"));
+		kolom7.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, Integer>("KassierID"));
+		kolom8.setCellValueFactory(new PropertyValueFactory<VerlorenVoorwerp, String>("TreinID"));
+		TextFields.bindAutoCompletion(this.textStation,  Definitions.getStationsNamen());
+
+	
 		this.refresh();
 	}
 	public void refresh() {
@@ -224,18 +245,22 @@ public class VerlorenVoorwerpController implements Initializable {
 	
 		VerlorenVoorwerp v = new VerlorenVoorwerp();
 		v.setBeschrijving( txtbeschrijving.getText());
-		v.setKassierID(Integer.parseInt(this.kass.getText()));
+		Settings.getInstance();
+		v.setKassierID(Settings.getIngelogdPersoneelslid().getPersonneelsId());
+		v.setKlantId(Integer.parseInt(this.TFKlantid.getText()));
 		v.setStation(textStation.getText());
 		//v.setTreinid(this.textTreinid.getText()); uncommenten ! 
 		VerlorenVoorwerpDAo b = new VerlorenVoorwerpDAo();
 		try {
 			b.insertVerlorenvoorwerp(v);
+			 resultArea.setText("Item inserted! \n");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			 resultArea.setText("Item not inserted! \n");
 			e.printStackTrace();
 		}
 		refresh();
-		 resultArea.setText("Item inserted! \n");
+		
 	}
 	
 	public void vulTabel()
@@ -267,16 +292,17 @@ public class VerlorenVoorwerpController implements Initializable {
 	 private void updateVerlorenVoorwerp (ActionEvent actionEvent) 
 	    {
 		 		VerlorenVoorwerpDAo a= new VerlorenVoorwerpDAo();
-		 		if(Integer.parseInt(this.TFKlantid.getText())  == 0 || this.TFKlantid ==null )
-		 		{
-	            a.updateVerlorenvoorwerp(0,Integer.parseInt(this.TFKlantid.getText()) );
-	           
-		 		}
-		 		else{
-		 		   a.updateVerlorenvoorwerp(Integer.parseInt(this.TFKlantid.getText()),Integer.parseInt(this.TFItemid.getText()) );
-		 		
-		 		}
+//		 		if(Integer.parseInt(this.TFKlantid.getText())  == 0 || this.TFKlantid ==null )
+//		 		{
+//	            a.updateVerlorenvoorwerp(0,Integer.parseInt(this.TFKlantid.getText()) );
+//	           
+//		 		}
+//		 		else{
+		 		 //  a.updateVerlorenvoorwerp(Integer.parseInt(this.TFKlantid.getText()),Integer.parseInt(this.TFItemid.getText()) );
+		 		a.ophalenVoorwerp(this.txtbeschrijving.getText());
+		 	//	}
 		 		resultArea.setText(Strings.Gevonden[Settings.getInstance().getTaal().getValue()] + this.TFItemid.getText() + "\n");
+		 		refresh();
 		 		
 	    }
 	 
@@ -295,5 +321,6 @@ public static void main(String[] args) throws IOException {
 //	Main.setWindow(startStage);
 	
 	}
-}
 
+
+}
