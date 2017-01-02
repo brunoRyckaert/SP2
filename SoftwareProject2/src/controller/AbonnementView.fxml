@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -23,7 +23,7 @@
                   </Label>
                </children>
             </AnchorPane>
-          <AnchorPane fx:id="lblklantid" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <Label fx:id="lblklantid" layoutX="63.0" layoutY="62.0" text="KlantID" />
                   <Label fx:id="lblBeginstation" layoutX="63.0" layoutY="99.0" text="BeginStation" />
@@ -45,8 +45,13 @@
                   <TextField fx:id="TFPrijs" layoutX="171.0" layoutY="364.0" />
                   <Button fx:id="btnBetalen" layoutX="320.0" layoutY="413.0" mnemonicParsing="false" onAction="#betalen" text="Betalen" />
                   <Label fx:id="lblKlasse" layoutX="69.0" layoutY="312.0" text="Klasse" />
-                  <ChoiceBox fx:id="cbklasse" layoutX="171.0" layoutY="308.0" prefWidth="150.0" />
                   <TextArea fx:id="area" layoutX="397.0" layoutY="383.0" prefHeight="93.0" prefWidth="187.0" />
+                  <Label fx:id="lblError" layoutX="424.0" layoutY="312.0" text="Label" textFill="RED">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbklasse" layoutX="171.0" layoutY="308.0" prefWidth="150.0" />
                </children>
             </AnchorPane>
         </items>
