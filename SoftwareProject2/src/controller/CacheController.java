@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
+import com.mysql.jdbc.CommunicationsException;
+
 import model.Abonnement;
 import model.Adres;
 import model.Definitions;
@@ -40,6 +42,11 @@ public class CacheController {
 	}
 	public static void push(){
 		System.out.println("Pushing...");
+		if (!DAO.isVerbinding()) {
+			System.out.println("Geen verbinding met de database!");
+			return;
+		}
+		
 		ArrayList<Serializable> objecten = deserialize(Definitions.getCacheFile());
 		if (objecten.size() == 0) {
 			System.out.println("De cache is leeg.");
@@ -145,7 +152,7 @@ public class CacheController {
 		
 	}
 	public static void init() {
-		cacheThread = new CacheThread(5);
+		cacheThread = new CacheThread(300);
 		thread = new Thread(cacheThread);
 		thread.start();
 	}

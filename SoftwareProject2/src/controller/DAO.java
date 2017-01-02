@@ -2,6 +2,8 @@ package controller;
 
 import java.sql.*;
 
+import com.mysql.jdbc.CommunicationsException;
+
 public abstract class DAO {
 	// connectie maken
 	protected static Connection con ;
@@ -19,6 +21,15 @@ public abstract class DAO {
 			}
 		return con;
 		
+	}
+	
+	public static boolean isVerbinding() {
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://dt5.ehb.be/SP2GR1","SP2GR1","6xBfsv");
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
 	}
 	
 }
